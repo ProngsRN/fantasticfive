@@ -1,0 +1,136 @@
+#{set title:'SiGBO :: Página Principal' /}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="@{'public/stylesheets/style.css'}" type="text/css" media="all" />
+		<link rel="stylesheet" href="@{'public/stylesheets/jquery.jcarousel.css'}" type="text/css" media="all" />
+		<!--[if IE 6]>
+			<link rel="stylesheet" href="@{'public/stylesheets/ie6.css'}" type="text/css" media="all" />
+		<![endif]-->
+		<link rel="shortcut icon" href="@{'public/images/favicon.ico'}" />
+		<script type="text/javascript" src="@{'/public/javascripts/jquery-1.4.2.min.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/jquery.jcarousel.pack.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/func.js'}"></script>
+    </head>
+    <body>
+        <div class="shell">
+	<div class="border">
+		<div id="header">
+			<h1 id="logo"><a href="#" class="notext">beSmart</a></h1>
+			<div class="socials right">
+				<ul>
+				    <li><a href="#" class="rss">Orkut</a></li>
+				    <li><a href="#" class="fb">Facebook</a></li>
+				    <li class="last"><a href="#" class="twit">Twitter</a></li>
+				</ul>
+			</div>
+			<div class="cl">&nbsp;</div>
+		</div>
+		
+		<div id="navigation">
+			<ul>
+			    <li><a href="#" class="active">Inicio</a></li>
+			    <li><a href="#">Historia</a></li>
+			    <li><a href="#">Equipe</a></li>
+			    <li><a href="#">Calendario</a></li>
+			    <li><a href="#">Contato</a></li>
+			</ul>
+			<div class="cl">&nbsp;</div>
+		</div>
+		
+		<div class="slider">
+			<div class="slider-nav">
+				<a href="#" class="left notext">1</a>
+				<a href="#" class="left notext">2</a>
+				<a href="#" class="left notext">3</a>
+				<a href="#" class="left notext">4</a>
+				<div class="cl">&nbsp;</div>
+			</div>
+			<ul>
+			    <li>
+			    	<div class="item">
+			    		<img src="public/images/img1.jpg" alt="" />
+			    	</div>
+			    </li>
+			    <li>
+			    	<div class="item">
+			    		<img src="public/images/img2.jpg" alt="" />
+			    	</div>
+			    </li>
+			    <li>
+			    	<div class="item">
+			    		<img src="public/images/img3.jpg" alt="" />
+			    	</div>
+			    </li>
+			    <li>
+			    	<div class="item">
+			    		<img src="public/images/img4.jpg" alt="" />
+			    	</div>
+			    </li>
+			</ul>
+		</div>
+		
+		<div id="main">
+			<div id="content" class="left">
+				<div class="highlight">
+					<h3>Bem vindo(a)</h3>
+					<img src="public/images/highlight.gif" alt="" class="right" />
+					<p>O Centro Educacional Maria Norma Alves, CEMNA foi fundado em 2 de fevereiro de 2000. Blabla bla blabla blablablabalbalbalba balbalblablbal. Blabla bla blabla blablablabalbalbalba balbalblablbal. Blabla bla blabla blablablabalbalbalba balbalblablbal.</p>
+					<a href="#" class="more">Ler mais</a>
+				</div>
+			</div>
+			<div id="sidebar" class="right">
+
+				<div class="info">
+					<h3>Boletim de Notas</h3>
+					<form action="@{Application.login()}" method="GET">
+    				Usuário:&nbsp;<input type="text" name="usuario"/>
+    				<br>
+					Senha:&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="senha"/>
+    				<br>
+    				<input type="submit" value="Entrar" class="btn-buy"/>
+    				
+    				#{if flash.error}
+    					<p style="color:#c00">
+						${flash.error}
+    					</p>
+					#{/if}
+    				
+					</form> 
+
+				</div>
+
+			</div>
+			<div class="cl">&nbsp;</div>
+		</div>
+		
+		<div class="shadow-l"></div>
+		<div class="shadow-r"></div>
+		<div class="shadow-b"></div>
+	</div>
+	
+	<div id="footer">
+		<div class="footer-nav left">
+			<ul>
+			    <li><a href="#" class="active">Inicio</a></li>
+			    <li><a href="#">Historia</a></li>
+			    <li><a href="#">Equipe</a></li>
+			    <li><a href="#">Calendario</a></li>
+			    <li class="last"><a href="#">Contato</a></li>
+			</ul>
+		</div>
+		<p class="copy right">Copyright &copy; | SiGBO 2011 - Fantastic Five Team |  ! beSmart 2010 | Valid CSS &amp; HTML. <a href="http://chocotemplates.com" target="_blank" title="Chocotemplates">Design</a></p>
+		<div class="cl">&nbsp;</div>
+	</div>
+</div>
+    </body>
+</html>
+
+
+<!DOCTYPE html>
+
+

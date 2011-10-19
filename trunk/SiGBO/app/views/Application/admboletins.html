@@ -1,0 +1,73 @@
+#{set title:'SiGBO :: Administrar Boletins' /}
+
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="@{'public/stylesheets/style.css'}" type="text/css" media="all" />
+		<link rel="stylesheet" href="@{'public/stylesheets/jquery.jcarousel.css'}" type="text/css" media="all" />
+		<!--[if IE 6]>
+			<link rel="stylesheet" href="@{'public/stylesheets/ie6.css'}" type="text/css" media="all" />
+		<![endif]-->
+		<link rel="shortcut icon" href="@{'public/images/favicon.ico'}" />
+		<script type="text/javascript" src="@{'/public/javascripts/jquery-1.4.2.min.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/jquery.jcarousel.pack.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/func.js'}"></script>
+    </head>
+    <body>
+    <div class="shell">
+	<div class="border">
+		<div id="header">
+			<h1 id="logo"><a href="#" class="notext">beSmart</a></h1>
+			<div class="socials right">
+				<ul>
+				    <li><a href="#" class="rss">Orkut</a></li>
+				    <li><a href="#" class="fb">Facebook</a></li>
+				    <li class="last"><a href="#" class="twit">Twitter</a></li>
+				</ul>
+			</div>
+			<div class="cl">&nbsp;</div>
+		</div>
+		
+		<div id="main">
+			<center>
+			<h3>:: Boletins ::</h3>
+			<p><select name="turma">
+			<option>1 EF</option>
+			<option>2 EF</option>
+			<option>3 EF</option>
+			<option>4 EF</option>
+			<option>5 EF</option>
+			<option>6 EF</option>
+			<option>7 EF</option>
+			<option>8 EF</option>
+			<option>9 EF</option>
+			<option>1 EM</option>
+			<option>2 EM</option>
+			<option>3 EM</option></select></p><input type="submit" value="Acessar" />
+			<br/>
+			<a href="@{Application.administrador()}"><img src="/public/images/voltar.png"></a>
+			</center>
+		</div>
+		
+		<div class="shadow-l"></div>
+		<div class="shadow-r"></div>
+		<div class="shadow-b"></div>
+	</div>
+	
+	<div id="footer">
+		<div class="footer-nav left">
+			<ul>
+			    <li><a href="#" class="active">Inicio</a></li>
+			    <li><a href="#">Historia</a></li>
+			    <li><a href="#">Equipe</a></li>
+			    <li><a href="#">Calendario</a></li>
+			    <li class="last"><a href="#">Contato</a></li>
+			</ul>
+		</div>
+		<p class="copy right">Copyright &copy; Fantastic Five Team ! beSmart 2010 | Valid CSS &amp; HTML. <a href="http://chocotemplates.com" target="_blank" title="Chocotemplates">Design</a></p>
+		<div class="cl">&nbsp;</div>
+	</div>
+</div>
+</body>
+</html>

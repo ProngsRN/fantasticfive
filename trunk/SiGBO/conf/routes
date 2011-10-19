@@ -1,0 +1,24 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Application.index
+GET		/user									Application.user
+GET		/admin									Application.administrador
+GET		/login									Application.login
+GET		/admin/alunos							Application.admalunos
+GET		/admin/boletins							Application.admboletins
+GET		/admin/notas							Application.admnotas
+GET		/admin/professores						Application.admprofessores
+GET		/admin/turmas							Application.admturmas
+*		/des									module:crud
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}
