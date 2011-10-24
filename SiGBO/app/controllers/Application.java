@@ -53,7 +53,10 @@ public class Application extends Controller {
 	}
 
 	public static void admalunos() {
-		render();
+		List<Aluno> alunos = Aluno.findAll();
+		List<Turma> turmas = Turma.findAll();
+		List<Disciplina> disciplinas = Disciplina.findAll();
+		render(alunos, turmas, disciplinas);
 	}
 
 	public static void admboletins() {
@@ -65,7 +68,9 @@ public class Application extends Controller {
 	}
 
 	public static void admprofessores() {
-		render();
+		List<Disciplina> disciplinas = Disciplina.findAll();
+		List<Professor> professores = Professor.findAll();
+		render(professores, disciplinas);
 	}
 
 	public static void admdisciplinas() {
@@ -82,36 +87,84 @@ public class Application extends Controller {
 		
 		Banco banco = new Banco();
 		banco.conectar();
+		int anoAtt = nivel;
 		
 		if (validation.hasErrors()) {
 			flash.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
 			Turma turma;
 			if ((nivel == 2) && (ano > 3)) {
+				anoAtt = 3;
 				turma = new Turma(3, nivel, sala);
 			} else
 				turma = new Turma(ano, nivel, sala);
-			String sql = ("INSERT into turma (ano, nivel, sala)" + " VALUES ('" + ano + "', '" + nivel + "', '" + sala + "');");
-			banco.executar(sql); 
+			String sql = ("INSERT into turma (ano, nivel, sala) VALUES ('" + anoAtt + "', '" + nivel + "', '" + sala + "');");
+			//banco.executar(sql);
+			turma.save();
 		}
 
 		admturmas();
 	}
+	
+	public static int getIdTurma (Turma turma) throws SQLException {
+		Banco banco = new Banco();
+		banco.conectar();
+		
+		String sql = "SELECT turma.id FROM turma WHERE ano = " + turma.getAno() + ", nivel = " + turma.getNivel();
+		ResultSet res = banco.consultar(sql);
+		return res.getInt("id");
+	}
 
 	public static void addDisciplina(
 			@Required String nome,
-			@Required Turma turma) {
+			@Required long turma) {
+		Banco banco = new Banco();
+		banco.conectar();
 		if (validation.hasErrors()) {
 			flash.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
 			Disciplina disciplina = new Disciplina(nome, turma);
-			EntityManager em = JPA.em();
-			em.persist(disciplina);	
+			String sql = ("INSERT into disciplina (nome, turma)" + " VALUES ('" + nome + "', '" + turma + "');");
+			disciplina.save();
 		}
 		admdisciplinas();
 	}
+	
+	public static void addProfessor (int disciplina, String nome) {
+		Banco banco = new Banco();
+		banco.conectar();
+		
+		if (validation.hasErrors()) {
+			flash.error("Um ou mais campos não foram preenchidos corretamente.");
+		} else {
+			Professor professor = new Professor(nome, disciplina);
+			String sql = ("INSERT into professor (disciplina, nome) VALUES ('" + disciplina + "', '" + nome + "');");
+			//banco.executar(sql);
+			professor.save();
+		}
+
+		admprofessores();
+	}
+	
+	public static void addAluno (String nome, int disciplina, int turma) {
+		Banco banco = new Banco();
+		banco.conectar();
+		
+		if (validation.hasErrors()) {
+			flash.error("Um ou mais campos não foram preenchidos corretamente.");
+		} else {
+			Aluno aluno = new Aluno (nome, turma, disciplina);
+			String sql = ("INSERT into aluno (disciplina, nome, turma) VALUES ('" + disciplina + "', '" + "', '" + nome + "', '" + turma + "');");
+			//banco.executar(sql);
+			aluno.save();
+		}
+
+		admalunos();
+	}
 
 	public static void admturmas() {
+		Banco banco = new Banco ();
+		banco.conectar();
 		List<Turma> lista = Turma.findAll();
 		render(lista);
 	}

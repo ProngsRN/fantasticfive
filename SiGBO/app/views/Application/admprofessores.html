@@ -21,21 +21,83 @@
 			<h1 id="logo"><a href="#" class="notext">beSmart</a></h1>
 			<div class="socials right">
 				<ul>
-				    <li><a href="#" class="rss">Orkut</a></li>
-				    <li><a href="#" class="fb">Facebook</a></li>
-				    <li class="last"><a href="#" class="twit">Twitter</a></li>
+				    <li><a href="@{Application.administrador()}" class="rss">Início</a></li>
+				    <li><a href="@{Application.index()}" class="fb">Sair</a></li>
 				</ul>
 			</div>
 			<div class="cl">&nbsp;</div>
 		</div>
 		
+		<div id="sidebar" class="left">
+
+				<h3>Alunos</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
+					    <li><a href="#">Gerenciar Alunos</a></li>
+					</ul>
+				</div>
+				
+				<h3>Professores</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admprofessores}">Cadastrar Professor</a></li>
+					    <li><a href="#">Gerenciar Professores</a></li>
+					</ul>
+				</div>
+				
+				<h3>Turmas</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admturmas}">Cadastrar Turma</a></li>
+					    <li><a href="#">Gerenciar Turmas</a></li>
+					</ul>
+				</div>
+				
+				<h3>Disciplinas</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admdisciplinas}">Cadastrar Disciplina</a></li>
+					    <li><a href="#">Gerenciar Disciplinas</a></li>
+					</ul>
+				</div>
+
+		</div>
+		
 		<div id="main">
 			<center>
-			<h3>:: Professores ::</h3>
-			<p><input type="submit" value="Cadastrar " />
-			<input type="submit" value="Editar" />
-			<input type="submit" value="Remover" /></p><a href="@{Application.administrador()}"><img src="/public/images/voltar.png"></a>
+			<h3>:: Cadastrar novo Professor ::</h3>
+			<form action="@{Application.addProfessor()}"  method="GET">
+				<label  for="ano">Nome: </label>
+				<input type="text" name="nome"/>
+				
+				<label  for="disciplina">Disciplina: </label>
+				<select name="disciplina">
+					#{if !disciplinas.isEmpty()}
+						#{list items:disciplinas, as:'disciplina'}
+							<option value=disciplina.getId()}>${disciplina.nome} - Turma: ${disciplina.turma}</option>
+						#{/list}
+					#{/if}
+				</select>
+				<input type="submit" value="Adicionar"/>
+				#{if flash.error}
+    				<p style="color:#c00">
+						${flash.error}
+    				</p>
+				#{/if}
+			</form>
+				
+			<br/>
+			<h3>:: Professores Cadastrados ::</h3>
+			#{if professores != null}
+				#{list items:professores, as:'professor'}
+					<b>Nome:</b> ${professor.nome} - <b>Disciplina:</b> ${professor.disciplina} || Turma: ${professor.turma}<br/>
+				#{/list}
+			#{/if}
+			<br/>
+			<a href="@{Application.administrador()}"><img src="/public/images/voltar.png"></a>
 			</center>
+			<br><br><br><br><br><br><br><br><br>
 		</div>
 		
 		<div class="shadow-l"></div>
