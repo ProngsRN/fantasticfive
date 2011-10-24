@@ -1,5 +1,7 @@
 package controllers;
 
+import java.sql.*;
+
 import play.*;
 
 import play.mvc.*;
@@ -14,6 +16,8 @@ import play.mvc.*;
 import java.util.*;
 
 import javax.persistence.EntityManager;
+
+import org.bouncycastle.asn1.ocsp.ServiceLocator;
 
 import models.*;
 import net.sf.oval.constraint.MinSize;
@@ -69,11 +73,16 @@ public class Application extends Controller {
 		List<Turma> turmas = Turma.findAll();
 		render(turmas, disciplinas);
 	}
+	 
 
 	public static void addTurma(
 			@Required int ano, 
 			@Required int nivel, 
-			@Required @MaxSize(1) String sala) {
+			@Required @MaxSize(1) String sala) throws SQLException {
+		
+		Banco banco = new Banco();
+		banco.conectar();
+		
 		if (validation.hasErrors()) {
 			flash.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
@@ -82,9 +91,8 @@ public class Application extends Controller {
 				turma = new Turma(3, nivel, sala);
 			} else
 				turma = new Turma(ano, nivel, sala);
-	
-			EntityManager em = JPA.em();
-			em.persist(turma);
+			String sql = ("INSERT into turma (ano, nivel, sala)" + " VALUES ('" + ano + "', '" + nivel + "', '" + sala + "');");
+			banco.executar(sql); 
 		}
 
 		admturmas();
