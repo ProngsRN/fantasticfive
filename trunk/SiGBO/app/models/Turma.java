@@ -1,6 +1,11 @@
 package models;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.persistence.Entity;
+
+import controllers.Banco;
 
 import net.sf.oval.constraint.MinSize;
 
@@ -50,4 +55,5 @@ public class Turma extends Model{
 	public void setSala (String sala) {
 		this.sala = sala;
 	}
+	
 }

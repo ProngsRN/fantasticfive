@@ -30,22 +30,6 @@
 		
 		<div id="sidebar" class="left">
 
-				<h3>Alunos</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
-					    <li><a href="#">Gerenciar Alunos</a></li>
-					</ul>
-				</div>
-				
-				<h3>Professores</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admprofessores}">Cadastrar Professor</a></li>
-					    <li><a href="#">Gerenciar Professores</a></li>
-					</ul>
-				</div>
-				
 				<h3>Turmas</h3>
 				<div class="sidebar-nav">
 					<ul>
@@ -61,6 +45,23 @@
 					    <li><a href="#">Gerenciar Disciplinas</a></li>
 					</ul>
 				</div>
+				
+				<h3>Professores</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admprofessores}">Cadastrar Professor</a></li>
+					    <li><a href="#">Gerenciar Professores</a></li>
+					</ul>
+				</div>
+				
+				<h3>Alunos</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
+					    <li><a href="#">Gerenciar Alunos</a></li>
+					    <li><a href="@{Application.habilitaracessoaluno}">Habilitar Acesso</a></li>
+					</ul>
+				</div>
 
 		</div>
 		
@@ -68,14 +69,14 @@
 			<center>
 			<h3>:: Cadastrar novo Professor ::</h3>
 			<form action="@{Application.addProfessor()}"  method="GET">
-				<label  for="ano">Nome: </label>
+				<label  for="nome">Nome: </label>
 				<input type="text" name="nome"/>
 				
 				<label  for="disciplina">Disciplina: </label>
 				<select name="disciplina">
 					#{if !disciplinas.isEmpty()}
 						#{list items:disciplinas, as:'disciplina'}
-							<option value=disciplina.getId()}>${disciplina.nome} - Turma: ${disciplina.turma}</option>
+							<option value=${disciplina.getId()}>${disciplina.nome} - Turma: ${disciplina.turma}</option>
 						#{/list}
 					#{/if}
 				</select>
@@ -91,7 +92,7 @@
 			<h3>:: Professores Cadastrados ::</h3>
 			#{if professores != null}
 				#{list items:professores, as:'professor'}
-					<b>Nome:</b> ${professor.nome} - <b>Disciplina:</b> ${professor.disciplina} || Turma: ${professor.turma}<br/>
+					<b>Nome:</b> ${professor.nome} - <b>Disciplina:</b> ${professor.disciplina} || <b>Turma:</b> ${professor.turma}<br/>
 				#{/list}
 			#{/if}
 			<br/>

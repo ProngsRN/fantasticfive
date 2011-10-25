@@ -8,6 +8,7 @@ GET		/user									Application.user
 GET		/admin									Application.administrador
 GET		/login									Application.login
 GET		/admin/alunos							Application.admalunos
+GET		/admin/alunos/habilitaracesso			Application.habilitaracessoaluno
 GET		/admin/boletins							Application.admboletins
 GET		/admin/notas							Application.admnotas
 GET		/admin/professores						Application.admprofessores

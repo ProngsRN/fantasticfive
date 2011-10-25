@@ -17,8 +17,24 @@ public class Disciplina extends Model {
 	private long turma;
 	
 	public Disciplina (String nome, long turma) {
+		this.setNome(nome);
+		this.setTurma(turma);
+	}
+
+	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setTurma(long turma) {
 		this.turma = turma;
+	}
+
+	public long getTurma() {
+		return turma;
 	}
 	
 	
