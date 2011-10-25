@@ -30,22 +30,6 @@
 		
 		<div id="sidebar" class="left">
 
-				<h3>Alunos</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
-					    <li><a href="#">Gerenciar Alunos</a></li>
-					</ul>
-				</div>
-				
-				<h3>Professores</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admprofessores}">Cadastrar Professor</a></li>
-					    <li><a href="#">Gerenciar Professores</a></li>
-					</ul>
-				</div>
-				
 				<h3>Turmas</h3>
 				<div class="sidebar-nav">
 					<ul>
@@ -61,6 +45,23 @@
 					    <li><a href="#">Gerenciar Disciplinas</a></li>
 					</ul>
 				</div>
+				
+				<h3>Professores</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admprofessores}">Cadastrar Professor</a></li>
+					    <li><a href="#">Gerenciar Professores</a></li>
+					</ul>
+				</div>
+				
+				<h3>Alunos</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
+					    <li><a href="#">Gerenciar Alunos</a></li>
+					    <li><a href="#}">Habilitar Acesso</a></li>
+					</ul>
+				</div>
 
 		</div>
 		
@@ -74,7 +75,7 @@
 				<select name="turma">
 					#{if !turmas.isEmpty()}
 						#{list items:turmas, as:'turma'}
-							<option value=turma.getId()}>${turma.ano}${turma.nivel}${turma.sala}</option>
+							<option value=${turma.getId()}>${turma.ano}${turma.nivel}${turma.sala}</option>
 						#{/list}
 					#{/if}
 				</select>
@@ -90,7 +91,7 @@
 			<h3>:: Disciplinas Cadastradas::</h3>
 			#{if disciplinas != null}
 				#{list items:disciplinas, as:'disciplina'}
-					<b>Nome:</b> ${disciplina.nome} - <b>Turma: ${disciplina.turma}<br/>
+					<b>Nome:</b> ${disciplina.nome} - <b>Turma</b>: ${disciplina.turma}<br/>
 				#{/list}
 			#{/if}
 			<br/>

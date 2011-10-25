@@ -12,16 +12,12 @@ public class Aluno extends Model {
     
 	@Required
 	private String nome;
-	
+
 	@Required
-	private int turma;
+	private long disciplina;
 	
-	@Required
-	private int disciplina;
-	
-	public Aluno (String nome, int turma, int disciplina) {
+	public Aluno (String nome, long disciplina) {
 		this.nome = nome;
-		this.turma = turma;
 		this.disciplina = disciplina;
 	}
 }

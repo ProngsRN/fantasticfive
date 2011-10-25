@@ -67,6 +67,12 @@ public class Application extends Controller {
 		render();
 	}
 
+	public static void habilitaracessoaluno() {
+		List<Aluno> alunos = Aluno.findAll();
+		List<UsuarioAluno> usuarios = UsuarioAluno.findAll();
+		render(alunos,usuarios);
+	}
+
 	public static void admprofessores() {
 		List<Disciplina> disciplinas = Disciplina.findAll();
 		List<Professor> professores = Professor.findAll();
@@ -78,19 +84,26 @@ public class Application extends Controller {
 		List<Turma> turmas = Turma.findAll();
 		render(turmas, disciplinas);
 	}
-	 
 
-	public static void addTurma(
-			@Required int ano, 
-			@Required int nivel, 
-			@Required @MaxSize(1) String sala) throws SQLException {
+	public static void habilitarAcessoAluno(@Required String nome,
+			@Required String senha, @Required String senha2, String email) {
 		
+			UsuarioAluno aluno = new UsuarioAluno(nome, senha, email);
+			aluno.save();
+
+		
+	}
+
+	public static void addTurma(@Required int ano, @Required int nivel,
+			@Required @MaxSize(1) String sala) throws SQLException {
+
 		Banco banco = new Banco();
 		banco.conectar();
 		int anoAtt = nivel;
-		
+
 		if (validation.hasErrors()) {
-			flash.error("Um ou mais campos não foram preenchidos corretamente.");
+			flash
+					.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
 			Turma turma;
 			if ((nivel == 2) && (ano > 3)) {
@@ -98,72 +111,80 @@ public class Application extends Controller {
 				turma = new Turma(3, nivel, sala);
 			} else
 				turma = new Turma(ano, nivel, sala);
-			String sql = ("INSERT into turma (ano, nivel, sala) VALUES ('" + anoAtt + "', '" + nivel + "', '" + sala + "');");
-			//banco.executar(sql);
+			// String sql = ("INSERT into turma (ano, nivel, sala) VALUES ('" +
+			// anoAtt + "', '" + nivel + "', '" + sala + "');");
+			// banco.executar(sql);
 			turma.save();
 		}
 
 		admturmas();
 	}
-	
-	public static int getIdTurma (Turma turma) throws SQLException {
-		Banco banco = new Banco();
-		banco.conectar();
-		
-		String sql = "SELECT turma.id FROM turma WHERE ano = " + turma.getAno() + ", nivel = " + turma.getNivel();
-		ResultSet res = banco.consultar(sql);
-		return res.getInt("id");
-	}
 
-	public static void addDisciplina(
-			@Required String nome,
-			@Required long turma) {
+	public static void addDisciplina(@Required String nome,
+			@Required long turma) throws SQLException {
 		Banco banco = new Banco();
 		banco.conectar();
 		if (validation.hasErrors()) {
-			flash.error("Um ou mais campos não foram preenchidos corretamente.");
+			flash
+					.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
-			Disciplina disciplina = new Disciplina(nome, turma);
-			String sql = ("INSERT into disciplina (nome, turma)" + " VALUES ('" + nome + "', '" + turma + "');");
+			Disciplina disciplina = new Disciplina (nome, turma);
 			disciplina.save();
+			
+			// String sql = ("INSERT into disciplina (nome, turma)" +
+			// " VALUES ('" + nome + "', '" + res + "');");
+
 		}
 		admdisciplinas();
 	}
-	
-	public static void addProfessor (int disciplina, String nome) {
+
+	public static void addProfessor(@Required String nome, @Required long disciplina)
+			throws SQLException {
 		Banco banco = new Banco();
 		banco.conectar();
-		
+
 		if (validation.hasErrors()) {
-			flash.error("Um ou mais campos não foram preenchidos corretamente.");
+			flash
+					.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
-			Professor professor = new Professor(nome, disciplina);
-			String sql = ("INSERT into professor (disciplina, nome) VALUES ('" + disciplina + "', '" + nome + "');");
-			//banco.executar(sql);
-			professor.save();
+			
+					Professor professor = new Professor(disciplina, nome);
+					int linhas = banco.executar("INSERT into professor (disciplina, nome) VALUES ('" + disciplina + "', '" + nome + "');");
+					professor.save();
 		}
+			
+			// String sql =
+			// ("INSERT into professor (disciplina, nome) VALUES ('" +
+			// disciplina + "', '" + nome + "');");
+			// banco.executar(sql);
+		
 
 		admprofessores();
 	}
-	
-	public static void addAluno (String nome, int disciplina, int turma) {
+
+	public static void addAluno(String nome, long disciplina)
+			throws SQLException {
 		Banco banco = new Banco();
 		banco.conectar();
-		
+
 		if (validation.hasErrors()) {
-			flash.error("Um ou mais campos não foram preenchidos corretamente.");
+			flash
+					.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
-			Aluno aluno = new Aluno (nome, turma, disciplina);
-			String sql = ("INSERT into aluno (disciplina, nome, turma) VALUES ('" + disciplina + "', '" + "', '" + nome + "', '" + turma + "');");
-			//banco.executar(sql);
+			
+			Aluno aluno = new Aluno (nome, disciplina);
 			aluno.save();
+			// String sql =
+			// ("INSERT into aluno (disciplina, nome, turma) VALUES ('" +
+			// disciplina + "', '" + "', '" + nome + "');");
+			// banco.executar(sql);
 		}
 
 		admalunos();
 	}
 
 	public static void admturmas() {
-		Banco banco = new Banco ();
+		Banco banco = new Banco();
 		banco.conectar();
 		List<Turma> lista = Turma.findAll();
 		render(lista);
