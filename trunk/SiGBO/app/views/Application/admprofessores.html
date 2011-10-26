@@ -68,7 +68,7 @@
 		<div id="main">
 			<center>
 			<h3>:: Cadastrar novo Professor ::</h3>
-			<form action="@{Application.addProfessor()}"  method="GET">
+			<form action="@{Cadastro.addProfessor()}"  method="GET">
 				<label  for="nome">Nome: </label>
 				<input type="text" name="nome"/>
 				
@@ -92,7 +92,7 @@
 			<h3>:: Professores Cadastrados ::</h3>
 			#{if professores != null}
 				#{list items:professores, as:'professor'}
-					<b>Nome:</b> ${professor.nome} - <b>Disciplina:</b> ${professor.disciplina} || <b>Turma:</b> ${professor.turma}<br/>
+					<b>Nome:</b> ${professor.nome} - <b>Disciplina:</b> ${professor.disciplina} <br/>
 				#{/list}
 			#{/if}
 			<br/>

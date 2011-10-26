@@ -59,7 +59,7 @@
 					<ul>
 					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
 					    <li><a href="#">Gerenciar Alunos</a></li>
-					    <li><a href="#}">Habilitar Acesso</a></li>
+					    <li><a href="@{Application.habilitaracessoaluno}">Habilitar Acesso</a></li>
 					</ul>
 				</div>
 
@@ -68,7 +68,7 @@
 		<div id="main">
 			<center>
 			<h3>:: Cadastrar nova Turma ::</h3>
-			<form action="@{Application.addTurma()}"  method="POST">
+			<form action="@{Cadastro.addTurma()}"  method="POST">
 				<label  for="nivel">Nível: </label>
 				<select name="nivel">
 					<option value=1>Ensino Fundamental</option>

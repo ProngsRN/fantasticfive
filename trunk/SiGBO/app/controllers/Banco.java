@@ -9,7 +9,7 @@ public class Banco extends Controller {
 	  String url = "jdbc:postgresql://localhost/sigbo";  
 	  String drive ="org.postgresql.Driver";  
 	    
-	  /** Efetua a conexão**/   
+	  /* Conecta o Banco de Dados */   
 	    public void conectar() {  
 	        try{  
 	            Class.forName(drive);  
@@ -17,10 +17,10 @@ public class Banco extends Controller {
 	        }catch(ClassNotFoundException e){  
 	            System.out.println("Erro (Banco): "+ e);  
 	        }catch(SQLException e){  
-	            System.out.println("Não foi possivel conectar: "+ e);  
+	            System.out.println("Conexão perdida: "+ e);  
 	        }  
 	    }  
-	    /** Desconecta o banco de dados**/  
+	    /* Desconecta o Banco de Dados */  
 	    public void desconectar() {  
 	        try {  
 	            conexao.close();  
@@ -28,7 +28,7 @@ public class Banco extends Controller {
 	            System.out.println("Erro (Banco): "+ e);  
 	        }  
 	    }  
-	    /** Executa uma opção do SQL**/  
+	    /* Executa um comando SQL */  
 	    public int executar(String sql) {  
 	        System.out.println("SQL: "+ sql);  
 	          
@@ -40,7 +40,7 @@ public class Banco extends Controller {
 	        }  
 	        return linhas;  
 	    }  
-	    /**Efetua uma consulta no banco de dados**/  
+	    /* Executa uma consulta no Banco de Dados */  
 	        public ResultSet consultar(String sql) {  
 	        ResultSet rs = null;  
 	        try{  
