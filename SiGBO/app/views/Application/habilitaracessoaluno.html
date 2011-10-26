@@ -56,7 +56,7 @@
 					<ul>
 					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
 					    <li><a href="#">Gerenciar Alunos</a></li>
-					    <li><a href="#}">Habilitar Acesso</a></li>
+					    <li><a href="@{Application.habilitaracessoaluno}">Habilitar Acesso</a></li>
 					</ul>
 				</div>
 
@@ -71,7 +71,7 @@
 				<select name="nome">
 					#{if !alunos.isEmpty()}
 						#{list items:alunos, as:'aluno'}
-							<option value=aluno.nome}>${aluno.nome}</option>
+							<option value="${aluno.nome}"}>${aluno.nome}</option>
 						#{/list}
 					#{/if}
 				</select>

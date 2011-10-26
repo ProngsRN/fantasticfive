@@ -18,7 +18,7 @@ public class Professor extends Model {
 
 	public Professor (long disciplina, String nome) {
 		this.nome = nome;
-		this.setDisciplina(disciplina);
+		this.disciplina = disciplina;
 	}
 		
 	public void setNome(String nome) {
