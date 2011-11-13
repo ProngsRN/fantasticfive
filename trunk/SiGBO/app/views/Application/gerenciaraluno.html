@@ -1,4 +1,4 @@
-#{set title:'SiGBO :: Administrar Alunos // Habilitar Acesso' /}
+#{set title:'SiGBO :: Administrar Alunos - Gerenciar Aluno' /}
 
 <html>
     <head>
@@ -65,30 +65,21 @@
 		
 		<div id="main">
 			<center>
-			<h3>:: Habilitar Acesso ::</h3>
-			<form action="@{Application.habilitarAcessoAluno()}"  method="GET">
-				<label  for="nome">Aluno: </label>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<select name="nome">
-					#{if !alunos.isEmpty()}
-						#{list items:alunos, as:'aluno'}
-							<option value="${aluno.nome}"}>${aluno.nome}</option>
-						#{/list}
-					#{/if}
+			<h3>:: Remover Aluno ::</h3>
+			#{if vazio == 0}
+				<center>
+				Você ainda não cadastrou nenhum aluno. <a href="@{Application.admalunos}">Clique aqui</a> para cadastrar.
+				<br>
+			#{/if}
+			#{if vazio != 0}
+			<form action="@{Remove.removeAluno()}"  method="GET">
+				<label  for="idAluno">Aluno: </label>
+				<select name="idAluno">
+					#{list items:alunos, as:'aluno'}
+						<option value=${aluno.getId()}>${aluno.nome}</option>
+					#{/list}
 				</select>
-				<br>
-				<label  for="senha">Senha: </label>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="password" name="senha"/>
-				<br>
-				<label  for="senha2">Repetir Senha:</label>
-				<input type="password" name="senha2"/>
-				<br>
-				<label  for="email">E-mail: </label>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" name="email"/>
-				<br>
-				<input type="submit" value="Adicionar"/>
+				<input type="submit" value="Remover"/>
 				
 				#{if flash.error}
     				<p style="color:#c00">
@@ -96,13 +87,21 @@
     				</p>
 				#{/if}
 			</form>
+			#{/if}
 				
 			<br/>
+			#{if vazio != 0}
 			<h3>:: Alunos Cadastrados ::</h3>
-			#{if usuarios != null}
-				#{list items:usuarios, as:'usuario'}
-					<b>Nome:</b> ${usuario.nome} <br/>
+			<table border=1>
+				<tr>
+					<td bgcolor='#aaddbb'><b><center>Nome</td>
+				</tr>
+				#{list items:alunos, as:'aluno'}
+						<tr>
+							<td>[ID: ${aluno.getId()}] ${aluno.nome}</td> 
+						</tr>
 				#{/list}
+			</table>	
 			#{/if}
 			<br/>
 			<a href="@{Application.administrador()}"><img src="/public/images/voltar.png"></a>

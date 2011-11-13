@@ -31,7 +31,7 @@
 				<div class="sidebar-nav">
 					<ul>
 					    <li><a href="@{Application.admturmas}">Cadastrar Turma</a></li>
-					    <li><a href="#">Gerenciar Turmas</a></li>
+					    <li><a href="@{Application.gerenciarturma}">Gerenciar Turmas</a></li>
 					</ul>
 				</div>
 				
@@ -39,7 +39,7 @@
 				<div class="sidebar-nav">
 					<ul>
 					    <li><a href="@{Application.admdisciplinas}">Cadastrar Disciplina</a></li>
-					    <li><a href="#">Gerenciar Disciplinas</a></li>
+					    <li><a href="@{Application.gerenciardisciplina}">Gerenciar Disciplinas</a></li>
 					</ul>
 				</div>
 				
@@ -47,7 +47,8 @@
 				<div class="sidebar-nav">
 					<ul>
 					    <li><a href="@{Application.admprofessores}">Cadastrar Professor</a></li>
-					    <li><a href="#">Gerenciar Professores</a></li>
+					    <li><a href="@{Application.gerenciarprofessor}">Gerenciar Professores</a></li>
+					    <li><a href="@{Application.admprofessordisciplina}">Cadastrar em Disciplina</a></li>
 					</ul>
 				</div>
 				
@@ -55,8 +56,8 @@
 				<div class="sidebar-nav">
 					<ul>
 					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
-					    <li><a href="#">Gerenciar Alunos</a></li>
-					    <li><a href="@{Application.habilitaracessoaluno}">Habilitar Acesso</a></li>
+					    <li><a href="@{Application.gerenciaraluno}">Gerenciar Alunos</a></li>
+					    <li><a href="@{Application.admalunodisciplina}">Cadastrar em Disciplina</a></li>
 					</ul>
 				</div>
 
@@ -66,17 +67,8 @@
 			<center>
 			<h3>:: Cadastrar novo Aluno ::</h3>
 			<form action="@{Cadastro.addAluno()}"  method="GET">
-				<label  for="ano">Nome: </label>
+				<label  for="nome">Nome: </label>
 				<input type="text" name="nome"/>
-				
-				<label  for="disciplina">Disciplina: </label>
-				<select name="disciplina">
-					#{if !disciplinas.isEmpty()}
-						#{list items:disciplinas, as:'disciplina'}
-							<option value=${disciplina.getId()}>${disciplina.nome} - Turma: ${disciplina.turma}</option>
-						#{/list}
-					#{/if}
-				</select>
 				
 				<input type="submit" value="Adicionar"/>
 				
@@ -88,11 +80,18 @@
 			</form>
 				
 			<br/>
+			#{if alunosvazio != 0}
 			<h3>:: Alunos Cadastrados ::</h3>
-			#{if alunos != null}
+			<table border=1>
+				<tr>
+					<td bgcolor='#aaddbb'><b><center>Nome</td>
+				</tr>
 				#{list items:alunos, as:'aluno'}
-					<b>Nome:</b> ${aluno.nome} <b>Disciplina que paga:</b> ${aluno.disciplina}<br/>
+						<tr>
+							<td>[ID: ${aluno.getId()}] ${aluno.nome}</td> 
+						</tr>
 				#{/list}
+			</table>	
 			#{/if}
 			<br/>
 			<a href="@{Application.administrador()}"><img src="/public/images/voltar.png"></a>
