@@ -54,9 +54,61 @@ public class Application extends Controller {
 
 	public static void admalunos() {
 		List<Aluno> alunos = Aluno.findAll();
+		
+		int alunosvazio = 1;
+		if (alunos.isEmpty()) alunosvazio = 0;
+		
+		render(alunos, alunosvazio);
+	}
+	
+	public static void gerenciaraluno() {
+		List<Aluno> alunos = Aluno.findAll();
+		int vazio = 1;
+		if (alunos.isEmpty()) vazio = 0;
+		render(alunos,vazio);
+	}
+	
+	public static void gerenciarprofessor() {
+		List<Professor> professores = Professor.findAll();
+		int vazio = 1;
+		if (professores.isEmpty()) vazio = 0;
+		render(professores,vazio);
+	}
+
+	public static void gerenciarturma() {
 		List<Turma> turmas = Turma.findAll();
+		int vazio = 1;
+		if (turmas.isEmpty()) vazio = 0;
+		render(turmas,vazio);
+	}
+	
+	public static void gerenciardisciplina() {
 		List<Disciplina> disciplinas = Disciplina.findAll();
-		render(alunos, turmas, disciplinas);
+		int vazio = 1;
+		if (disciplinas.isEmpty()) vazio = 0;
+		render(disciplinas, vazio);
+	}
+	
+	public static void admalunodisciplina() {
+		List<AlunoDisciplinas> alunodisciplina = AlunoDisciplinas.findAll();
+		List<Disciplina> disciplinas = Disciplina.findAll();
+		List<Aluno> alunos = Aluno.findAll();
+		
+		int vazio = 1;
+		if (alunos.isEmpty()) vazio = 0;
+		
+		render(alunodisciplina, alunos, disciplinas, vazio);
+	}
+
+	public static void admprofessordisciplina() {
+		List<ProfessorDisciplinas> professordisciplina = ProfessorDisciplinas.findAll();
+		List<Professor> professores = Professor.findAll();
+		List<Disciplina> disciplinas = Disciplina.findAll();
+		
+		int vazio = 1;
+		if (professores.isEmpty()) vazio = 0;
+				
+		render(professores, disciplinas, professordisciplina, vazio);
 	}
 
 	public static void admboletins() {
@@ -70,43 +122,51 @@ public class Application extends Controller {
 	public static void habilitaracessoaluno() {
 		List<Aluno> alunos = Aluno.findAll();
 		List<UsuarioAluno> usuarios = UsuarioAluno.findAll();
-		render(alunos,usuarios);
+		render(alunos, usuarios);
 	}
 
 	public static void admprofessores() {
-		List<Disciplina> disciplinas = Disciplina.findAll();
 		List<Professor> professores = Professor.findAll();
-		render(professores, disciplinas);
+		
+		int vazio = 1;
+		if (professores.isEmpty()) vazio = 0;
+		render(professores, vazio);
 	}
 
 	public static void admdisciplinas() {
 		List<Disciplina> disciplinas = Disciplina.findAll();
 		List<Turma> turmas = Turma.findAll();
-		render(turmas, disciplinas);
+		
+		int turmavazia = 1, disciplinavazia = 1;
+		
+		if (disciplinas.isEmpty()) disciplinavazia = 0;
+		if (turmas.isEmpty()) turmavazia = 0;
+		
+		render(turmas, disciplinas, disciplinavazia, turmavazia);
 	}
 
 	public static void habilitarAcessoAluno(@Required String nome,
 			@Required String senha, @Required String senha2, String email) {
-		
-			validation.email(email);
-			validation.equals(senha, senha2);
-			
-			if (validation.hasErrors()) {
-				flash
-						.error("Um ou mais campos não foram preenchidos corretamente.");
-			} else {
-				UsuarioAluno aluno = new UsuarioAluno(nome, senha, email);
-				aluno.save();
-			}
 
-		
+		validation.email(email);
+		validation.equals(senha, senha2);
+
+		if (validation.hasErrors()) {
+			flash
+					.error("Um ou mais campos não foram preenchidos corretamente.");
+		} else {
+			UsuarioAluno aluno = new UsuarioAluno(nome, senha, email);
+			aluno.save();
+		}
+
 	}
 
 	public static void admturmas() {
-		Banco banco = new Banco();
-		banco.conectar();
-		List<Turma> lista = Turma.findAll();
-		render(lista);
+		List<Turma> turmas = Turma.findAll();
+		
+		int vazia = 1;
+		if (turmas.isEmpty()) vazia = 0;
+		render(turmas, vazia);
 	}
 
 	public static int teste(String usuario, String senha) {

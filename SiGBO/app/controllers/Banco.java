@@ -44,7 +44,7 @@ public class Banco extends Controller {
 	        public ResultSet consultar(String sql) {  
 	        ResultSet rs = null;  
 	        try{  
-	            rs = conexao.createStatement().executeQuery(sql);  
+	            rs = conexao.createStatement().executeQuery(sql);
 	        }catch(SQLException e){  
 	            System.out.println("Erro (Banco): "+ e);  
 	        }  

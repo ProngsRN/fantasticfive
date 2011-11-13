@@ -8,11 +8,17 @@ GET		/user									Application.user
 GET		/admin									Application.administrador
 GET		/login									Application.login
 GET		/admin/alunos							Application.admalunos
+GET 	/admin/alunos/cadastrardisciplina		Application.admalunodisciplina
+GET		/admin/alunos/gerenciaraluno			Application.gerenciaraluno
 GET		/admin/alunos/habilitaracesso			Application.habilitaracessoaluno
 GET		/admin/boletins							Application.admboletins
 GET		/admin/notas							Application.admnotas
 GET		/admin/professores						Application.admprofessores
+GET		/admin/professores/cadastrardisciplina	Application.admprofessordisciplina
+GET		/admin/professores/gerenciarprofessor	Application.gerenciarprofessor
 GET		/admin/turmas							Application.admturmas
+GET		/admin/disciplinas						Application.admdisciplinas
+GET		/admin/disciplinas/gerenciardisciplina	Application.gerenciardisciplina
 *		/des									module:crud
 
 # Ignore favicon requests

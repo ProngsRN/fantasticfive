@@ -34,7 +34,7 @@
 				<div class="sidebar-nav">
 					<ul>
 					    <li><a href="@{Application.admturmas}">Cadastrar Turma</a></li>
-					    <li><a href="#">Gerenciar Turmas</a></li>
+					    <li><a href="@{Application.gerenciarturma}">Gerenciar Turmas</a></li>
 					</ul>
 				</div>
 				
@@ -42,7 +42,7 @@
 				<div class="sidebar-nav">
 					<ul>
 					    <li><a href="@{Application.admdisciplinas}">Cadastrar Disciplina</a></li>
-					    <li><a href="#">Gerenciar Disciplinas</a></li>
+					    <li><a href="@{Application.gerenciardisciplina}">Gerenciar Disciplinas</a></li>
 					</ul>
 				</div>
 				
@@ -50,7 +50,8 @@
 				<div class="sidebar-nav">
 					<ul>
 					    <li><a href="@{Application.admprofessores}">Cadastrar Professor</a></li>
-					    <li><a href="#">Gerenciar Professores</a></li>
+					    <li><a href="@{Application.gerenciarprofessor}">Gerenciar Professores</a></li>
+					    <li><a href="@{Application.admprofessordisciplina}">Cadastrar em Disciplina</a></li>
 					</ul>
 				</div>
 				
@@ -58,8 +59,8 @@
 				<div class="sidebar-nav">
 					<ul>
 					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
-					    <li><a href="#">Gerenciar Alunos</a></li>
-					    <li><a href="@{Application.habilitaracessoaluno}">Habilitar Acesso</a></li>
+					    <li><a href="@{Application.gerenciaraluno}">Gerenciar Alunos</a></li>
+					    <li><a href="@{Application.admalunodisciplina}">Cadastrar em Disciplina</a></li>
 					</ul>
 				</div>
 
@@ -96,13 +97,44 @@
     				</p>
 				#{/if}
 			</form>
-				
 			<br/>
+			#{if vazia != 0}
 			<h3>:: Turmas Cadastradas::</h3>
-			#{if lista != null}
-				#{list items:lista, as:'turma'}
-					<b>Ano:</b> ${turma.ano}º - <b>Nivel:</b> #{if turma.nivel == 2} Ensino Médio #{/if} #{if turma.nivel == 1} Ensino Fundamental #{/if}- <b>Sala:</b> ${turma.sala}<br/>
+			<table border=1>
+			<tr>
+				<td bgcolor='#aaddbb'>
+					<center>
+					<b>Ano
+				</td>
+				<td bgcolor='#aaddbb'>
+					<center>
+					<b>Nível
+				</td>
+				<td bgcolor='#aaddbb'>
+					<center>
+					<b>Sala
+				</td>
+			</tr>
+				#{list items:turmas, as:'turma'}
+					<tr>
+						<td>
+							<center>
+							${turma.ano}º
+						</td>
+						<td>
+							<center>
+							#{if turma.nivel == 2} 
+								Ensino Médio
+							#{/if}
+							#{if turma.nivel == 1}
+								Ensino Fundamental
+							#{/if}
+						<td>
+							<center>${turma.sala}
+						</td>
+					</tr>
 				#{/list}
+			</table>
 			#{/if}
 			<br/>
 			<a href="@{Application.administrador()}"><img src="/public/images/voltar.png"></a>

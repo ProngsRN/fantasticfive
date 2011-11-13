@@ -13,12 +13,8 @@ public class Professor extends Model {
 	@Required
 	private String nome;
 	
-	@Required
-	private long disciplina;
-
-	public Professor (long disciplina, String nome) {
+	public Professor (String nome) {
 		this.nome = nome;
-		this.disciplina = disciplina;
 	}
 		
 	public void setNome(String nome) {
@@ -27,14 +23,5 @@ public class Professor extends Model {
 
 	public String getNome() {
 		return nome;
-	}
-
-	public void setDisciplina(long disciplina) {
-		this.disciplina = disciplina;
-	}
-
-	public long getDisciplina() {
-		return disciplina;
-	}
-   
+	}   
 }

@@ -1,4 +1,4 @@
-#{set title:'SiGBO :: Administrar Alunos // Habilitar Acesso' /}
+#{set title:'SiGBO :: Administrar Turma - Gerenciar Turmas' /}
 
 <html>
     <head>
@@ -65,30 +65,30 @@
 		
 		<div id="main">
 			<center>
-			<h3>:: Habilitar Acesso ::</h3>
-			<form action="@{Application.habilitarAcessoAluno()}"  method="GET">
-				<label  for="nome">Aluno: </label>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<select name="nome">
-					#{if !alunos.isEmpty()}
-						#{list items:alunos, as:'aluno'}
-							<option value="${aluno.nome}"}>${aluno.nome}</option>
-						#{/list}
-					#{/if}
+			<h3>:: Remover Turma ::</h3>
+			#{if vazio == 0}
+				<center>
+				Você ainda não cadastrou nenhuma turma. <a href="@{Application.admturmas}">Clique aqui</a> para cadastrar.
+				<br>
+			#{/if}
+			#{if vazio != 0}
+			<form action="@{Remove.removeTurma()}"  method="GET">
+				<label  for="idTurma">Aluno: </label>
+				<select name="idTurma">
+					#{list items:turmas, as:'turma'}
+						<option value=${turma.getId()}>
+							Ano: ${turma.ano} 
+							Nivel: 	#{if turma.nivel == 1} 
+										Ensino Fundamental 
+									#{/if}
+									#{if turma.nivel == 2}
+										Ensino Médio
+									#{/if}
+							Sala: ${turma.sala}
+						</option>
+					#{/list}
 				</select>
-				<br>
-				<label  for="senha">Senha: </label>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="password" name="senha"/>
-				<br>
-				<label  for="senha2">Repetir Senha:</label>
-				<input type="password" name="senha2"/>
-				<br>
-				<label  for="email">E-mail: </label>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" name="email"/>
-				<br>
-				<input type="submit" value="Adicionar"/>
+				<input type="submit" value="Remover"/>
 				
 				#{if flash.error}
     				<p style="color:#c00">
@@ -96,13 +96,46 @@
     				</p>
 				#{/if}
 			</form>
+			#{/if}
 				
 			<br/>
-			<h3>:: Alunos Cadastrados ::</h3>
-			#{if usuarios != null}
-				#{list items:usuarios, as:'usuario'}
-					<b>Nome:</b> ${usuario.nome} <br/>
+			#{if vazio != 0}
+			<h3>:: Turmas Cadastrados ::</h3>
+			<table border=1>
+				<tr>
+				<td bgcolor='#aaddbb'>
+					<center>
+					<b>Ano
+				</td>
+				<td bgcolor='#aaddbb'>
+					<center>
+					<b>Nível
+				</td>
+				<td bgcolor='#aaddbb'>
+					<center>
+					<b>Sala
+				</td>
+			</tr>
+				#{list items:turmas, as:'turma'}
+					<tr>
+						<td>
+							<center>
+							${turma.ano}º
+						</td>
+						<td>
+							<center>
+							#{if turma.nivel == 2} 
+								Ensino Médio
+							#{/if}
+							#{if turma.nivel == 1}
+								Ensino Fundamental
+							#{/if}
+						<td>
+							<center>${turma.sala}
+						</td>
+					</tr>
 				#{/list}
+			</table>	
 			#{/if}
 			<br/>
 			<a href="@{Application.administrador()}"><img src="/public/images/voltar.png"></a>

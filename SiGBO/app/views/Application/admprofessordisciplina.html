@@ -1,4 +1,4 @@
-#{set title:'SiGBO :: Administrar Alunos // Habilitar Acesso' /}
+#{set title:'SiGBO :: Administrar Professores - Cadastrar Disciplina' /}
 
 <html>
     <head>
@@ -6,13 +6,16 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="@{'public/stylesheets/style.css'}" type="text/css" media="all" />
 		<link rel="stylesheet" href="@{'public/stylesheets/jquery.jcarousel.css'}" type="text/css" media="all" />
+		<!--[if IE 6]>
+			<link rel="stylesheet" href="@{'public/stylesheets/ie6.css'}" type="text/css" media="all" />
+		<![endif]-->
 		<link rel="shortcut icon" href="@{'public/images/favicon.ico'}" />
 		<script type="text/javascript" src="@{'/public/javascripts/jquery-1.4.2.min.js'}"></script>
 		<script type="text/javascript" src="@{'/public/javascripts/jquery.jcarousel.pack.js'}"></script>
 		<script type="text/javascript" src="@{'/public/javascripts/func.js'}"></script>
     </head>
     <body>
-<div class="shell">
+    <div class="shell">
 	<div class="border">
 		<div id="header">
 			<h1 id="logo"><a href="#" class="notext">beSmart</a></h1>
@@ -65,51 +68,66 @@
 		
 		<div id="main">
 			<center>
-			<h3>:: Habilitar Acesso ::</h3>
-			<form action="@{Application.habilitarAcessoAluno()}"  method="GET">
-				<label  for="nome">Aluno: </label>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<select name="nome">
-					#{if !alunos.isEmpty()}
-						#{list items:alunos, as:'aluno'}
-							<option value="${aluno.nome}"}>${aluno.nome}</option>
+			#{if vazio == 0}
+				<center>
+				Você ainda não cadastrou nenhum professor. <a href="@{Application.admprofessores}">Clique aqui</a> para cadastrar.
+				<br>
+			#{/if}
+			#{if vazio != 0}
+			<h3>:: Cadastrar Professor em Disciplina ::</h3>
+			<form action="@{Cadastro.addDisciplinaToProfessor()}"  method="GET">
+				<label  for="idProfessor">Professor: </label>
+				<select name="idProfessor">
+					#{if !professores.isEmpty()}
+						#{list items:professores, as:'professor'}
+							<option value=${professor.getId()}>${professor.nome}</option>
 						#{/list}
 					#{/if}
 				</select>
 				<br>
-				<label  for="senha">Senha: </label>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="password" name="senha"/>
-				<br>
-				<label  for="senha2">Repetir Senha:</label>
-				<input type="password" name="senha2"/>
-				<br>
-				<label  for="email">E-mail: </label>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" name="email"/>
-				<br>
-				<input type="submit" value="Adicionar"/>
+				<label  for="idDisciplina">Disciplina: </label>
+				<select name="idDisciplina">
+					#{if !disciplinas.isEmpty()}
+						#{list items:disciplinas, as:'disciplina'}
+							<option value=${disciplina.getId()}>[ID ${disciplina.getId()}]${disciplina.nome} - Turma: ${disciplina.getTurmaDisciplina()}</option>
+						#{/list}
+					#{/if}
+				</select>
 				
+				<input type="submit" value="Adicionar"/>
 				#{if flash.error}
     				<p style="color:#c00">
 						${flash.error}
     				</p>
 				#{/if}
 			</form>
-				
+			#{/if}
 			<br/>
-			<h3>:: Alunos Cadastrados ::</h3>
-			#{if usuarios != null}
-				#{list items:usuarios, as:'usuario'}
-					<b>Nome:</b> ${usuario.nome} <br/>
+			#{if vazio != 0}
+			<h3>:: Professores Cadastrados ::</h3>
+			<table border=1>
+				<tr>
+					<td bgcolor='#aaddbb'><center><b>Nome</td> <td bgcolor='#aaddbb'><center><b>Disciplinas (ID)</td>
+				</tr>
+				#{list items:professores, as:'professor'}
+					<tr>
+						<td><center>[ID ${professor.getId()}] ${professor.nome}</td> 
+						<td>
+							#{list items:professordisciplina, as:'disciplina'}
+								#{if disciplina.idProfessor == professor.id} 
+									<center>[ID: ${disciplina.idDisciplina}]${disciplina.getNomeDisciplina()} (<b>Turma:</b> ${disciplina.getTurmaDisciplina()})</center><br>
+								#{/if} 
+							#{/list}
+						</td>
+					</tr>
 				#{/list}
+			</table>
 			#{/if}
 			<br/>
 			<a href="@{Application.administrador()}"><img src="/public/images/voltar.png"></a>
 			</center>
 			<br><br><br><br><br><br><br><br><br>
 		</div>
-		
 		
 		<div class="shadow-l"></div>
 		<div class="shadow-r"></div>
@@ -126,8 +144,7 @@
 			    <li class="last"><a href="#">Contato</a></li>
 			</ul>
 		</div>
-
-		<p class="copy right">Copyright &copy; | SiGBO 2011 - Fantastic Five Team |  ! beSmart 2010 | Valid CSS &amp; HTML. <a href="http://chocotemplates.com" target="_blank" title="Chocotemplates">Design</a></p>
+		<p class="copy right">Copyright &copy; Fantastic Five Team ! beSmart 2010 | Valid CSS &amp; HTML. <a href="http://chocotemplates.com" target="_blank" title="Chocotemplates">Design</a></p>
 		<div class="cl">&nbsp;</div>
 	</div>
 </div>

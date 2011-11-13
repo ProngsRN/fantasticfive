@@ -12,12 +12,8 @@ public class Aluno extends Model {
     
 	@Required
 	private String nome;
-
-	@Required
-	private long disciplina;
 	
-	public Aluno (String nome, long disciplina) {
+	public Aluno (String nome) {
 		this.nome = nome;
-		this.disciplina = disciplina;
 	}
 }
