@@ -19,17 +19,16 @@ public class Cadastro extends Application {
 		int anoAtt = ano;
 
 		if (validation.hasErrors()) {
-			flash
-					.error("Um ou mais campos não foram preenchidos corretamente.");
+			flash.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
 			if ((nivel == 2) && (ano > 3)) {
 				anoAtt = 3;
 			}
-			
-			String sql = ("SELECT * FROM turma WHERE ano = "
-					+ anoAtt + " AND nivel = " + nivel + " AND sala = '" + sala + "'");
+
+			String sql = ("SELECT * FROM turma WHERE ano = " + anoAtt
+					+ " AND nivel = " + nivel + " AND sala = '" + sala + "'");
 			ResultSet rs = banco.consultar(sql);
-			
+
 			if (!rs.next()) {
 				Turma turma;
 				turma = new Turma(anoAtt, nivel, sala);
@@ -46,14 +45,13 @@ public class Cadastro extends Application {
 		Banco banco = new Banco();
 		banco.conectar();
 		if (validation.hasErrors()) {
-			flash
-					.error("Um ou mais campos não foram preenchidos corretamente.");
+			flash.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
-			
-			String sql = ("SELECT * FROM disciplina WHERE nome = '"
-					+ nome + "' AND turma = " + turma);
+
+			String sql = ("SELECT * FROM disciplina WHERE nome = '" + nome
+					+ "' AND turma = " + turma);
 			ResultSet rs = banco.consultar(sql);
-			
+
 			if (!rs.next()) {
 				Disciplina disciplina = new Disciplina(nome, turma);
 				disciplina.save();
@@ -64,19 +62,40 @@ public class Cadastro extends Application {
 		admdisciplinas();
 	}
 
+	public static void addNotaToAluno(@Required long idAluno,
+			@Required long idDisciplina, int nota1, int nota2, int nota3,
+			int nota4) throws SQLException {
+
+		if (validation.hasErrors()) {
+			flash.error("Um ou mais campos não foram preenchidos corretamente.");
+		} else {
+
+			String sql = ("UPDATE alunodisciplinas SET nota1 = " + nota1
+					+ ", nota2 = " + nota2 + ", nota3 = " + nota3
+					+ ", nota4 = " + nota4 + " WHERE idaluno = " + idAluno
+					+ " AND iddisciplina = " + idDisciplina);
+			Banco banco = new Banco ();
+			banco.conectar();
+			ResultSet rs = banco.consultar(sql);
+			if (rs != null) {
+				flash.error("Não foi possível atualizar as notas do aluno.");
+			}
+			banco.desconectar();
+		}
+		admnotas();
+	}
+
 	public static void addProfessor(@Required String nome) throws SQLException {
 		Banco banco = new Banco();
 		banco.conectar();
 
 		if (validation.hasErrors()) {
-			flash
-					.error("Um ou mais campos não foram preenchidos corretamente.");
+			flash.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
-			
-			String sql = ("SELECT * FROM professor WHERE nome = '"
-					+ nome + "'");
+
+			String sql = ("SELECT * FROM professor WHERE nome = '" + nome + "'");
 			ResultSet rs = banco.consultar(sql);
-			
+
 			if (!rs.next()) {
 				Professor professor = new Professor(nome);
 				professor.save();
@@ -93,15 +112,12 @@ public class Cadastro extends Application {
 		banco.conectar();
 
 		if (validation.hasErrors()) {
-			flash
-					.error("Um ou mais campos não foram preenchidos corretamente.");
+			flash.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
 
-
-			String sql = ("SELECT * FROM aluno WHERE nome = '"
-					+ nome + "'");
+			String sql = ("SELECT * FROM aluno WHERE nome = '" + nome + "'");
 			ResultSet rs = banco.consultar(sql);
-			
+
 			if (!rs.next()) {
 				Aluno aluno = new Aluno(nome);
 				aluno.save();
@@ -116,8 +132,7 @@ public class Cadastro extends Application {
 			@Required long idDisciplina) throws SQLException {
 
 		if (validation.hasErrors()) {
-			flash
-					.error("Um ou mais campos não foram preenchidos corretamente.");
+			flash.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
 			Banco banco = new Banco();
 			banco.conectar();
@@ -134,8 +149,8 @@ public class Cadastro extends Application {
 		}
 		admprofessordisciplina();
 	}
-	
-	public static void teste () {
+
+	public static void teste() {
 		renderText("teste");
 	}
 
@@ -143,8 +158,7 @@ public class Cadastro extends Application {
 			@Required long idDisciplina) throws SQLException {
 
 		if (validation.hasErrors()) {
-			flash
-					.error("Um ou mais campos não foram preenchidos corretamente.");
+			flash.error("Um ou mais campos não foram preenchidos corretamente.");
 		} else {
 			Banco banco = new Banco();
 			banco.conectar();

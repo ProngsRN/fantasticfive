@@ -13,24 +13,16 @@ import java.util.*;
 
 @Entity
 public class AlunoDisciplinas extends Model {
-    
-	private int nota;
-	
+
 	private long idDisciplina;
-	
+
 	private long idAluno;
-	
+
+	private float nota1, nota2, nota3, nota4;
+
 	public AlunoDisciplinas(long idDisciplina, long idAluno) {
 		this.idDisciplina = idDisciplina;
 		this.idAluno = idAluno;
-	}
-
-	public void setNota(int nota) {
-		this.nota = nota;
-	}
-
-	public int getNota() {
-		return nota;
 	}
 
 	public void setIdDisciplina(long idDisciplina) {
@@ -48,7 +40,7 @@ public class AlunoDisciplinas extends Model {
 	public long getIdAluno() {
 		return idAluno;
 	}
-	
+
 	public String getNomeDisciplina() throws SQLException {
 
 		Banco banco = new Banco();
@@ -63,8 +55,22 @@ public class AlunoDisciplinas extends Model {
 		return nome;
 	}
 	
-public String getTurmaDisciplina() throws SQLException {
+	public String getNomeAluno() throws SQLException {
 		
+		Banco banco = new Banco ();
+		banco.conectar();
+		String sql = ("SELECT nome FROM aluno WHERE id = " + idAluno);
+		ResultSet rs = banco.consultar(sql);
+		String nome = "";
+		if (rs.next()) {
+			nome = rs.getString("nome");
+		}
+		banco.desconectar();
+		return nome;
+	}
+
+	public String getTurmaDisciplina() throws SQLException {
+
 		Banco banco = new Banco();
 		banco.conectar();
 		String sql = ("SELECT turma FROM disciplina WHERE id = " + idDisciplina);
@@ -82,11 +88,45 @@ public String getTurmaDisciplina() throws SQLException {
 			nivel = rs.getString("nivel");
 			sala = rs.getString("sala");
 			String nivelString;
-			if (nivel == "2") nivelString = "Ensino Médio";
-			else nivelString = "Ensino Fundamental";
+			if (nivel == "2")
+				nivelString = "Ensino Médio";
+			else
+				nivelString = "Ensino Fundamental";
 			turma = ("Ano: " + ano + " Nível: " + nivelString + " Sala: " + sala);
 		}
 		banco.desconectar();
 		return turma;
+	}
+
+	public float getNota1() {
+		return nota1;
+	}
+
+	public void setNota1(float nota1) {
+		this.nota1 = nota1;
+	}
+
+	public float getNota2() {
+		return nota2;
+	}
+
+	public void setNota2(float nota2) {
+		this.nota2 = nota2;
+	}
+
+	public float getNota3() {
+		return nota3;
+	}
+
+	public void setNota3(float nota3) {
+		this.nota3 = nota3;
+	}
+
+	public float getNota4() {
+		return nota4;
+	}
+
+	public void setNota4(float nota4) {
+		this.nota4 = nota4;
 	}
 }

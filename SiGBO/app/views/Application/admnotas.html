@@ -21,45 +21,134 @@
 			<h1 id="logo"><a href="#" class="notext">beSmart</a></h1>
 			<div class="socials right">
 				<ul>
-				    <li><a href="#" class="rss">Orkut</a></li>
-				    <li><a href="#" class="fb">Facebook</a></li>
-				    <li class="last"><a href="#" class="twit">Twitter</a></li>
+				    <li><a href="@{Application.administrador()}" class="rss">Início</a></li>
+				    <li><a href="@{Application.index()}" class="fb">Sair</a></li>
 				</ul>
 			</div>
 			<div class="cl">&nbsp;</div>
 		</div>
 		
+		<div id="sidebar" class="left">
+
+				<h3>Turmas</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admturmas}">Cadastrar Turma</a></li>
+					    <li><a href="@{Application.gerenciarturma}">Gerenciar Turmas</a></li>
+					</ul>
+				</div>
+				
+				<h3>Disciplinas</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admdisciplinas}">Cadastrar Disciplina</a></li>
+					    <li><a href="@{Application.gerenciardisciplina}">Gerenciar Disciplinas</a></li>
+					</ul>
+				</div>
+				
+				<h3>Professores</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admprofessores}">Cadastrar Professor</a></li>
+					    <li><a href="@{Application.gerenciarprofessor}">Gerenciar Professores</a></li>
+					    <li><a href="@{Application.admprofessordisciplina}">Cadastrar em Disciplina</a></li>
+					</ul>
+				</div>
+				
+				<h3>Alunos</h3>
+				<div class="sidebar-nav">
+					<ul>
+					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
+					    <li><a href="@{Application.gerenciaraluno}">Gerenciar Alunos</a></li>
+					    <li><a href="@{Application.admalunodisciplina}">Cadastrar em Disciplina</a></li>
+					</ul>
+				</div>
+
+		</div>
+		
 		<div id="main">
 			<center>
-			<h3>:: Notas ::</h3>
-			<p><select name="turma">
-			<option>1 EF</option>
-			<option>2 EF</option>
-			<option>3 EF</option>
-			<option>4 EF</option>
-			<option>5 EF</option>
-			<option>6 EF</option>
-			<option>7 EF</option>
-			<option>8 EF</option>
-			<option>9 EF</option>
-			<option>1 EM</option>
-			<option>2 EM</option>
-			<option>3 EM</option></select>
-			
-			<select name="disciplina">
-			<option>Portugues</option>
-			<option>Matematica</option>
-			<option>Quimica</option>
-			<option>Fisica</option>
-			<option>Biologia</option>
-			<option>Historia</option>
-			<option>Geografia</option>
-			<option>Ingles</option>
-			<option>Espanhol</option>
-			<option>Filosofia</option>
-			<option>Artes</option></select></p>
-			<input type="submit" value="Acessar" /><br/><a href="@{Application.administrador()}"><img src="/public/images/voltar.png"></a>
+			#{if alunovazio == 0}
+				<center>
+				Você ainda não cadastrou aluno em disciplina. <a href="@{Application.admalunodisciplina}">Clique aqui</a> para cadastrar.
+				<br>
+			#{/if}
+			#{if alunovazio != 0}
+			<h3>:: Cadastrar nova Disciplina ::</h3>
+			<form action="@{Cadastro.addNotaToAluno()}"  method="GET">
+				<label  for="idAluno">Aluno: </label>
+				<select name="idAluno">
+					#{list items:alunodisciplina, as:'aluno'}
+						<option value=${aluno.getIdAluno()}>
+							${aluno.getNomeAluno()}
+						</option>
+					#{/list}
+				</select>
+				<label  for="idDisciplina">Disciplina: </label>
+				<select name="idDisciplina">
+					#{list items:alunodisciplina, as:'disciplina'}
+						<option value=${disciplina.getIdDisciplina()}>
+							${disciplina.getNomeDisciplina()}
+						</option>
+					#{/list}
+				</select>
+				<label  for="nota1">Nota 1: </label>
+				<input type="number" name="nota1">
+				<label  for="nota2">Nota 2: </label>
+				<input type="number" name="nota2">
+				<label  for="nota3">Nota 3: </label>
+				<input type="number" name="nota3">
+				<label  for="nota4">Nota 4: </label>
+				<input type="number" name="nota4">
+				
+				<input type="submit" value="Adicionar"/>
+				#{if flash.error}
+    				<p style="color:#c00">
+						${flash.error}
+    				</p>
+				#{/if}
+			</form>
+			#{/if}
+			<br/>
+			#{if alunovazio != 0}
+			<h3>:: Alunos Cadastrados (Disciplinas e Notas)::</h3>
+			<table border=1>
+				<tr>
+					<td bgcolor='#aaddbb'><b><center>Aluno</td> 
+					<td bgcolor='#aaddbb'><center><b>Disciplina</td>
+					<td bgcolor='#aaddbc'><center><b>Nota 1</td>
+					<td bgcolor='#aaddbc'><center><b>Nota 2</td>
+					<td bgcolor='#aaddbc'><center><b>Nota 3</td>
+					<td bgcolor='#aaddbc'><center><b>Nota 4</td>
+				</tr>
+				#{list items:alunodisciplina, as:'aluno'}
+					<tr>
+						<td>
+							<center>[ID ${aluno.getIdAluno()}] ${aluno.getNomeAluno()}
+						</td> 
+						<td>
+							<center>[ID: ${aluno.getIdDisciplina()}] ${aluno.getNomeDisciplina()} (${aluno.getTurmaDisciplina()})</center><br>
+						</td>
+						<td>
+							<center> ${aluno.getNota1()}
+						</td>
+						<td>
+							<center> ${aluno.getNota2()}
+						</td>
+						<td>
+							<center> ${aluno.getNota3()}
+						</td>
+						<td>
+							<center> ${aluno.getNota4()}
+						</td>
+					</tr>
+				#{/list}
+			</table>
+			#{/if}
+			<br/>
+			<a href="@{Application.administrador()}"><img src="/public/images/voltar.png"></a>
 			</center>
+			<br><br><br><br><br><br><br><br><br>
 		</div>
 		
 		<div class="shadow-l"></div>
