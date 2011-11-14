@@ -34,11 +34,13 @@ Agora, partiremos para o próximo passo: criar um novo usuário.
 Clique com o botão direito sobre _Login Roles_ (último na lista), e escolha _New Login Role_. O usuário deverá ter obrigatoriamente os seguintes dados:
 
 
-_ Aba: *Properties* _
-Role Name: usersigbo
+ _ Aba: *Properties* _
+
+ Role Name: usersigbo
  
-_ Aba: *Definition* _
-Password: five
+ _ Aba: *Definition* _
+
+ Password: five
 
 = Conclusão =
 
