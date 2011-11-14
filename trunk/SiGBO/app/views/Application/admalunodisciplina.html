@@ -66,12 +66,17 @@
 		
 		<div id="main">
 			<center>
-			#{if vazio == 0}
+			#{if vazioaluno == 0}
 				<center>
 				Você ainda não cadastrou nenhum aluno. <a href="@{Application.admalunos}">Clique aqui</a> para cadastrar.
 				<br>
 			#{/if}
-			#{if vazio != 0}
+			#{if vaziodisciplina == 0}
+				<center>
+				Você ainda não cadastrou nenhuma disciplina. <a href="@{Application.admdisciplinas}">Clique aqui</a> para cadastrar.
+				<br>
+			#{/if}
+			#{if (vazioaluno != 0) && (vaziodisciplina != 0)}
 			<h3>:: Cadastrar Aluno em Disciplina ::</h3>
 			<form action="@{Cadastro.addDisciplinaToAluno()}"  method="GET">
 				<label  for="idAluno">Aluno: </label>
@@ -103,7 +108,7 @@
 			#{/if}
 				
 			<br/>
-			#{if vazio != 0}
+			#{if vazioaluno != 0}
 			<h3>:: Alunos Cadastrados ::</h3>
 			<table border=1>
 				<tr>
