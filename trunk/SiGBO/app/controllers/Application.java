@@ -123,7 +123,12 @@ public class Application extends Controller {
 	}
 
 	public static void admnotas() {
-		render();
+		List<AlunoDisciplinas> alunodisciplina = AlunoDisciplinas.findAll();
+		
+		int alunovazio = 1;
+		if (alunodisciplina.isEmpty()) alunovazio = 0;
+		
+		render(alunodisciplina, alunovazio);
 	}
 
 	public static void habilitaracessoaluno() {
