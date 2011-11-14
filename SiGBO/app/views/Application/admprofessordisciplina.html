@@ -68,12 +68,17 @@
 		
 		<div id="main">
 			<center>
-			#{if vazio == 0}
+			#{if professorvazio == 0}
 				<center>
 				Você ainda não cadastrou nenhum professor. <a href="@{Application.admprofessores}">Clique aqui</a> para cadastrar.
 				<br>
 			#{/if}
-			#{if vazio != 0}
+			#{if disciplinavazio == 0}
+				<center>
+				Você ainda não cadastrou nenhuma disciplina. <a href="@{Application.admdisciplinas}">Clique aqui</a> para cadastrar.
+				<br>
+			#{/if}
+			#{if (professorvazio != 0) && (disciplinavazio != 0)}
 			<h3>:: Cadastrar Professor em Disciplina ::</h3>
 			<form action="@{Cadastro.addDisciplinaToProfessor()}"  method="GET">
 				<label  for="idProfessor">Professor: </label>
@@ -103,7 +108,7 @@
 			</form>
 			#{/if}
 			<br/>
-			#{if vazio != 0}
+			#{if professorvazio != 0}
 			<h3>:: Professores Cadastrados ::</h3>
 			<table border=1>
 				<tr>

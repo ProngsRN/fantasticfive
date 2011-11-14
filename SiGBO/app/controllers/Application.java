@@ -94,10 +94,13 @@ public class Application extends Controller {
 		List<Disciplina> disciplinas = Disciplina.findAll();
 		List<Aluno> alunos = Aluno.findAll();
 		
-		int vazio = 1;
-		if (alunos.isEmpty()) vazio = 0;
+		int vazioaluno = 1;
+		if (alunos.isEmpty()) vazioaluno = 0;
 		
-		render(alunodisciplina, alunos, disciplinas, vazio);
+		int vaziodisciplina = 1;
+		if (disciplinas.isEmpty()) vaziodisciplina = 0;
+		
+		render(alunodisciplina, alunos, disciplinas, vazioaluno, vaziodisciplina);
 	}
 
 	public static void admprofessordisciplina() {
@@ -105,10 +108,14 @@ public class Application extends Controller {
 		List<Professor> professores = Professor.findAll();
 		List<Disciplina> disciplinas = Disciplina.findAll();
 		
-		int vazio = 1;
-		if (professores.isEmpty()) vazio = 0;
+		int professorvazio = 1;
+		if (professores.isEmpty()) professorvazio = 0;
+		
+		int disciplinavazio = 1;
+		if (disciplinas.isEmpty()) disciplinavazio = 0;
+		
 				
-		render(professores, disciplinas, professordisciplina, vazio);
+		render(professores, disciplinas, professordisciplina, professorvazio, disciplinavazio);
 	}
 
 	public static void admboletins() {
