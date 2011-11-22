@@ -89,10 +89,10 @@ public class AlunoDisciplinas extends Model {
 			sala = rs.getString("sala");
 			String nivelString;
 			if (nivel == "2")
-				nivelString = "Ensino Médio";
+				nivelString = "Ensino MÃ©dio";
 			else
 				nivelString = "Ensino Fundamental";
-			turma = ("Ano: " + ano + " Nível: " + nivelString + " Sala: " + sala);
+			turma = ("Ano: " + ano + " NÃ­vel: " + nivelString + " Sala: " + sala);
 		}
 		banco.desconectar();
 		return turma;
