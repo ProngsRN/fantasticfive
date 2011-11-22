@@ -23,16 +23,23 @@
 			<h1 id="logo"><a href="#" class="notext">beSmart</a></h1>
 			<div class="socials right">
 				<ul>
-				    <li><a href="#" class="rss">Orkut</a></li>
-				    <li><a href="#" class="fb">Facebook</a></li>
-				    <li class="last"><a href="#" class="twit">Twitter</a></li>
+				    <li><a href="@{Application.administrador()}" class="rss">Início</a></li>
+				    <li><a href="@{Application.index()}" class="fb">Sair</a></li>
 				</ul>
 			</div>
 			<div class="cl">&nbsp;</div>
 		</div>
 		
 		<div id="main">
-		<center><img src="/public/images/boletim.jpg" alt="" /><br/><a href="@{Application.index()}"><img src="/public/images/voltar.png"></a></center>
+			<center>
+				<b><big>Olá, ${aluno.getNome()}!
+				<br>
+				<img src="/public/images/boletim.jpg" alt="" />
+				<br/>
+				<a href="@{Application.index()}">
+					<img src="/public/images/voltar.png">
+				</a>
+			</center>
 		</div>
 		
 		<div class="shadow-l"></div>

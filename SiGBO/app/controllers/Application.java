@@ -23,35 +23,58 @@ import models.*;
 import net.sf.oval.constraint.MinSize;
 
 public class Application extends Controller {
+	
+	@Before(unless = {"index", "login"})
+	static void checkAuthentication() {
+		if ( !session.contains("user") && !session.contains("admin")) index();
+	}
+	
+	@Before(only = {"administrador"})
+	static void checkUser() {
+		if ( !session.contains("admin")) index();
+	}
 
 	public static void index() {
 		render();
 	}
 
-	public static void login(@Required String usuario, @Required String senha) {
-		int valid = teste(usuario, senha);
-		if (validation.hasErrors()) {
-			flash.error("Digite um nome de usuário e senha.");
-			index();
-		}
-		if (valid == 0) {
+	public static void login(String usuario, String senha) throws SQLException {
+		
+		Banco banco = new Banco();
+		banco.conectar();
+		if (usuario.equals("admin") && senha.equals("123")) {
+			session.put("admin", "yes");
 			administrador();
-		} else if (valid == 1) {
-			user();
-		} else {
-			flash.error("Usuário ou Senha incorretos.");
-			index();
 		}
+		String sql = ("SELECT * FROM usuario WHERE usuario = '" + usuario + "' AND senha = '" + senha + "'");
+		ResultSet rs = banco.consultar(sql);
+		if (rs.next()) {
+			int tipo = rs.getInt("tipo");
+			if (tipo == 1) {
+				session.put("user", rs.getLong("idusuarioref"));
+				session.put("user-nome", rs.getString("usuario"));
+				user(rs.getLong("idusuarioref"));
+			}
+			else flash.error("Pagina do Professor em construçao.");
+		} else 
+			flash.error("Usuario e Senha nao conferem");
+		index();
+	}
+	
+	public static void logout() {
+		session.clear();
+		index();
 	}
 
-	public static void user() {
-		render();
+	public static void user(long idUsuario) {
+		Aluno aluno = Aluno.findById(idUsuario);
+		render(aluno);
 	}
 
 	public static void administrador() {
 		render();
 	}
-
+	
 	public static void admalunos() {
 		List<Aluno> alunos = Aluno.findAll();
 		
@@ -133,7 +156,7 @@ public class Application extends Controller {
 
 	public static void habilitaracessoaluno() {
 		List<Aluno> alunos = Aluno.findAll();
-		List<UsuarioAluno> usuarios = UsuarioAluno.findAll();
+		List<Usuario> usuarios = Usuario.findAll();
 		render(alunos, usuarios);
 	}
 
@@ -157,60 +180,12 @@ public class Application extends Controller {
 		render(turmas, disciplinas, disciplinavazia, turmavazia);
 	}
 
-	public static void habilitarAcessoAluno(@Required String nome,
-			@Required String senha, @Required String senha2, String email) {
-
-		validation.email(email);
-		validation.equals(senha, senha2);
-
-		if (validation.hasErrors()) {
-			flash
-					.error("Um ou mais campos não foram preenchidos corretamente.");
-		} else {
-			UsuarioAluno aluno = new UsuarioAluno(nome, senha, email);
-			aluno.save();
-		}
-
-	}
-
 	public static void admturmas() {
 		List<Turma> turmas = Turma.findAll();
 		
 		int vazia = 1;
 		if (turmas.isEmpty()) vazia = 0;
 		render(turmas, vazia);
-	}
-
-	public static int teste(String usuario, String senha) {
-		int retorno = -1; // Invalid
-		String[] usuarios = new String[5];
-		String[] senhas = new String[5];
-
-		usuarios[0] = "duarte";
-		usuarios[1] = "tiago";
-		usuarios[2] = "lock";
-		usuarios[3] = "tadeus";
-		usuarios[4] = "prongs";
-
-		senhas[0] = "bomba";
-		senhas[1] = "jared";
-		senhas[2] = "macaco";
-		senhas[3] = "ronaldo";
-		senhas[4] = "pontas";
-
-		if (usuario.equals("admin") && senha.equals("123"))
-			retorno = 0; // Admin
-		else {
-			int i = 0;
-			while (i < 5) {
-				if ((usuarios[i].equals(usuario)) && (senhas[i].equals(senha))) {
-					retorno = 1; // User
-					i = 5;
-				} else
-					i++;
-			}
-		}
-		return retorno;
 	}
 
 }

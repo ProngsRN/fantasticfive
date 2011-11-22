@@ -60,6 +60,7 @@
 					<ul>
 					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
 					    <li><a href="@{Application.gerenciaraluno}">Gerenciar Alunos</a></li>
+						<li><a href="@{Application.admnotas}">Cadastrar Notas</a></li>
 					    <li><a href="@{Application.admalunodisciplina}">Cadastrar em Disciplina</a></li>
 					</ul>
 				</div>
@@ -72,7 +73,16 @@
 			<form action="@{Cadastro.addProfessor()}"  method="GET">
 				<label  for="nome">Nome: </label>
 				<input type="text" name="nome"/>
-				
+				<br>
+				<label  for="usuario">Nome de Usuario: </label>
+				<input type="text" name="usuario"/>
+				<br><br>
+				<label  for="senha">Senha: </label>
+				<input type="password" name="senha"/>
+				<br>
+				<label  for="senha2">Informe a senha novamente: </label>
+				<input type="password" name="senha2"/>
+				<br>
 				<input type="submit" value="Adicionar"/>
 				#{if flash.error}
     				<p style="color:#c00">

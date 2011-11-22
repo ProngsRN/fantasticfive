@@ -57,6 +57,7 @@
 					<ul>
 					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
 					    <li><a href="@{Application.gerenciaraluno}">Gerenciar Alunos</a></li>
+					    <li><a href="@{Application.admnotas}">Cadastrar Notas</a></li>
 					    <li><a href="@{Application.admalunodisciplina}">Cadastrar em Disciplina</a></li>
 					</ul>
 				</div>
@@ -95,10 +96,14 @@
 			<table border=1>
 				<tr>
 					<td bgcolor='#aaddbb'><b><center>Nome</td>
+					<td bgcolor='#aaddbb'><b><center>Usuario</td>
+					<td bgcolor='#aaddbb'><b><center>Senha</td>
 				</tr>
 				#{list items:alunos, as:'aluno'}
 						<tr>
-							<td>[ID: ${aluno.getId()}] ${aluno.nome}</td> 
+							<td>[ID: ${aluno.getId()}] ${aluno.getNome()}</td> 
+							<td><b>${aluno.getNomeUsuario()}</b></td> 
+							<td><i>${aluno.getSenhaUsuario()}</i></td>
 						</tr>
 				#{/list}
 			</table>	

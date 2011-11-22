@@ -61,6 +61,7 @@
 					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
 					    <li><a href="@{Application.gerenciaraluno}">Gerenciar Alunos</a></li>
 					    <li><a href="@{Application.admalunodisciplina}">Cadastrar em Disciplina</a></li>
+						<li><a href="@{Application.admnotas}">Cadastrar Notas</a></li>
 					</ul>
 				</div>
 
@@ -74,7 +75,7 @@
 				<br>
 			#{/if}
 			#{if alunovazio != 0}
-			<h3>:: Cadastrar nova Disciplina ::</h3>
+			<h3>:: Cadastrar Nota ::</h3>
 			<form action="@{Cadastro.addNotaToAluno()}"  method="GET">
 				<label  for="idAluno">Aluno: </label>
 				<select name="idAluno">
@@ -92,14 +93,19 @@
 						</option>
 					#{/list}
 				</select>
+				<br>
 				<label  for="nota1">Nota 1: </label>
 				<input type="number" name="nota1">
+				<br>
 				<label  for="nota2">Nota 2: </label>
 				<input type="number" name="nota2">
+				<br>
 				<label  for="nota3">Nota 3: </label>
 				<input type="number" name="nota3">
+				<br>
 				<label  for="nota4">Nota 4: </label>
 				<input type="number" name="nota4">
+				<br>
 				
 				<input type="submit" value="Adicionar"/>
 				#{if flash.error}
