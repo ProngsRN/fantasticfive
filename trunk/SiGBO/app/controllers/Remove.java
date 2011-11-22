@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import models.*;
 import play.data.validation.Required;
+import play.db.jpa.GenericModel.JPAQuery;
 import play.mvc.*;
 
 public class Remove extends Application {
@@ -87,6 +88,7 @@ public class Remove extends Application {
 			banco.desconectar();
 		}
 		gerenciarturma();
+		
 	}
 
 }
