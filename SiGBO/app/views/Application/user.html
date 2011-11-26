@@ -24,7 +24,7 @@
 			<div class="socials right">
 				<ul>
 				    <li><a href="@{Application.administrador()}" class="rss">Início</a></li>
-				    <li><a href="@{Application.index()}" class="fb">Sair</a></li>
+				    <li><a href="@{Application.logout()}" class="fb">Sair</a></li>
 				</ul>
 			</div>
 			<div class="cl">&nbsp;</div>
@@ -32,7 +32,27 @@
 		
 		<div id="main">
 			<center>
-				<b><big>Olá, ${aluno.getNome()}!
+				<big>
+				#{if reg == 0}
+					<b>Complete o seu registro, ${aluno.getNome()}!
+					<br>
+										
+					#{form @Application.uploadPicture(), enctype:'multipart/form-data'}
+						<input type="file" name="picture.image" />
+						<input type="submit" name="submit" value="Save" />
+					#{/form}
+					</b>
+				#{/if}
+				#{if reg == 1}
+					Olá, ${aluno.getNome()}!
+					<br>
+					#{list items:models.Picture.findAll(), as:'picture'}
+						#{if picture.getIdAluno() == aluno.getId()}
+							<img src="@{Application.getPicture(picture.id)}"/>
+						#{/if}
+					#{/list}
+				#{/if}
+				</big>
 				<br>
 				<img src="/public/images/boletim.jpg" alt="" />
 				<br/>

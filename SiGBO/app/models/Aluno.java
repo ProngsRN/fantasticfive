@@ -3,6 +3,7 @@ package models;
 import play.*;
 import play.data.validation.Required;
 import play.db.jpa.*;
+import sun.util.calendar.LocalGregorianCalendar.Date;
 
 import javax.persistence.*;
 import java.util.*;
@@ -13,8 +14,11 @@ public class Aluno extends Model {
 	@Required
 	private String nome;
 	
+	private long avatar;
+	
 	public Aluno (String nome) {
 		this.setNome(nome);
+		this.setAvatar(0);
 	}
 
 	public void setNome(String nome) {
@@ -47,5 +51,13 @@ public class Aluno extends Model {
 			}
 		}
 		return senha;
+	}
+
+	public void setAvatar(long avatar) {
+		this.avatar = avatar;
+	}
+
+	public long getAvatar() {
+		return avatar;
 	}
 }
