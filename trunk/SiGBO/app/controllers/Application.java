@@ -24,14 +24,15 @@ import net.sf.oval.constraint.MinSize;
 
 public class Application extends Controller {
 	
-	@Before(unless = {"index", "login"})
-	static void checkAuthentication() {
-		if ( !session.contains("user") && !session.contains("admin")) index();
-	}
 	
 	@Before(only = {"administrador"})
-	static void checkUser() {
+	static void checkAdmin() {
 		if ( !session.contains("admin")) index();
+	}
+	
+	@Before(only = {"user"})
+	static void checkUser() {
+		if (!session.contains("user")) index();
 	}
 
 	public static void index() {
@@ -53,7 +54,7 @@ public class Application extends Controller {
 			if (tipo == 1) {
 				session.put("user", rs.getLong("idusuarioref"));
 				session.put("user-nome", rs.getString("usuario"));
-				user(rs.getLong("idusuarioref"));
+				user();
 			}
 			else flash.error("Pagina do Professor em construçao.");
 		} else 
@@ -66,8 +67,9 @@ public class Application extends Controller {
 		index();
 	}
 
-	public static void user(long idUsuario) {
-		Aluno aluno = Aluno.findById(idUsuario);
+	public static void user() {
+		long id = Long.valueOf(session.get("user"));
+		Aluno aluno = Aluno.findById(id);
 		render(aluno);
 	}
 
