@@ -70,8 +70,34 @@ public class Application extends Controller {
 	public static void user() {
 		long id = Long.valueOf(session.get("user"));
 		Aluno aluno = Aluno.findById(id);
-		render(aluno);
+		int reg = 1;
+		if (aluno.getAvatar() == 0) {
+			reg = 0;
+		}
+		render(aluno, reg);
 	}
+		
+	public static void uploadPicture(Picture picture) throws NumberFormatException, SQLException {
+        Banco banco = new Banco();
+        banco.conectar();
+        String sql = "select * from Picture where idAluno = " + session.get("user");
+        ResultSet rs = banco.consultar(sql);
+        if (!rs.next()) {
+			picture.setIdAluno(Long.valueOf(session.get("user")));
+			picture.save();
+			Aluno aluno = Aluno.findById(Long.valueOf(session.get("user")));
+			aluno.setAvatar(picture.getId());
+			aluno.save();
+        }
+        user();
+        
+    }
+    
+	public static void getPicture(long id) {
+        Picture picture = Picture.findById(id);
+        response.setContentTypeIfNotSet(picture.image.type());
+        renderBinary(picture.image.get());
+    }
 
 	public static void administrador() {
 		render();
