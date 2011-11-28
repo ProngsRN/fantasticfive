@@ -1,0 +1,52 @@
+#{extends 'main.html' /}
+#{set title:'BOLETINS' /}
+
+<html>
+<body>
+NOME DO ALUNO: ${Aluno.getNome()};
+<br>
+<br>
+<table border="1">
+<tr>
+<th>BOLETIM</th>
+<td><b>1o BIMESTRE</b></td>
+	<td><b>2o BIMESTRE</b></td>
+	<td><b>3o BIMESTRE</b></td>
+	<td><b>4o BIMESTRE</b></td>
+</tr>
+	<td>PORTUGUES</td>
+	<td><input type="float" name="1a nota" size="4"></td>
+	<td><input type="float" name="2a nota" size="4"></td>
+	<td><input type="float" name="3a nota" size="4"></td>
+	<td><input type="float" name="4a nota" size="4"></td>
+	</tr>
+	<td>MATEMATICA</td>
+	<td><input type="float" name="1a nota" size="4"></td>
+	<td><input type="float" name="2a nota" size="4"></td>
+	<td><input type="float" name="3a nota" size="4"></td>
+	<td><input type="float" name="4a nota" size="4"></td>
+	</tr>
+	<td>BIOLOGIA</td>
+	<td><input type="float" name="1a nota" size="4"></td>
+	<td><input type="float" name="2a nota" size="4"></td>
+	<td><input type="float" name="3a nota" size="4"></td>
+	<td><input type="float" name="4a nota" size="4"></td>
+	</tr>
+	<td>HISTORIA</td>
+	<td><input type="float" name="1a nota" size="4"></td>
+	<td><input type="float" name="2a nota" size="4"></td>
+	<td><input type="float" name="3a nota" size="4"></td>
+	<td><input type="float" name="4a nota" size="4"></td>
+	</tr>
+	<td>GEOGRAFIA</td>
+	<td><input type="float" name="1a nota" size="4"></td>
+	<td><input type="float" name="2a nota" size="4"></td>
+	<td><input type="float" name="3a nota" size="4"></td>
+	<td><input type="float" name="4a nota" size="4"></td>
+	</tr>
+	</table>
+	<br>
+	<br>
+	<input type="button" value="Imprimir boletim" onclick="window.print();">
+</body>
+</html>
