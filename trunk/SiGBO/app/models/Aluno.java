@@ -8,6 +8,7 @@ import sun.util.calendar.LocalGregorianCalendar.Date;
 import javax.persistence.*;
 import java.util.*;
 
+
 @Entity
 public class Aluno extends Model {
     
@@ -60,4 +61,22 @@ public class Aluno extends Model {
 	public long getAvatar() {
 		return avatar;
 	}
+	
+	public List<Aluno> getColegas () {
+		
+		List<AlunoDisciplinas> alunos = AlunoDisciplinas.findAll();
+		List<Aluno> colegas = new ArrayList<Aluno>();
+		for (AlunoDisciplinas a : alunos) {
+			if (a.getIdAluno() == id) {
+				long idDisciplina = a.getIdDisciplina();
+				for (AlunoDisciplinas b : alunos) {
+					if ( (b.getIdDisciplina() == idDisciplina) && (b.getIdAluno() != id)){
+						colegas.add((Aluno) Aluno.findById(b.getIdAluno()));
+					}
+				}
+			}
+		}
+		return colegas;
+	}
+	
 }

@@ -94,19 +94,25 @@
 					#{/list}
 				</select>
 				<br>
-				<label  for="nota1">Nota 1: </label>
-				<input type="number" name="nota1">
+				<label  for="bim">Bimestre: </label>
+				<select name="bim">
+					<option value="nota1">
+						1º Bimestre
+					</option>
+					<option value="nota2">
+						2º Bimestre
+					</option>
+					<option value="nota3">
+						3º Bimestre
+					</option>
+					<option value="nota4">
+						4º Bimestre
+					</option>
+				</select>
 				<br>
-				<label  for="nota2">Nota 2: </label>
-				<input type="number" name="nota2">
+				<label  for="nota">Nota: </label>
+				<input type="text" name="nota">
 				<br>
-				<label  for="nota3">Nota 3: </label>
-				<input type="number" name="nota3">
-				<br>
-				<label  for="nota4">Nota 4: </label>
-				<input type="number" name="nota4">
-				<br>
-				
 				<input type="submit" value="Adicionar"/>
 				#{if flash.error}
     				<p style="color:#c00">

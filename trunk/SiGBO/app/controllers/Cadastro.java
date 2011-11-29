@@ -50,6 +50,7 @@ public class Cadastro extends Application {
 			throws SQLException {
 		Banco banco = new Banco();
 		banco.conectar();
+		
 		if (validation.hasErrors()) {
 			flash
 					.error("Um ou mais campos não foram preenchidos corretamente.");
@@ -70,18 +71,21 @@ public class Cadastro extends Application {
 	}
 
 	public static void addNotaToAluno(@Required long idAluno,
-			@Required long idDisciplina, int nota1, int nota2, int nota3,
-			int nota4) throws SQLException {
+			@Required long idDisciplina, @Required String bim,
+			@Required String nota) throws SQLException {
 
+		int notaValor = -1;
+		if (!nota.isEmpty()) 
+			notaValor = Integer.valueOf(nota);
+		
+		validation.range(notaValor, 0, 10);
 		if (validation.hasErrors()) {
 			flash
 					.error("Um ou mais campos não foram preenchidos corretamente.");
-		} else {
-
-			String sql = ("UPDATE alunodisciplinas SET nota1 = " + nota1
-					+ ", nota2 = " + nota2 + ", nota3 = " + nota3
-					+ ", nota4 = " + nota4 + " WHERE idaluno = " + idAluno
-					+ " AND iddisciplina = " + idDisciplina);
+		}
+		else {
+			String sql = ("UPDATE alunodisciplinas SET " + bim + " = " + notaValor
+					+ " WHERE idaluno = " + idAluno + " AND iddisciplina = " + idDisciplina);
 			Banco banco = new Banco();
 			banco.conectar();
 			ResultSet rs = banco.consultar(sql);
@@ -93,19 +97,19 @@ public class Cadastro extends Application {
 		admnotas();
 	}
 
-	public static void addProfessor(@Required String nome, String usuario, String senha,
-			String senha2) throws SQLException {
+	public static void addProfessor(@Required String nome, String usuario,
+			String senha, String senha2) throws SQLException {
 		Banco banco = new Banco();
 		banco.conectar();
-		
+
 		int tamSenha = senha.length();
-		
+
 		validation.range(tamSenha, 6, 14);
 		validation.equals(senha2, senha);
-		
+
 		if (validation.hasErrors()) {
 			for (Error error : validation.errors())
-					flash.error(error.message());
+				flash.error(error.message());
 		} else {
 
 			String sql = ("SELECT * FROM professor WHERE nome = '" + nome + "'");
@@ -138,13 +142,13 @@ public class Cadastro extends Application {
 		banco.conectar();
 
 		int tamSenha = senha.length();
-		
+
 		validation.range(tamSenha, 6, 14);
 		validation.equals(senha2, senha);
-		
+
 		if (validation.hasErrors()) {
 			for (Error error : validation.errors())
-					flash.error(error.message());
+				flash.error(error.message());
 		} else {
 
 			String sql = ("SELECT * FROM aluno WHERE nome = '" + nome + "'");
@@ -218,6 +222,12 @@ public class Cadastro extends Application {
 			banco.desconectar();
 		}
 		admalunodisciplina();
+	}
+	
+	public static void criarAmizade (long idColega) {
+		Long idAluno = Long.valueOf(session.get("user"));
+		ColegaAluno amizade = new ColegaAluno(idAluno, idColega);
+		amizade.save();
 	}
 
 }
