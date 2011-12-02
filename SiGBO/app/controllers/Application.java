@@ -69,7 +69,7 @@ public class Application extends Controller {
 		index();
 	}
 
-	public static void user() {
+	public static void user() throws SQLException {
 
 		long id = Long.valueOf(session.get("user"));
 		Aluno aluno = Aluno.findById(id);
@@ -78,7 +78,9 @@ public class Application extends Controller {
 			reg = 0;
 		}
 		List<Aluno> colegas = aluno.getColegas();
-		render(aluno, reg, colegas);
+		List<AlunoDisciplinas> disciplinas = null;
+		disciplinas = aluno.getAlunoDisciplinas();
+		render(aluno, reg, colegas, disciplinas);
 	}
 
 	public static void uploadPicture(Picture picture)
@@ -195,12 +197,30 @@ public class Application extends Controller {
 
 	public static void admnotas() {
 		List<AlunoDisciplinas> alunodisciplina = AlunoDisciplinas.findAll();
-
+		List<AlunoDisciplinas> alunos = new ArrayList<AlunoDisciplinas>();
+		List<AlunoDisciplinas> disciplinas = new ArrayList<AlunoDisciplinas>();
+		List<Long> listaid = new ArrayList<Long>();
+		
+		for (AlunoDisciplinas a : alunodisciplina) {
+			if (!listaid.contains(a.getIdAluno())) {
+				alunos.add(a);
+				listaid.add(a.getIdAluno());
+			}
+		}
+		
+		listaid.clear();
+		for (AlunoDisciplinas d : alunodisciplina) {
+			if (!listaid.contains(d.getIdDisciplina())) {
+				disciplinas.add(d);
+				listaid.add(d.getIdDisciplina());
+			}
+		}
+		
 		int alunovazio = 1;
 		if (alunodisciplina.isEmpty())
 			alunovazio = 0;
 		int bim = 0;
-		render(alunodisciplina, alunovazio, bim);
+		render(alunodisciplina, alunos, disciplinas, alunovazio, bim);
 	}
 
 	public static void habilitaracessoaluno() {

@@ -6,18 +6,22 @@ import play.db.jpa.*;
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
 import javax.persistence.*;
-import java.util.*;
 
+import controllers.Banco;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
 
 @Entity
 public class Aluno extends Model {
-    
+
 	@Required
 	private String nome;
-	
+
 	private long avatar;
-	
-	public Aluno (String nome) {
+
+	public Aluno(String nome) {
 		this.setNome(nome);
 		this.setAvatar(0);
 	}
@@ -29,10 +33,10 @@ public class Aluno extends Model {
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public String getNomeUsuario() {
-		
-		List<Usuario> usuarios = Usuario.findAll(); 
+
+		List<Usuario> usuarios = Usuario.findAll();
 		String user = "";
 		for (Usuario u : usuarios) {
 			if (u.getIdUsuarioRef() == this.getId()) {
@@ -41,10 +45,10 @@ public class Aluno extends Model {
 		}
 		return user;
 	}
-	
+
 	public String getSenhaUsuario() {
-		
-		List<Usuario> usuarios = Usuario.findAll(); 
+
+		List<Usuario> usuarios = Usuario.findAll();
 		String senha = "";
 		for (Usuario u : usuarios) {
 			if (u.getIdUsuarioRef() == this.getId()) {
@@ -61,16 +65,17 @@ public class Aluno extends Model {
 	public long getAvatar() {
 		return avatar;
 	}
-	
-	public List<Aluno> getColegas () {
-		
+
+	public List<Aluno> getColegas() {
+
 		List<AlunoDisciplinas> alunos = AlunoDisciplinas.findAll();
 		List<Aluno> colegas = new ArrayList<Aluno>();
 		for (AlunoDisciplinas a : alunos) {
 			if (a.getIdAluno() == id) {
 				long idDisciplina = a.getIdDisciplina();
 				for (AlunoDisciplinas b : alunos) {
-					if ( (b.getIdDisciplina() == idDisciplina) && (b.getIdAluno() != id)){
+					if ((b.getIdDisciplina() == idDisciplina)
+							&& (b.getIdAluno() != id)) {
 						colegas.add((Aluno) Aluno.findById(b.getIdAluno()));
 					}
 				}
@@ -78,5 +83,17 @@ public class Aluno extends Model {
 		}
 		return colegas;
 	}
-	
+
+	public List<AlunoDisciplinas> getAlunoDisciplinas() {
+
+		List<AlunoDisciplinas> alunodisciplinas = new ArrayList<AlunoDisciplinas>();
+		List<AlunoDisciplinas> lista = AlunoDisciplinas.findAll();
+		for (AlunoDisciplinas ad : lista) {
+			if (ad.getIdAluno() == id) {
+				alunodisciplinas.add(ad);
+			}
+		}
+		return alunodisciplinas;
+	}
+
 }
