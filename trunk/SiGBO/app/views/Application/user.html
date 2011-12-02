@@ -82,8 +82,24 @@
 					</b>
 				#{/if}
 				<br>
-				<img src="/public/images/boletim.jpg" alt="teste" />
-				<br/>
+				
+				<div style="height:400px;width:170px;">
+				Quantidade de disciplinas: ${disciplinas.size()}
+				<br><br>
+				#{if disciplinas != null}
+					#{list items:disciplinas, as:'disc'}
+						<b>${disc.getNomeDisciplina()}</b>
+						<br>
+						Notas:
+						<br>
+						${disc.getNota1()} ||  
+						${disc.getNota2()} || 
+						${disc.getNota3()} || 
+						${disc.getNota4()} ||
+						<br><br>
+					#{/list}
+				#{/if}
+			</div>
 			</center>
 		</div>
 		

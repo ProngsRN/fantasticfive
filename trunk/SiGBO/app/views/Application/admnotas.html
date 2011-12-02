@@ -79,7 +79,7 @@
 			<form action="@{Cadastro.addNotaToAluno()}"  method="GET">
 				<label  for="idAluno">Aluno: </label>
 				<select name="idAluno">
-					#{list items:alunodisciplina, as:'aluno'}
+					#{list items:alunos, as:'aluno'}
 						<option value=${aluno.getIdAluno()}>
 							${aluno.getNomeAluno()}
 						</option>
@@ -87,7 +87,7 @@
 				</select>
 				<label  for="idDisciplina">Disciplina: </label>
 				<select name="idDisciplina">
-					#{list items:alunodisciplina, as:'disciplina'}
+					#{list items:disciplinas, as:'disciplina'}
 						<option value=${disciplina.getIdDisciplina()}>
 							${disciplina.getNomeDisciplina()}
 						</option>

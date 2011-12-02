@@ -54,10 +54,10 @@ public class AlunoDisciplinas extends Model {
 		banco.desconectar();
 		return nome;
 	}
-	
+
 	public String getNomeAluno() throws SQLException {
-		
-		Banco banco = new Banco ();
+
+		Banco banco = new Banco();
 		banco.conectar();
 		String sql = ("SELECT nome FROM aluno WHERE id = " + idAluno);
 		ResultSet rs = banco.consultar(sql);
@@ -78,7 +78,7 @@ public class AlunoDisciplinas extends Model {
 		String turma = "";
 		long id = 0;
 		if (rs.next()) {
-			id = rs.getInt("turma");
+			id = rs.getLong("turma");
 		}
 		sql = ("SELECT ano,nivel,sala FROM turma WHERE id = " + id);
 		rs = banco.consultar(sql);
