@@ -29,14 +29,14 @@
 		
 		<div id="sidebar" class="left">
 			<img src="@{Application.getPicture(aluno.getAvatar())}" height=150/>
-			<br><small><a href="#">Alterar a foto</a></small>
+			<br><small><a href="@{Application.alterarfoto()}">Alterar a foto</a></small>
 			<br><b>${aluno.getNome()}
 			<hr>
-			- <a href="@{Application.user}">Mural</a>
+			- <a href="@{Application.recadosusuario()}">Mural</a>
 			<br>
 			- <a href="@{Application.aluno(aluno.getId())}">Ver Perfil</a>
 			<br>
-			- <a href="#">Recados</a>
+			- <a href="">Mensagens</a>
 			<br>
 			</b>
 		</div>
@@ -67,7 +67,7 @@
 		</div>
 		<div id="main">
 			<center>
-				<div style="height:400px;width:170px;">
+				<div style="height:400px;width:500px">
 					#{doLayout /}
 				</div>
 			</center>

@@ -1,0 +1,37 @@
+#{extends '/templates/templatealuno.html' /}
+#{set title: 'SiGBO :: Usuário / Mural' /}
+
+<form action="@{Application.addRecado()}"  method="GET">
+	<div style=" display:block;display:none;">
+		<input type="radio" checked name="idDestinatario" value="${aluno.getId()}">
+	</div>
+	<textarea name="texto" id="texto" rows="7" cols="80"></textarea>
+	<br/>
+	<input type="checkbox" name="privado" value="true"> <small>Privado</small>
+	<br>
+	<input type="submit" value="Adicionar"/>
+</form>
+
+#{if flash.error}
+	<p style="color:#c00">
+		${flash.error}
+	</p>
+#{/if}
+
+#{if !recados.isEmpty()}
+<div style="height:330px;width:480px;overflow:scroll;">
+	<p align=left>
+		#{list items:recados, as:'recado'}
+			<a href="@{Application.aluno(recado.getIdRemetente())}">
+				<img src="@{Application.getPicture(recado.getRemetente().getAvatar())}" height=50/>
+				<small><b>${recado.getRemetente().getNome()}
+			</a> disse (às ${recado.getDataFormatada()}):
+			</b></small>
+			<br>
+			<b>${recado.getTexto()}</b>
+			<br>
+			<br/>
+		#{/list}
+	</p>
+</div>
+#{/if}

@@ -1,0 +1,11 @@
+#{extends '/templates/templateuser.html' /}
+#{set title: 'SiGBO :: Usuário / Alterar Foto' /}
+
+Escolha uma foto para o seu perfil.
+<br/><br/>
+#{form @Application.uploadPicture(), enctype:'multipart/form-data'}
+	<input type="file" name="picture.image" />
+	<input type="submit" name="submit" value="Save" />
+#{/form}
+<br/>
+Preferencialmente uma foto abaixo de 200k! 

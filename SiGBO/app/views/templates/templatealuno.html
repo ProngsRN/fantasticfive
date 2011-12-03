@@ -1,22 +1,26 @@
 <html>
     <head>
-        <title>#{get 'title' /}</title>
+        <title>#{get 'title' /} // ${aluno.getNome()}</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="@{'public/stylesheets/style.css'}" type="text/css" media="all" />
 		<link rel="stylesheet" href="@{'public/stylesheets/jquery.jcarousel.css'}" type="text/css" media="all" />
+		<!--[if IE 6]>
+			<link rel="stylesheet" href="@{'public/stylesheets/ie6.css'}" type="text/css" media="all" />
+		<![endif]-->
 		<link rel="shortcut icon" href="@{'public/images/favicon.ico'}" />
 		<script type="text/javascript" src="@{'/public/javascripts/jquery-1.4.2.min.js'}"></script>
 		<script type="text/javascript" src="@{'/public/javascripts/jquery.jcarousel.pack.js'}"></script>
 		<script type="text/javascript" src="@{'/public/javascripts/func.js'}"></script>
     </head>
     <body>
-		<div class="shell">
+    <font face=Arial size=3>
+        <div class="shell">
 	<div class="border">
 		<div id="header">
 			<h1 id="logo"><a href="#" class="notext">beSmart</a></h1>
 			<div class="socials right">
 				<ul>
-				    <li><a href="@{Application.administrador()}" class="rss">Início</a></li>
+					<li><a href="@{Application.user}" class="fb">Início</a></li>
 				    <li><a href="@{Application.logout()}" class="fb">Sair</a></li>
 				</ul>
 			</div>
@@ -24,52 +28,44 @@
 		</div>
 		
 		<div id="sidebar" class="left">
-	
-				<h3>Turmas</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admturmas}">Cadastrar Turma</a></li>
-					    <li><a href="@{Application.gerenciarturma}">Gerenciar Turmas</a></li>
-					</ul>
-				</div>
-				
-				<h3>Disciplinas</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admdisciplinas}">Cadastrar Disciplina</a></li>
-					    <li><a href="@{Application.gerenciardisciplina}">Gerenciar Disciplinas</a></li>
-					</ul>
-				</div>
-				
-				<h3>Professores</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admprofessores}">Cadastrar Professor</a></li>
-					    <li><a href="@{Application.gerenciarprofessor}">Gerenciar Professores</a></li>
-					    <li><a href="@{Application.admprofessordisciplina}">Cadastrar em Disciplina</a></li>
-					</ul>
-				</div>
-				
-				<h3>Alunos</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
-					    <li><a href="@{Application.gerenciaraluno}">Gerenciar Alunos</a></li>
-					    <li><a href="@{Application.admalunodisciplina}">Cadastrar em Disciplina</a></li>
-					    <li><a href="@{Application.admnotas}">Cadastrar Notas</a></li>
-					</ul>
-				</div>
-	
+			<img src="@{Application.getPicture(aluno.getAvatar())}" height=150/>
+			<br><b>${aluno.getNome()}
+			<hr>
+			- <a href="@{Application.aluno(aluno.getId())}">Ver Perfil</a>
+			<br>
+			- <a href="@{Application.recadosaluno(aluno.getId())}">Mural</a>
+			<br>
+			</b>
 		</div>
-		
+		<div id="sidebar" class="right">
+			<big><b>Colegas</b>
+			<br><hr>
+			<br>
+			
+			<div style="height:520px;width:170px;overflow:scroll;">
+			
+			#{if colegas != null}
+				#{list items:colegas, as:'colega'}
+					<a href="@{Application.aluno(colega.getId())}">
+						<img src="@{Application.getPicture(colega.getAvatar())}" height=100/>
+						<br>
+						<b><small>${colega.getNome()}</small></b>
+					</a>
+					<br>
+				#{/list}
+			#{/if}
+			#{if colegas == null}
+				Ele não tem colegas.
+			#{/if}
+			</div>
+		</div>
 		<div id="main">
 			<center>
-			<div style="height:380px;">
-			#{doLayout /}
-			<br/>
+				<div style="height:400px;">
+					#{doLayout /}
+				</div>
 			</center>
 		</div>
-		
 		
 		<div class="shadow-l"></div>
 		<div class="shadow-r"></div>
@@ -86,10 +82,12 @@
 			    <li class="last"><a href="#">Contato</a></li>
 			</ul>
 		</div>
-	
 		<p class="copy right">Copyright &copy; | SiGBO 2011 - Fantastic Five Team |  ! beSmart 2010 | Valid CSS &amp; HTML. <a href="http://chocotemplates.com" target="_blank" title="Chocotemplates">Design</a></p>
 		<div class="cl">&nbsp;</div>
 	</div>
-	</div>
-	</body>
+</div>
+</body>
 </html>
+
+
+<!DOCTYPE html>
