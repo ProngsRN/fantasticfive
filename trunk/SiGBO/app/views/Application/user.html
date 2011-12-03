@@ -1,131 +1,29 @@
-#{set title:'SiGBO :: Usuário' /}
+#{extends '/templates/templateuser.html' /}
 
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="@{'public/stylesheets/style.css'}" type="text/css" media="all" />
-		<link rel="stylesheet" href="@{'public/stylesheets/jquery.jcarousel.css'}" type="text/css" media="all" />
-		<!--[if IE 6]>
-			<link rel="stylesheet" href="@{'public/stylesheets/ie6.css'}" type="text/css" media="all" />
-		<![endif]-->
-		<link rel="shortcut icon" href="@{'public/images/favicon.ico'}" />
-		<script type="text/javascript" src="@{'/public/javascripts/jquery-1.4.2.min.js'}"></script>
-		<script type="text/javascript" src="@{'/public/javascripts/jquery.jcarousel.pack.js'}"></script>
-		<script type="text/javascript" src="@{'/public/javascripts/func.js'}"></script>
-    </head>
-    <body>
-    <font face=Arial size=3>
-        <div class="shell">
-	<div class="border">
-		<div id="header">
-			<h1 id="logo"><a href="#" class="notext">beSmart</a></h1>
-			<div class="socials right">
-				<ul>
-				    <li><a href="@{Application.user}" class="fb">Início</a></li>
-				    <li><a href="@{Application.logout()}" class="fb">Sair</a></li>
-				</ul>
-			</div>
-			<div class="cl">&nbsp;</div>
-		</div>
-		
-		<div id="sidebar" class="left">
-			<img src="@{Application.getPicture(aluno.getAvatar())}" height=150/>
-			<br><small><a href="#">Alterar a foto</a></small>
-			<br><b>${aluno.getNome()}
-			<hr>
-			- <a href="@{Application.user}">Mural</a>
-			<br>
-			- <a href="@{Application.aluno(aluno.getId())}">Ver Perfil</a>
-			<br>
-			- <a href="#">Recados</a>
-			<br>
-			</b>
-		</div>
-		<div id="sidebar" class="right">
-			<big><b>Colegas</b>
-			<br><hr>
-			<br>
-			
-			<div style="height:520px;width:170px;overflow:scroll;">
-			
-			#{if colegas != null}
-				#{list items:colegas, as:'colega'}
-					<a href="@{Application.aluno(colega.getId())}">
-						<img src="@{Application.getPicture(colega.getAvatar())}" height=100/>
-						<br><b>
-						<small>
-						${colega.getNome()}
-						</small>
-						</b>
-					</a>
-					<br>
-				#{/list}
-			#{/if}
-			#{if colegas == null}
-				Voce nao tem colegas.
-			#{/if}
-			</div>
-		</div>
-		<div id="main">
-			<center>
-				#{if reg == 0}
-					<b>Complete o seu registro, ${aluno.getNome()}!
-					<br>
-										
-					#{form @Application.uploadPicture(), enctype:'multipart/form-data'}
-						<input type="file" name="picture.image" />
-						<input type="submit" name="submit" value="Save" />
-					#{/form}
-					</b>
-				#{/if}
-				<br>
-				
-				<div style="height:400px;width:170px;">
-				Quantidade de disciplinas: ${disciplinas.size()}
-				<br><br>
-				#{if disciplinas != null}
-					#{list items:disciplinas, as:'disc'}
-						<b>${disc.getNomeDisciplina()}</b>
-						<br>
-						Notas:
-						<br>
-						${disc.getNota1()} ||  
-						${disc.getNota2()} || 
-						${disc.getNota3()} || 
-						${disc.getNota4()} ||
-						<br><br>
-					#{/list}
-				#{/if}
-			</div>
-			</center>
-		</div>
-		
-		<div class="shadow-l"></div>
-		<div class="shadow-r"></div>
-		<div class="shadow-b"></div>
-	</div>
-	
-	<div id="footer">
-		<div class="footer-nav left">
-			<ul>
-			    <li><a href="#" class="active">Inicio</a></li>
-			    <li><a href="#">Historia</a></li>
-			    <li><a href="#">Equipe</a></li>
-			    <li><a href="#">Calendario</a></li>
-			    <li class="last"><a href="#">Contato</a></li>
-			</ul>
-		</div>
-		<p class="copy right">Copyright &copy; | SiGBO 2011 - Fantastic Five Team |  ! beSmart 2010 | Valid CSS &amp; HTML. <a href="http://chocotemplates.com" target="_blank" title="Chocotemplates">Design</a></p>
-		<div class="cl">&nbsp;</div>
-	</div>
-</div>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-
-
+#{set title: 'SiGBO :: Usuário / Página Inicial' /}
+#{if (aluno.getAvatar() == 0)}
+	<b>Complete o seu registro, ${aluno.getNome()}!
+	<br>
+						
+	#{form @Application.uploadPicture(), enctype:'multipart/form-data'}
+		<input type="file" name="picture.image" />
+		<input type="submit" name="submit" value="Save" />
+	#{/form}
+	</b>
+#{/if}
+<br>
+Quantidade de disciplinas: ${disciplinas.size()}
+<br><br>
+#{if disciplinas != null}
+	#{list items:disciplinas, as:'disc'}
+		<b>${disc.getNomeDisciplina()}</b>
+		<br>
+		Notas:
+		<br>
+		${disc.getNota1()} ||  
+		${disc.getNota2()} || 
+		${disc.getNota3()} || 
+		${disc.getNota4()} ||
+		<br><br>
+	#{/list}
+#{/if}

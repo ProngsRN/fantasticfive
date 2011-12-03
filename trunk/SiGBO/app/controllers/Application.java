@@ -73,32 +73,27 @@ public class Application extends Controller {
 
 		long id = Long.valueOf(session.get("user"));
 		Aluno aluno = Aluno.findById(id);
-		int reg = 1;
-		if (aluno.getAvatar() == 0) {
-			reg = 0;
-		}
+		
 		List<Aluno> colegas = aluno.getColegas();
 		List<AlunoDisciplinas> disciplinas = null;
 		disciplinas = aluno.getAlunoDisciplinas();
-		render(aluno, reg, colegas, disciplinas);
+		render(aluno, colegas, disciplinas);
 	}
 
 	public static void uploadPicture(Picture picture)
 			throws NumberFormatException, SQLException {
-		Banco banco = new Banco();
-		banco.conectar();
-		String sql = "select * from Picture where idAluno = "
-				+ session.get("user");
-		ResultSet rs = banco.consultar(sql);
-		if (!rs.next()) {
-			picture.setIdAluno(Long.valueOf(session.get("user")));
-			picture.save();
-			Aluno aluno = Aluno.findById(Long.valueOf(session.get("user")));
-			aluno.setAvatar(picture.getId());
-			aluno.save();
+		
+		Long id = Long.valueOf(session.get("user"));
+		Aluno aluno = Aluno.findById(id);
+		if (aluno.getAvatar() != 0) {
+			aluno.deleteAvatar();
 		}
-		user();
+		picture.setIdAluno(id);
+		picture.save();
+		aluno.setAvatar(picture.getId());
+		aluno.save();
 
+		user();
 	}
 
 	public static void getPicture(long idAvatar) {
@@ -116,44 +111,27 @@ public class Application extends Controller {
 
 	public static void admalunos() {
 		List<Aluno> alunos = Aluno.findAll();
-
-		int alunosvazio = 1;
-		if (alunos.isEmpty())
-			alunosvazio = 0;
-
-		render(alunos, alunosvazio);
+		render(alunos);
 	}
 
 	public static void gerenciaraluno() {
 		List<Aluno> alunos = Aluno.findAll();
-		int vazio = 1;
-		if (alunos.isEmpty())
-			vazio = 0;
-		render(alunos, vazio);
+		render(alunos);
 	}
 
 	public static void gerenciarprofessor() {
 		List<Professor> professores = Professor.findAll();
-		int vazio = 1;
-		if (professores.isEmpty())
-			vazio = 0;
-		render(professores, vazio);
+		render(professores);
 	}
 
 	public static void gerenciarturma() {
 		List<Turma> turmas = Turma.findAll();
-		int vazio = 1;
-		if (turmas.isEmpty())
-			vazio = 0;
-		render(turmas, vazio);
+		render(turmas);
 	}
 
 	public static void gerenciardisciplina() {
 		List<Disciplina> disciplinas = Disciplina.findAll();
-		int vazio = 1;
-		if (disciplinas.isEmpty())
-			vazio = 0;
-		render(disciplinas, vazio);
+		render(disciplinas);
 	}
 
 	public static void admalunodisciplina() {
@@ -161,16 +139,7 @@ public class Application extends Controller {
 		List<Disciplina> disciplinas = Disciplina.findAll();
 		List<Aluno> alunos = Aluno.findAll();
 
-		int vazioaluno = 1;
-		if (alunos.isEmpty())
-			vazioaluno = 0;
-
-		int vaziodisciplina = 1;
-		if (disciplinas.isEmpty())
-			vaziodisciplina = 0;
-
-		render(alunodisciplina, alunos, disciplinas, vazioaluno,
-				vaziodisciplina);
+		render(alunodisciplina, alunos, disciplinas);
 	}
 
 	public static void admprofessordisciplina() {
@@ -178,17 +147,8 @@ public class Application extends Controller {
 				.findAll();
 		List<Professor> professores = Professor.findAll();
 		List<Disciplina> disciplinas = Disciplina.findAll();
-
-		int professorvazio = 1;
-		if (professores.isEmpty())
-			professorvazio = 0;
-
-		int disciplinavazio = 1;
-		if (disciplinas.isEmpty())
-			disciplinavazio = 0;
-
-		render(professores, disciplinas, professordisciplina, professorvazio,
-				disciplinavazio);
+	
+		render(professores, disciplinas, professordisciplina);
 	}
 
 	public static void admboletins() {
@@ -216,49 +176,24 @@ public class Application extends Controller {
 			}
 		}
 		
-		int alunovazio = 1;
-		if (alunodisciplina.isEmpty())
-			alunovazio = 0;
 		int bim = 0;
-		render(alunodisciplina, alunos, disciplinas, alunovazio, bim);
-	}
-
-	public static void habilitaracessoaluno() {
-		List<Aluno> alunos = Aluno.findAll();
-		List<Usuario> usuarios = Usuario.findAll();
-		render(alunos, usuarios);
+		render(alunodisciplina, alunos, disciplinas, bim);
 	}
 
 	public static void admprofessores() {
 		List<Professor> professores = Professor.findAll();
-
-		int vazio = 1;
-		if (professores.isEmpty())
-			vazio = 0;
-		render(professores, vazio);
+		render(professores);
 	}
 
 	public static void admdisciplinas() {
 		List<Disciplina> disciplinas = Disciplina.findAll();
 		List<Turma> turmas = Turma.findAll();
-
-		int turmavazia = 1, disciplinavazia = 1;
-
-		if (disciplinas.isEmpty())
-			disciplinavazia = 0;
-		if (turmas.isEmpty())
-			turmavazia = 0;
-
-		render(turmas, disciplinas, disciplinavazia, turmavazia);
+		render(turmas, disciplinas);
 	}
 
 	public static void admturmas() {
 		List<Turma> turmas = Turma.findAll();
-
-		int vazia = 1;
-		if (turmas.isEmpty())
-			vazia = 0;
-		render(turmas, vazia);
+		render(turmas);
 	}
 
 	public static void aluno(long idAluno) {

@@ -56,7 +56,7 @@ public class Disciplina extends Model {
 			String nivelString;
 			if (nivel == "2") nivelString = "Ensino Médio";
 			else nivelString = "Ensino Fundamental";
-			turma = ("Ano: " + ano + " Nível: " + nivelString + " Sala: " + sala);
+			turma = ("Ano: " + ano + " Nivel: " + nivelString + " Sala: " + sala);
 		}
 		banco.desconectar();
 		return turma;
