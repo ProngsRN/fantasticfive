@@ -1,150 +1,60 @@
+#{extends '/templates/templateadmin.html' /}
 #{set title:'SiGBO :: Administrar Disciplinas' /}
-
-<html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="@{'public/stylesheets/style.css'}" type="text/css" media="all" />
-		<link rel="stylesheet" href="@{'public/stylesheets/jquery.jcarousel.css'}" type="text/css" media="all" />
-		<!--[if IE 6]>
-			<link rel="stylesheet" href="@{'public/stylesheets/ie6.css'}" type="text/css" media="all" />
-		<![endif]-->
-		<link rel="shortcut icon" href="@{'public/images/favicon.ico'}" />
-		<script type="text/javascript" src="@{'/public/javascripts/jquery-1.4.2.min.js'}"></script>
-		<script type="text/javascript" src="@{'/public/javascripts/jquery.jcarousel.pack.js'}"></script>
-		<script type="text/javascript" src="@{'/public/javascripts/func.js'}"></script>
-    </head>
-    <body>
-    <div class="shell">
-	<div class="border">
-		<div id="header">
-			<h1 id="logo"><a href="#" class="notext">beSmart</a></h1>
-			<div class="socials right">
-				<ul>
-				    <li><a href="@{Application.administrador()}" class="rss">Início</a></li>
-				    <li><a href="@{Application.logout()}" class="fb">Sair</a></li>
-				</ul>
-			</div>
-			<div class="cl">&nbsp;</div>
-		</div>
 		
-		<div id="sidebar" class="left">
 
-				<h3>Turmas</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admturmas}">Cadastrar Turma</a></li>
-					    <li><a href="@{Application.gerenciarturma}">Gerenciar Turmas</a></li>
-					</ul>
-				</div>
-				
-				<h3>Disciplinas</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admdisciplinas}">Cadastrar Disciplina</a></li>
-					    <li><a href="@{Application.gerenciardisciplina}">Gerenciar Disciplinas</a></li>
-					</ul>
-				</div>
-				
-				<h3>Professores</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admprofessores}">Cadastrar Professor</a></li>
-					    <li><a href="@{Application.gerenciarprofessor}">Gerenciar Professores</a></li>
-					    <li><a href="@{Application.admprofessordisciplina}">Cadastrar em Disciplina</a></li>
-					</ul>
-				</div>
-				
-				<h3>Alunos</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
-					    <li><a href="@{Application.gerenciaraluno}">Gerenciar Alunos</a></li>
-					    <li><a href="@{Application.admalunodisciplina}">Cadastrar em Disciplina</a></li>
-					    <li><a href="@{Application.admnotas}">Cadastrar Notas</a></li>
-					</ul>
-				</div>
-
+#{if turmas.isEmpty()}
+	Você ainda não cadastrou nenhuma turma. <a href="@{Application.admturmas}">Clique aqui</a> para cadastrar.
+	<br>
+#{/if}
+#{if !turmas.isEmpty()}
+<h3>:: Cadastrar nova Disciplina ::</h3>
+<form action="@{Cadastro.addDisciplina()}"  method="GET">
+	<label  for="ano">Nome: </label>
+	<input type="text" name="nome"/>
+	<label  for="sala">Turma: </label>
+	<select name="turma">
+		#{list items:turmas, as:'turma'}
+			<option value=${turma.getId()}>
+				Ano: ${turma.ano} 
+				Nivel: 	#{if turma.nivel == 1} 
+							Ensino Fundamental 
+						#{/if}
+						#{if turma.nivel == 2}
+							Ensino Médio
+						#{/if}
+				Sala: ${turma.sala}
+			</option>
+		#{/list}
+	</select>
+	<input type="submit" value="Adicionar"/>
+	#{if flash.error}
+		<p style="color:#c00">
+			${flash.error}
+		</p>
+	#{/if}
+</form>
+#{/if}
+<br/>
+#{if !disciplinas.isEmpty()}
+<h3>:: Disciplinas Cadastradas::</h3>
+		<table border=1 width=600>
+			<tr>
+				<td bgcolor='#aaddbb' width=150><b><center>Disciplina</td> 
+				<td bgcolor='#aaddbb' width=480><center><b>Turma</td>
+			</tr>
+		</table>
+		<div style="height:270px;width:700px;overflow:scroll;">
+		<table border=1>
+		#{list items:disciplinas, as:'disciplina'}
+			<tr>
+				<td width=180>
+					<center>[ID ${disciplina.getId()}] ${disciplina.nome}
+				</td> 
+				<td width=460>
+					<center>[ID: ${disciplina.turma}] <b>Turma:</b> ${disciplina.getTurmaDisciplina()}</center><br>
+				</td>
+			</tr>
+		#{/list}
+		</table>
 		</div>
-		
-		<div id="main">
-			<center>
-			#{if turmavazia == 0}
-				<center>
-				Você ainda não cadastrou nenhuma turma. <a href="@{Application.admturmas}">Clique aqui</a> para cadastrar.
-				<br>
-			#{/if}
-			#{if turmavazia != 0}
-			<h3>:: Cadastrar nova Disciplina ::</h3>
-			<form action="@{Cadastro.addDisciplina()}"  method="GET">
-				<label  for="ano">Nome: </label>
-				<input type="text" name="nome"/>
-				<label  for="sala">Turma: </label>
-				<select name="turma">
-					#{if !turmas.isEmpty()}
-						#{list items:turmas, as:'turma'}
-							<option value=${turma.getId()}>
-								Ano: ${turma.ano} 
-								Nivel: 	#{if turma.nivel == 1} 
-											Ensino Fundamental 
-										#{/if}
-										#{if turma.nivel == 2}
-											Ensino Médio
-										#{/if}
-								Sala: ${turma.sala}
-							</option>
-						#{/list}
-					#{/if}
-				</select>
-				<input type="submit" value="Adicionar"/>
-				#{if flash.error}
-    				<p style="color:#c00">
-						${flash.error}
-    				</p>
-				#{/if}
-			</form>
-			#{/if}
-			<br/>
-			#{if disciplinavazia != 0}
-			<h3>:: Disciplinas Cadastradas::</h3>
-			<table border=1>
-				<tr>
-					<td bgcolor='#aaddbb'><b><center>Disciplina</td> <td bgcolor='#aaddbb'><center><b>Turma</td>
-				</tr>
-				#{list items:disciplinas, as:'disciplina'}
-					<tr>
-						<td><center>[ID ${disciplina.getId()}] ${disciplina.nome}</td> 
-						<td>
-							<center>[ID: ${disciplina.turma}] <b>Turma:</b> ${disciplina.getTurmaDisciplina()}</center><br>
-						</td>
-					</tr>
-				#{/list}
-			</table>
-			#{/if}
-			<br/>
-			<a href="@{Application.administrador()}"><img src="/public/images/voltar.png"></a>
-			</center>
-			<br><br><br><br><br><br><br><br><br>
-		</div>
-		
-		<div class="shadow-l"></div>
-		<div class="shadow-r"></div>
-		<div class="shadow-b"></div>
-	</div>
-	
-	<div id="footer">
-		<div class="footer-nav left">
-			<ul>
-			    <li><a href="#" class="active">Inicio</a></li>
-			    <li><a href="#">Historia</a></li>
-			    <li><a href="#">Equipe</a></li>
-			    <li><a href="#">Calendario</a></li>
-			    <li class="last"><a href="#">Contato</a></li>
-			</ul>
-		</div>
-		<p class="copy right">Copyright &copy; Fantastic Five Team ! beSmart 2010 | Valid CSS &amp; HTML. <a href="http://chocotemplates.com" target="_blank" title="Chocotemplates">Design</a></p>
-		<div class="cl">&nbsp;</div>
-	</div>
-</div>
-</body>
-</html>
+#{/if}

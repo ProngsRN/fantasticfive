@@ -65,6 +65,11 @@ public class Aluno extends Model {
 	public long getAvatar() {
 		return avatar;
 	}
+	
+	public void deleteAvatar() {
+		Picture picture = Picture.findById(avatar);
+		picture.delete();
+	}
 
 	public List<Aluno> getColegas() {
 

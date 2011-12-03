@@ -74,9 +74,9 @@ public class Cadastro extends Application {
 			@Required long idDisciplina, @Required String bim,
 			@Required String nota) throws SQLException {
 
-		int notaValor = -1;
+		float notaValor = -1;
 		if (!nota.isEmpty()) 
-			notaValor = Integer.valueOf(nota);
+			notaValor = Float.valueOf(nota);
 		
 		validation.range(notaValor, 0, 10);
 		if (validation.hasErrors()) {
