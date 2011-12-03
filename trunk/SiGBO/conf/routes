@@ -5,6 +5,9 @@
 # Home page
 GET     /                                       Application.index
 GET		/user									Application.user
+GET		/user/id={idAluno}						Application.aluno
+GET 	/user/id={idAluno}/mural				Application.recadosaluno
+GET		/user/mural								Application.recadosusuario
 GET		/admin									Application.administrador
 GET		/login									Application.login
 GET		/admin/alunos							Application.admalunos

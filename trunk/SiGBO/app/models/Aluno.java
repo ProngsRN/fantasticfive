@@ -100,5 +100,17 @@ public class Aluno extends Model {
 		}
 		return alunodisciplinas;
 	}
+	
+	public List<Recado> getRecados(boolean privado) {
+
+		List<Recado> lista = Recado.find("order by data desc").fetch();
+		List<Recado> recados = new ArrayList<Recado>();
+		for (Recado r : lista) {
+			if ( (r.getIdDestinatario() == id) && (r.isPrivado() == privado)) {
+				recados.add(r);
+			}
+		}
+		return recados;
+	}
 
 }

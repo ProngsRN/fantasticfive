@@ -26,14 +26,39 @@ public class Application extends Controller {
 
 	@Before(only = { "administrador" })
 	static void checkAdmin() {
-		if (!session.contains("admin"))
+		if (!session.contains("admin")) {
+			if (session.contains("user")) {
+				user();
+			}
 			index();
+		}
 	}
 
 	@Before(only = { "user" })
 	static void checkUser() {
-		if (!session.contains("user"))
+		if (!session.contains("user")) {
+			if (session.contains("admin")) {
+				administrador();
+			}
 			index();
+		}
+	}
+
+	@Before(unless = { "user", "administrador", "index", "login" })
+	static void checkAuthentication() {
+		if (session.isEmpty()) {
+			index();
+		}
+	}
+
+	@Before(only = { "index", "login" })
+	static void check() {
+		if (!session.isEmpty()) {
+			if (session.contains("user")) {
+				user();
+			}
+			administrador();
+		}
 	}
 
 	public static void index() {
@@ -69,11 +94,11 @@ public class Application extends Controller {
 		index();
 	}
 
-	public static void user() throws SQLException {
+	public static void user() {
 
 		long id = Long.valueOf(session.get("user"));
 		Aluno aluno = Aluno.findById(id);
-		
+
 		List<Aluno> colegas = aluno.getColegas();
 		List<AlunoDisciplinas> disciplinas = null;
 		disciplinas = aluno.getAlunoDisciplinas();
@@ -82,7 +107,7 @@ public class Application extends Controller {
 
 	public static void uploadPicture(Picture picture)
 			throws NumberFormatException, SQLException {
-		
+
 		Long id = Long.valueOf(session.get("user"));
 		Aluno aluno = Aluno.findById(id);
 		if (aluno.getAvatar() != 0) {
@@ -94,6 +119,14 @@ public class Application extends Controller {
 		aluno.save();
 
 		user();
+	}
+
+	public static void alterarfoto() {
+		long id = Long.valueOf(session.get("user"));
+		Aluno aluno = Aluno.findById(id);
+
+		List<Aluno> colegas = aluno.getColegas();
+		render(aluno, colegas);
 	}
 
 	public static void getPicture(long idAvatar) {
@@ -147,7 +180,7 @@ public class Application extends Controller {
 				.findAll();
 		List<Professor> professores = Professor.findAll();
 		List<Disciplina> disciplinas = Disciplina.findAll();
-	
+
 		render(professores, disciplinas, professordisciplina);
 	}
 
@@ -160,14 +193,14 @@ public class Application extends Controller {
 		List<AlunoDisciplinas> alunos = new ArrayList<AlunoDisciplinas>();
 		List<AlunoDisciplinas> disciplinas = new ArrayList<AlunoDisciplinas>();
 		List<Long> listaid = new ArrayList<Long>();
-		
+
 		for (AlunoDisciplinas a : alunodisciplina) {
 			if (!listaid.contains(a.getIdAluno())) {
 				alunos.add(a);
 				listaid.add(a.getIdAluno());
 			}
 		}
-		
+
 		listaid.clear();
 		for (AlunoDisciplinas d : alunodisciplina) {
 			if (!listaid.contains(d.getIdDisciplina())) {
@@ -175,7 +208,7 @@ public class Application extends Controller {
 				listaid.add(d.getIdDisciplina());
 			}
 		}
-		
+
 		int bim = 0;
 		render(alunodisciplina, alunos, disciplinas, bim);
 	}
@@ -203,8 +236,59 @@ public class Application extends Controller {
 		if (aluno != null) {
 			colegas = aluno.getColegas();
 		}
-		if ( (colegas != null) )
-			render(aluno, colegas);
+		render(aluno, colegas);
+	}
+
+	public static void addRecado(long idDestinatario, @Required String texto, boolean privado) {
+
+		validation.minSize(texto, 1);
+		validation.maxSize(texto, 100);
+		if (validation.hasErrors()) {
+			flash.error("Erro!");
+		}
+		else {
+			long idRemetente = Long.valueOf(session.get("user"));
+			Recado recado = new Recado(idRemetente, texto, idDestinatario, privado);
+			recado.save();
+		}
+		recadosaluno(idDestinatario);
+	}
+
+	public static void removerRecado(long idRecado) {
+		Recado recado = Recado.findById(idRecado);
+		recado.delete();
+		recadosusuario();
+	}
+
+	public static void recadosusuario() {
+
+		long id = Long.valueOf(session.get("user"));
+		Aluno aluno = Aluno.findById(id);
+		List<Recado> recados = aluno.getRecados(false);
+
+		List<Aluno> colegas = aluno.getColegas();
+		render(aluno,colegas,recados);
+	}
+	
+	public static void recadosaluno(long idAluno) {
+		
+		Aluno aluno = Aluno.findById(idAluno);
+		List<Aluno> colegas = null;
+		if (aluno != null) {
+			colegas = aluno.getColegas();
+		}
+		List<Recado> recados = aluno.getRecados(false);
+		render(aluno, colegas, recados);
+	}
+	
+	public static void mensagens() {
+		
+		long id = Long.valueOf(session.get("user"));
+		Aluno aluno = Aluno.findById(id);
+		List<Recado> mensagens = aluno.getRecados(true);
+		List<Aluno> colegas = aluno.getColegas();
+		
+		render(aluno,colegas,mensagens);
 	}
 
 }
