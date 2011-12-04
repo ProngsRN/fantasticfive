@@ -92,7 +92,7 @@ public class AlunoDisciplinas extends Model {
 				nivelString = "Ensino MÃ©dio";
 			else
 				nivelString = "Ensino Fundamental";
-			turma = ("Ano: " + ano + " NÃ­vel: " + nivelString + " Sala: " + sala);
+			turma = ("Ano: " + ano + " Nível: " + nivelString + " Sala: " + sala);
 		}
 		banco.desconectar();
 		return turma;
