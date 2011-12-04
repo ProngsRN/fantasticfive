@@ -1,4 +1,54 @@
-#{extends 'main.html' /}
-#{set title:'mensagens.html' /}
+#{extends '/templates/templateuser.html' /}
+#{set title: 'SiGBO :: Usuário / Mensagens' /}
 
-Here goes your content.
+<p align=left><font size=6><b>M</b>ensagens</font></p>
+<br>
+<small><b>Enviar uma nova mensagem:</b></small>
+<br>
+<form action="@{Application.enviarMensagem()}"  method="GET">
+	<label  for="idDestinatario">Para: </label>
+	<select name="idDestinatario">
+		#{list items:colegas, as:'colega'}
+			<option value=${colega.getId()}>${colega.getNome()}</option>
+		#{/list}
+	</select>
+	<textarea name="texto" id="texto" rows="5" cols="100"></textarea>
+	<br/>
+	<input type="submit" value=" Enviar "/>
+</form>
+#{if flash.error}
+	<p style="color:#c00">
+		${flash.error}
+	</p>
+#{/if}
+#{if flash.success}
+	<p style="color:green">
+		${flash.success}
+	</p>
+#{/if}
+#{if !mensagens.isEmpty()}
+<div style="height:265px;width:480px;overflow:scroll;">
+	<p align=left>
+		#{list items:mensagens, as:'mensagem'}
+				<a href="@{Application.aluno(mensagem.getIdRemetente())}">
+					<img src="@{Application.getPicture(mensagem.getRemetente().getAvatar())}" height=50/>
+					<small><b>${mensagem.getRemetente().getNome()}
+				</a> disse (às ${mensagem.getDataFormatada()}):
+				</b></small>
+				<br>
+				<b>${mensagem.getTexto()}</b>
+				<br>
+				<font size=2>
+					<a href="@{Application.recadosaluno(mensagem.getIdRemetente())}">
+						Responder
+					</a>
+					<a href="@{Application.removerRecado(mensagem.getId())}">
+						[x] Apagar mensagem.
+					</a>
+				</font>
+				<br>
+			<br/><br>
+		#{/list}
+	</p>
+</div>
+#{/if}
