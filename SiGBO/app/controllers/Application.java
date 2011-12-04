@@ -281,6 +281,22 @@ public class Application extends Controller {
 		render(aluno, colegas, recados);
 	}
 	
+	public static void enviarMensagem(long idDestinatario, @Required String texto) {
+		
+		validation.minSize(texto, 1);
+		validation.maxSize(texto, 100);
+		if (validation.hasErrors()) {
+			flash.error("Mensagem não pode ser enviada!");
+		}
+		else {
+			long idRemetente = Long.valueOf(session.get("user"));
+			Recado recado = new Recado(idRemetente, texto, idDestinatario, true);
+			recado.save();
+			flash.success("Mensagem enviada!");
+		}
+		mensagens();
+	}
+	
 	public static void mensagens() {
 		
 		long id = Long.valueOf(session.get("user"));
