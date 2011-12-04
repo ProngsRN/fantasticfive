@@ -75,13 +75,15 @@ public class Aluno extends Model {
 
 		List<AlunoDisciplinas> alunos = AlunoDisciplinas.findAll();
 		List<Aluno> colegas = new ArrayList<Aluno>();
+		List<Long> listaid = new ArrayList<Long>();
 		for (AlunoDisciplinas a : alunos) {
 			if (a.getIdAluno() == id) {
 				long idDisciplina = a.getIdDisciplina();
 				for (AlunoDisciplinas b : alunos) {
 					if ((b.getIdDisciplina() == idDisciplina)
-							&& (b.getIdAluno() != id)) {
+							&& (b.getIdAluno() != id) && (!listaid.contains(b.getIdAluno()))) {
 						colegas.add((Aluno) Aluno.findById(b.getIdAluno()));
+						listaid.add(b.getIdAluno());
 					}
 				}
 			}

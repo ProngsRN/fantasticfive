@@ -59,7 +59,7 @@ textarea { overflow:auto; }
 .slider-nav a { width: 18px; height: 18px; background: #d7d7d8; margin: 0 5px 0 0; }
 .slider-nav a.active { background: #39393d; }
 
-#main { width: 932px; padding: 157px 24px 90px 24px; }
+#main { width: 932px; padding: 150px 24px 90px 24px; }
 #main h3 { font-size: 12px; line-height: 15px; color: #000; text-transform: uppercase; border-bottom: 0px solid #dbdbdb; padding: 0 0 9px 0; }
 #main a.more { background: url(../images/more.gif) no-repeat 0 3px; font-size: 11px; line-height: 14px; color: #ff0000; text-decoration: underline; padding: 0 0 0 13px; }
 #main a.more:hover { text-decoration: none; }
