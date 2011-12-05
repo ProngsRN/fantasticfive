@@ -2,7 +2,7 @@
 #{set title:'SiGBO :: Administrar Disciplina - Gerenciar Disciplinas' /}
 
 <center>		
-<h2>:: Remover Disciplina ::</h2>
+<h2>« Remover Disciplina »</h2>
 #{if disciplinas.isEmpty()}
 	<center>
 	Você ainda não cadastrou nenhuma disciplina. <a href="@{Application.admdisciplinas}">Clique aqui</a> para cadastrar.
@@ -14,11 +14,13 @@
 	<select name="idDisciplina">
 		#{list items:disciplinas, as:'disciplina'}
 			<option value=${disciplina.getId()}>
-				[ID ${disciplina.getId()}]${disciplina.nome} - Turma: ${disciplina.getTurmaDisciplina()}
+				${disciplina.nome} (${disciplina.getTurmaDisciplina()})
 			</option>
 		#{/list}
 	</select>
-	<input type="submit" value="Remover"/>
+	<div class="buttons">
+	<br><input type="submit" value="Remover" class="button"/>
+	</div>
 	
 	#{if flash.error}
 		<p style="color:#c00">
@@ -29,26 +31,3 @@
 #{/if}
 	
 <br/>
-#{if !disciplinas.isEmpty()}
-<font size=4>:: Disciplinas Cadastrados ::</font>
-<table border=1 width=600>
-		<tr>
-			<td bgcolor='#aaddbb' width=150><b><center>Disciplina</td> 
-			<td bgcolor='#aaddbb' width=480><center><b>Turma</td>
-		</tr>
-		</table>
-		<div style="height:270px;width:700px;overflow:scroll;">
-		<table border=1>
-		#{list items:disciplinas, as:'disciplina'}
-			<tr>
-				<td width=180>
-					<center>[ID ${disciplina.getId()}] ${disciplina.nome}
-				</td> 
-				<td width=460>
-					<center>[ID: ${disciplina.turma}] <b>Turma:</b> ${disciplina.getTurmaDisciplina()}</center><br>
-				</td>
-			</tr>
-		#{/list}
-		</table>
-		</div>	
-#{/if}

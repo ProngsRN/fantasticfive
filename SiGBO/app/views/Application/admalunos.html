@@ -50,7 +50,7 @@
 	<table border=1>
 		<tr>
 			<td bgcolor='#aaddbb' width=279><b><center>Nome</td>
-			<td bgcolor='#aaddbb' width=100><b><center>Usuario</td>
+			<td bgcolor='#aaddbb' width=100><b><center>Usuário</td>
 			<td bgcolor='#aaddbb' width=80><b><center>Senha</td>
 		</tr>
 	</table>
@@ -59,9 +59,9 @@
 	<table border=1 height=140 width=480>
 		#{list items:alunos, as:'aluno'}
 				<tr>
-					<td width=270>${aluno.getNome()}</td> 
-					<td width=100><b>${aluno.getNomeUsuario()}</b></td> 
-					<td width=80><i>${aluno.getSenhaUsuario()}</i></td>
+					<td width=270><center>${aluno.getNome()}</center></td> 
+					<td width=100><center><b>${aluno.getNomeUsuario()}</center></b></td> 
+					<td width=80><center><i>${aluno.getSenhaUsuario()}</center></i></td>
 				</tr>
 		#{/list}
 	</table>

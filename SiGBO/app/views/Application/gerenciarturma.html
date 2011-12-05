@@ -2,7 +2,7 @@
 #{set title:'SiGBO :: Administrar Turma - Gerenciar Turmas' /}
 
 <center>
-<h2>:: Remover Turma ::</h2>
+<h2>« Remover Turma »</h2>
 #{if turmas.isEmpty()}
 	<center>
 	Você ainda não cadastrou nenhuma turma. <a href="@{Application.admturmas}">Clique aqui</a> para cadastrar.
@@ -10,7 +10,7 @@
 #{/if}
 #{if !turmas.isEmpty()}
 <form action="@{Remove.removeTurma()}"  method="GET">
-	<label  for="idTurma">Aluno: </label>
+	<label  for="idTurma">Turma: </label>
 	<select name="idTurma">
 		#{list items:turmas, as:'turma'}
 			<option value=${turma.getId()}>
@@ -24,7 +24,9 @@
 			</option>
 		#{/list}
 	</select>
-	<input type="submit" value="Remover"/>
+	<div class="buttons">
+	<br><input type="submit" value="Remover" class="button"/>
+	</div>
 	
 	#{if flash.error}
 		<p style="color:#c00">
@@ -35,45 +37,3 @@
 #{/if}
 	
 <br/>
-#{if !turmas.isEmpty()}
-<font size=4>:: Turmas Cadastrados ::</font>
-<table border=1>
-	<tr>
-		<td bgcolor='#aaddbb' width=40>
-			<center>
-			<b>Ano
-		</td>
-		<td bgcolor='#aaddbb' width=150>
-			<center>
-			<b>Nível
-		</td>
-		<td bgcolor='#aaddbb' width=40>
-			<center>
-			<b>Sala
-		</td>
-	</tr>
-</table>
-<div style="height:250px;width:270px;overflow:scroll;">
-<table border=1>
-	#{list items:turmas, as:'turma'}
-		<tr>
-			<td width=40>
-				<center>
-				${turma.ano}º
-			</td>
-			<td width=150>
-				<center>
-				#{if turma.nivel == 2} 
-					Ensino Médio
-				#{/if}
-				#{if turma.nivel == 1}
-					Ensino Fundamental
-				#{/if}
-			<td width=40>
-				<center>${turma.sala}
-			</td>
-		</tr>
-	#{/list}
-</table>
-</div>
-#{/if}

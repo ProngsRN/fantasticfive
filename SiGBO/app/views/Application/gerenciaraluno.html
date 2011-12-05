@@ -2,7 +2,7 @@
 #{set title:'SiGBO :: Administrar Alunos - Gerenciar Aluno' /}
 
 <center>
-<h2>:: Remover Aluno ::</h2>
+<h2>« Remover Aluno »</h2>
 #{if alunos.isEmpty()}
 	<center>
 	Você ainda não cadastrou nenhum aluno. <a href="@{Application.admalunos}">Clique aqui</a> para cadastrar.
@@ -16,7 +16,9 @@
 			<option value=${aluno.getId()}>${aluno.nome}</option>
 		#{/list}
 	</select>
-	<input type="submit" value="Remover"/>
+	<div class="buttons">
+	<br><input type="submit" value="Remover" class="button"/>
+	</div>
 	
 	#{if flash.error}
 		<p style="color:#c00">
@@ -27,25 +29,3 @@
 #{/if}
 	
 <br/>
-#{if !alunos.isEmpty()}
-	<font size=4>:: Alunos Cadastrados ::</font>
-	<br>
-	<table border=1>
-		<tr>
-			<td bgcolor='#aaddbb' width=250><b><center>Nome</td>
-			<td bgcolor='#aaddbb' width=90><b><center>Usuario</td>
-			<td bgcolor='#aaddbb' width=70><b><center>Senha</td>
-		</tr>
-	</table>
-	<div style="height:250px;width:480px;overflow:scroll;">
-		<table border=1 height=140 width=450>
-			#{list items:alunos, as:'aluno'}
-					<tr>
-						<td>[ID: ${aluno.getId()}] ${aluno.getNome()}</td> 
-						<td><b>${aluno.getNomeUsuario()}</b></td> 
-						<td><i>${aluno.getSenhaUsuario()}</i></td>
-					</tr>
-			#{/list}
-		</table>
-	</div>	
-#{/if}

@@ -2,7 +2,7 @@
 #{set title:'SiGBO :: Administrar Turmas' /}
 
 <center>
-<h2>:: Cadastrar nova Turma ::</h2>
+<h2>« Cadastrar nova Turma »</h2>
 <form action="@{Cadastro.addTurma()}"  method="POST">
 	<label  for="ano">Ano: </label>
 	<select name="ano">
@@ -23,7 +23,9 @@
 		<option value=1>Ensino Fundamental</option>
 		<option value=2>Ensino Médio</option>
 	</select>
-	<input type="submit" value="Adicionar"/>
+	<div class="buttons">
+	<br><input type="submit" value="Adicionar" class="button"/>
+	</div>
 	#{if flash.error}
 		<p style="color:#c00">
 			${flash.error}
