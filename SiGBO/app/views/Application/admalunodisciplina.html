@@ -63,9 +63,8 @@
 							#{list items:alunodisciplina, as:'disciplina'}
 								#{if disciplina.idAluno == aluno.id} 
 									<center>
-									${disciplina.getNomeDisciplina()} 
-									(<b>Turma:</b> ${disciplina.getTurmaDisciplina()})</center>
-									<br>
+									${disciplina.getNomeDisciplina()}
+									(${disciplina.getTurmaDisciplina()})</center>
 								#{/if} 
 							#{/list}
 						</td>

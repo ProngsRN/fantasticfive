@@ -2,23 +2,25 @@
 #{set title:'SiGBO :: Administrar Professores' /}
 
 <center>
-<h2>:: Cadastrar novo Professor ::</h2>
+<h2>« Cadastrar novo Professor »</h2></center>
 <form action="@{Cadastro.addProfessor()}"  method="GET">
-	<label  for="nome">Nome: </label>
+	<label  for="nome" style="margin:0 0 0 220">Nome: </label>
 	<input type="text" name="nome"/>
 	<br>
-	<label  for="usuario">Nome de Usuario: </label>
+	<label  for="usuario" style="margin:0 0 0 156">Nome de Usuario: </label>
 	<input type="text" name="usuario"/>
-	<br><br>
-	<label  for="senha">Senha: </label>
+	<br>
+	<label  for="senha" style="margin:0 0 0 218">Senha: </label>
 	<input type="password" name="senha"/>
 	<br>
-	<label  for="senha2">Informe a senha novamente: </label>
+	<label  for="senha2" style="margin:0 0 0 155">Confirme a senha: </label>
 	<input type="password" name="senha2"/>
 	<br>
-	<input type="submit" value="Adicionar"/>
+	<div class="buttons" style="margin:0 0 0 265">
+	<br><input type="submit" value="Adicionar" class="button"/>
+	</div>
 	#{if flash.error}
-		<p style="color:#c00">
+		<p align="center" style="color:#c00">
 			${flash.error}
 		</p>
 	#{/if}
@@ -27,17 +29,12 @@
 <br/>
 
 #{if !professores.isEmpty()}
-<font size=4>:: Professores Cadastrados ::</font>
-<table border=1>
-	<tr>
-		<td bgcolor='#aaddbb' width=230><center><b>Nome</td>
-	</tr>
-</table>
-<div style="height:250px;width:250px;overflow:scroll;">
+<center><font size=4>Professores Cadastrados</font><br><br>
+<div style="height:250px;width:400px;overflow:scroll;">
 	<table border=1 height=70>
 		#{list items:professores, as:'professor'}
 			<tr>
-				<td width=200>[ID: ${professor.getId()}] ${professor.nome}</td> 
+				<td width=380><center>${professor.nome}</center></td> 
 			</tr>
 		#{/list}
 	</table>
