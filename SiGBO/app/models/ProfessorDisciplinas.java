@@ -86,7 +86,7 @@ public class ProfessorDisciplinas extends Model {
 			String nivelString;
 			if (nivel == "2") nivelString = "Ensino Médio";
 			else nivelString = "Ensino Fundamental";
-			turma = ("Ano: " + ano + " Nível: " + nivelString + " Sala: " + sala);
+			turma = (ano + "º Ano \"" + sala + "\" " + nivelString);
 		}
 		banco.desconectar();
 		return turma;
