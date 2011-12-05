@@ -1,14 +1,13 @@
 #{extends '/templates/templateadmin.html' /}
 #{set title:'SiGBO :: Administrar Notas' /}
 
-
+<center>
 #{if alunos.isEmpty()}
-	<center>
 	Você ainda não cadastrou aluno em disciplina. <a href="@{Application.admalunodisciplina}">Clique aqui</a> para cadastrar.
 	<br>
 #{/if}
 #{if !alunos.isEmpty()}
-<h3>:: Cadastrar Nota ::</h3>
+<h2>:: Cadastrar Nota ::</h2>
 <form action="@{Cadastro.addNotaToAluno()}"  method="GET">
 	<label  for="idAluno">Aluno: </label>
 	<select name="idAluno">
@@ -56,7 +55,8 @@
 #{/if}
 <br/>
 #{if !alunos.isEmpty()}
-<h3>:: Alunos Cadastrados (Disciplinas e Notas)::</h3>
+<font size=4>:: Alunos Cadastrados (Disciplinas e Notas)::</font>
+	<br>
 		<table border=1 align=left>
 		<tr>
 			<td bgcolor='#aaddbb' width=210><b><center>Aluno</td> 
@@ -91,6 +91,6 @@
 				</td>
 			</tr>
 		#{/list}
+		</table>
 		</div>
-	</table>
 #{/if}

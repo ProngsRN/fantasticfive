@@ -1,8 +1,8 @@
 #{extends '/templates/templateadmin.html' /}
 #{set title:'SiGBO :: Administrar Professores - Cadastrar Disciplina' /}
 
+<center>
 #{if professores.isEmpty()}
-	<center>
 	Você ainda não cadastrou nenhum professor. <a href="@{Application.admprofessores}">Clique aqui</a> para cadastrar.
 	<br>
 #{/if}
@@ -12,7 +12,7 @@
 	<br>
 #{/if}
 #{if (!professores.isEmpty()) && (!disciplinas.isEmpty())}
-<h3>:: Cadastrar Professor em Disciplina ::</h3>
+<h2>:: Cadastrar Professor em Disciplina ::</h2>
 <form action="@{Cadastro.addDisciplinaToProfessor()}"  method="GET">
 	<label  for="idProfessor">Professor: </label>
 	<select name="idProfessor">
@@ -38,7 +38,7 @@
 #{/if}
 <br/>
 #{if !professores.isEmpty()}
-<h3>:: Professores Cadastrados ::</h3>
+<font size=4>:: Professores Cadastrados ::</font>
 <table border=1>
 	<tr>
 		<td bgcolor='#aaddbb' width=180><center><b>Nome</td>

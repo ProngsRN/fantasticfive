@@ -1,7 +1,8 @@
 #{extends '/templates/templateadmin.html' /}
 #{set title:'SiGBO :: Administrar Disciplina - Gerenciar Disciplinas' /}
-		
-<h3>:: Remover Disciplina ::</h3>
+
+<center>		
+<h2>:: Remover Disciplina ::</h2>
 #{if disciplinas.isEmpty()}
 	<center>
 	Você ainda não cadastrou nenhuma disciplina. <a href="@{Application.admdisciplinas}">Clique aqui</a> para cadastrar.
@@ -29,7 +30,7 @@
 	
 <br/>
 #{if !disciplinas.isEmpty()}
-<h3>:: Disciplinas Cadastrados ::</h3>
+<font size=4>:: Disciplinas Cadastrados ::</font>
 <table border=1 width=600>
 		<tr>
 			<td bgcolor='#aaddbb' width=150><b><center>Disciplina</td> 

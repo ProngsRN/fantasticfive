@@ -1,7 +1,8 @@
 #{extends '/templates/templateadmin.html' /}
 #{set title:'SiGBO :: Administrar Alunos - Gerenciar Aluno' /}
 
-<h3>:: Remover Aluno ::</h3>
+<center>
+<h2>:: Remover Aluno ::</h2>
 #{if alunos.isEmpty()}
 	<center>
 	Você ainda não cadastrou nenhum aluno. <a href="@{Application.admalunos}">Clique aqui</a> para cadastrar.
@@ -27,7 +28,8 @@
 	
 <br/>
 #{if !alunos.isEmpty()}
-	<h3>:: Alunos Cadastrados ::</h3>
+	<font size=4>:: Alunos Cadastrados ::</font>
+	<br>
 	<table border=1>
 		<tr>
 			<td bgcolor='#aaddbb' width=250><b><center>Nome</td>

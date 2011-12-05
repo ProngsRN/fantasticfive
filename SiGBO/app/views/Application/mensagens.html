@@ -1,9 +1,9 @@
 #{extends '/templates/templateuser.html' /}
 #{set title: 'SiGBO :: Usuário / Mensagens' /}
 
-<p align=left><font size=6><b>M</b>ensagens</font></p>
+<h2>Mensagens</h2>
 <br>
-<small><b>Enviar uma nova mensagem:</b></small>
+<b>Enviar uma nova mensagem:</b>
 <br>
 <form action="@{Application.enviarMensagem()}"  method="GET">
 	<label  for="idDestinatario">Para: </label>
@@ -12,7 +12,7 @@
 			<option value=${colega.getId()}>${colega.getNome()}</option>
 		#{/list}
 	</select>
-	<textarea name="texto" id="texto" rows="5" cols="100"></textarea>
+	<textarea name="texto" id="texto" rows="5" cols="60"></textarea>
 	<br/>
 	<input type="submit" value=" Enviar "/>
 </form>
@@ -32,20 +32,22 @@
 		#{list items:mensagens, as:'mensagem'}
 				<a href="@{Application.aluno(mensagem.getIdRemetente())}">
 					<img src="@{Application.getPicture(mensagem.getRemetente().getAvatar())}" height=50/>
-					<small><b>${mensagem.getRemetente().getNome()}
+					<b>${mensagem.getRemetente().getNome()}
 				</a> disse (às ${mensagem.getDataFormatada()}):
-				</b></small>
+				</b>
 				<br>
-				<b>${mensagem.getTexto()}</b>
+				<big>${mensagem.getTexto()}</big>
 				<br>
-				<font size=2>
+				<b>
+				<small>
 					<a href="@{Application.recadosaluno(mensagem.getIdRemetente())}">
 						Responder
 					</a>
-					<a href="@{Application.removerRecado(mensagem.getId())}">
+					<a href="@{Application.removerMensagem(mensagem.getId())}">
 						[x] Apagar mensagem.
 					</a>
-				</font>
+				</small>
+				</b>
 				<br>
 			<br/><br>
 		#{/list}

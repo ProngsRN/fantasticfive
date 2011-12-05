@@ -1,7 +1,8 @@
 #{extends '/templates/templateadmin.html' /}
 #{set title:'SiGBO :: Administrar Turma - Gerenciar Turmas' /}
 
-<h3>:: Remover Turma ::</h3>
+<center>
+<h2>:: Remover Turma ::</h2>
 #{if turmas.isEmpty()}
 	<center>
 	Você ainda não cadastrou nenhuma turma. <a href="@{Application.admturmas}">Clique aqui</a> para cadastrar.
@@ -36,7 +37,7 @@
 	
 <br/>
 #{if !turmas.isEmpty()}
-<h3>:: Turmas Cadastrados ::</h3>
+<font size=4>:: Turmas Cadastrados ::</font>
 <table border=1>
 	<tr>
 		<td bgcolor='#aaddbb' width=40>
@@ -74,5 +75,6 @@
 			</td>
 		</tr>
 	#{/list}
-</table>	
+</table>
+</div>
 #{/if}

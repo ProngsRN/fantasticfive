@@ -1,99 +1,133 @@
-<html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="@{'public/stylesheets/style.css'}" type="text/css" media="all" />
-		<link rel="stylesheet" href="@{'public/stylesheets/jquery.jcarousel.css'}" type="text/css" media="all" />
-		<!--[if IE 6]>
-			<link rel="stylesheet" href="@{'public/stylesheets/ie6.css'}" type="text/css" media="all" />
-		<![endif]-->
-		<link rel="shortcut icon" href="@{'public/images/favicon.ico'}" />
-		<script type="text/javascript" src="@{'/public/javascripts/jquery-1.4.2.min.js'}"></script>
-		<script type="text/javascript" src="@{'/public/javascripts/jquery.jcarousel.pack.js'}"></script>
-		<script type="text/javascript" src="@{'/public/javascripts/func.js'}"></script>
-    </head>
-    <body>
-    <font face=Arial size=3>
-        <div class="shell">
-	<div class="border">
-		<div id="header">
-			<h1 id="logo"><a href="#" class="notext">beSmart</a></h1>
-			<div class="socials right">
-				<ul>
-				    <li><a href="@{Application.user}" class="fb">Início</a></li>
-				    <li><a href="@{Application.logout()}" class="fb">Sair</a></li>
-				</ul>
-			</div>
-			<div class="cl">&nbsp;</div>
-		</div>
-		
-		<div id="sidebar" class="left">
-			<img src="@{Application.getPicture(aluno.getAvatar())}" height=150/>
-			<br><small><a href="@{Application.alterarfoto()}">Alterar a foto</a></small>
-			<br><b>${aluno.getNome()}
-			<hr>
-			- <a href="@{Application.recadosusuario()}">Mural</a>
-			<br>
-			- <a href="@{Application.aluno(aluno.getId())}">Ver Perfil</a>
-			<br>
-			- <a href="@{Application.mensagens()}">Mensagens</a>
-			<br>
-			</b>
-		</div>
-		<div id="sidebar" class="right">
-			<big><b>Colegas</b>
-			<br><hr>
-			<br>
-			
-			<div style="height:520px;width:170px;overflow:scroll;">
-			
-			#{if colegas != null}
-				#{list items:colegas, as:'colega'}
-					<a href="@{Application.aluno(colega.getId())}">
-						<img src="@{Application.getPicture(colega.getAvatar())}" height=100/>
-						<br><b>
-						<small>
-						${colega.getNome()}
-						</small>
-						</b>
-					</a>
-					<br>
-				#{/list}
-			#{/if}
-			#{if colegas == null}
-				Voce nao tem colegas.
-			#{/if}
-			</div>
-		</div>
-		<div id="main">
-			<center>
-				<div style="height:400px;width:500px">
-					#{doLayout /}
-				</div>
-			</center>
-		</div>
-		
-		<div class="shadow-l"></div>
-		<div class="shadow-r"></div>
-		<div class="shadow-b"></div>
-	</div>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+	<title>#{get 'title' /}</title>
+	<link rel="stylesheet" href="@{'public/stylesheets/style.css'}" type="text/css" media="all" />
 	
-	<div id="footer">
-		<div class="footer-nav left">
+	<!--[if IE 6]>
+		<link rel="stylesheet" href="@{'public/stylesheets/ie.css'}" type="text/css" media="all" />	
+	<![endif]-->
+	
+	<script type="text/javascript" src="@{'public/javascripts/jquery-1.4.2.min.js'}"></script>
+	
+	<script type="text/javascript" src="@{'public/javascripts/jquery.jcarousel.js'}"></script>
+	
+	<!-- Cufon -->
+	<script type="text/javascript" src="@{'public/javascripts/cufon-yui.js'}"></script>
+	
+	<script type="text/javascript" src="@{'public/javascripts/MyriadPro.font.js'}"></script>
+	<script type="text/javascript" src="@{'public/javascripts/ArialBold.font.js'}"></script>
+	
+	
+	<script type="text/javascript" src="@{'public/javascripts/jquery-func.js'}"></script>
+	<link rel="shortcut icon" type="image/x-icon" href="@{'public/images//favicon.ico'}" />
+</head>
+<body>
+<!-- Header -->
+<div id="header">
+	<div class="shell">
+		<!-- Logo -->
+		<h1 id="logo"><a href="#">CEMNA - centro educacional professora maria norma alves</a></h1>
+		<!-- /Logo -->
+		
+		<!-- Navigation -->
+		<div id="navigation">
 			<ul>
-			    <li><a href="#" class="active">Inicio</a></li>
-			    <li><a href="#">Historia</a></li>
-			    <li><a href="#">Equipe</a></li>
-			    <li><a href="#">Calendario</a></li>
-			    <li class="last"><a href="#">Contato</a></li>
+				<li><a href="@{Application.user}">In&iacute;cio</a></li>
+				<li><a href="@{Application.logout}">Sair</a></li>
 			</ul>
 		</div>
-		<p class="copy right">Copyright &copy; | SiGBO 2011 - Fantastic Five Team |  ! beSmart 2010 | Valid CSS &amp; HTML. <a href="http://chocotemplates.com" target="_blank" title="Chocotemplates">Design</a></p>
+		<!-- /Navigation -->
+	</div>
+</div>
+<!-- /Header -->
+
+<!-- Main -->
+<div id="main">
+	<div class="shell">
+		<!-- Box -->
+		<div class="aluno0">
+			<center>
+			<a href="@{Application.alterarfoto()}" alt="Alterar a foto">
+			<img src="@{Application.getPicture(aluno.getAvatar())}" alt="#" width="180px"/>
+			</a>
+			<font size=4>${aluno.getNome()}</font>
+			</center><br>
+			<div class="entry bullet-list">
+				<ul>
+					<li><a href="@{Application.aluno(aluno.getId())}">Perfil</a></li>
+					<li><a href="@{Application.recadosusuario()}">Mural de Recados</a></li>
+					<li><a href="@{Application.mensagens()}">Mensagens</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- /Box -->
+
+		<!-- Box -->
+		<div class="box aluno1">			
+			<div class="entry">
+				<div style="padding:0 0 0 50px;">
+					#{doLayout /}
+				</div>
+			</div>
+		</div>
+		<!-- /Box -->
+
+		<!-- Box -->
+		<div class="box aluno2">
+			<center>
+				<img src="@{'public/images/colegas.png'}" alt="#"/>
+			</center>
+			<div style="height:520px;width:170px;overflow:scroll;">
+				<center>
+				#{if colegas != null}
+					#{list items:colegas, as:'colega'}
+						<a href="@{Application.aluno(colega.getId())}">
+							<img src="@{Application.getPicture(colega.getAvatar())}" width="120px"/>
+							<br>
+							<small>${colega.getNome()}</small>
+							</b>
+						</a>
+						<h2></h2>
+					#{/list}
+				#{/if}
+				#{if colegas == null}
+					Voce nao tem colegas.
+				#{/if}
+				</center>
+			</div>
+		</div>
+		<!-- /Box -->
+
 		<div class="cl">&nbsp;</div>
 	</div>
 </div>
+<!-- /Main -->
+
+<!-- Footer -->
+<div id="footer">
+	<div class="shell">
+		<!-- Mini Nav --> 
+		<div class="footer-navigation"> 
+			<ul> 
+				<li><a href="#">In&iacute;cio</a></li>
+				<li><a href="#">Sobre</a></li>
+				<li><a href="#">Fotos</a></li>
+				<li><a href="#">Blog</a></li>
+				<li class="last"><a href="#">Contato</a></li> 
+			</ul> 
+		</div> 
+		<!-- /Mini Nav --> 
+		
+		<!-- Copyrights --> 
+		<p class="right"> 
+			Copyright &copy; 2011 | CEMNA | Fantastic Five Team | <a href="http://css-free-templates.com/">Design</a>
+		</p> 
+		<!-- /Copyrights --> 
+		
+		<div class="cl">&nbsp;</div>
+	</div>
+</div>
+<!-- /Footer -->
 </body>
 </html>
-
-
-<!DOCTYPE html>

@@ -1,26 +1,29 @@
 #{extends '/templates/templateuser.html' /}
 #{set title: 'SiGBO :: Usuário / Mural' /}
 
+<h2>Mural</h2>
 #{if !recados.isEmpty()}
-<div style="height:330px;width:480px;overflow:scroll;">
+<div style="height:500px;width:480px;overflow:scroll;">
 	<p align=left>
 		#{list items:recados, as:'recado'}
 				<a href="@{Application.aluno(recado.getIdRemetente())}">
 					<img src="@{Application.getPicture(recado.getRemetente().getAvatar())}" height=50/>
-					<small><b>${recado.getRemetente().getNome()}
+					<b>${recado.getRemetente().getNome()}
 				</a> disse (às ${recado.getDataFormatada()}):
-				</b></small>
+				</b>
 				<br>
-				<b>${recado.getTexto()}</b>
+				<big><b>${recado.getTexto()}</b></big>
 				<br>
-				<font size=2>
+				<b>
+				<small>
 					<a href="@{Application.recadosaluno(recado.getIdRemetente())}">
 						Responder
 					</a>
 					<a href="@{Application.removerRecado(recado.getId())}">
 						[x] Apagar recado.
 					</a>
-				</font>
+				</small>
+				</b>
 				<br>
 			<br/><br>
 		#{/list}
