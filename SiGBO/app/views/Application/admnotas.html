@@ -7,9 +7,9 @@
 	<br>
 #{/if}
 #{if !alunos.isEmpty()}
-<h2>« Cadastrar Nota »</h2>
+<h2>« Cadastrar Nota »</h2></center>
 <form action="@{Cadastro.addNotaToAluno()}"  method="GET">
-	<label  for="idAluno">Aluno: </label>
+	<label  for="idAluno" style="margin:0 0 0 200">Aluno: </label>
 	<select name="idAluno">
 		#{list items:alunos, as:'aluno'}
 			<option value=${aluno.getIdAluno()}>
@@ -17,8 +17,8 @@
 			</option>
 		#{/list}
 	</select>
-	<br>
-	<label  for="idDisciplina">Disciplina: </label>
+	<br><br>
+	<label  for="idDisciplina" style="margin:0 0 0 200">Disciplina: </label>
 	<select name="idDisciplina">
 		#{list items:disciplinas, as:'disciplina'}
 			<option value=${disciplina.getIdDisciplina()}>
@@ -26,8 +26,8 @@
 			</option>
 		#{/list}
 	</select>
-	<br>
-	<label  for="bim">Bimestre: </label>
+	<br><br>
+	<label  for="bim" style="margin:0 0 0 200">Bimestre: </label>
 	<select name="bim">
 		<option value="nota1">
 			1º Bimestre
@@ -42,12 +42,11 @@
 			4º Bimestre
 		</option>
 	</select>
-	
 	<label  for="nota">Nota: </label>
 	<input type="text" name="nota" size=1>
-	
+	<br><br>
 	<div class="buttons">
-	<br><input type="submit" value="Adicionar" class="button"/>
+	<input type="submit" value="Adicionar" class="button" style="margin:0 0 0 290"/>
 	</div>
 	#{if flash.error}
 		<p style="color:#c00">
@@ -58,7 +57,7 @@
 #{/if}
 <br/>
 #{if !alunos.isEmpty()}
-<font size=4>Alunos Cadastrados (Disciplinas e Notas)</font>
+<font size=4><center>Alunos Cadastrados (Disciplinas e Notas)</font>
 	<br><br>
 		<div style="width:700px;">
 		<table border=1>
