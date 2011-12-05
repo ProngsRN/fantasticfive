@@ -24,7 +24,10 @@ import net.sf.oval.constraint.MinSize;
 
 public class Application extends Controller {
 
-	@Before(only = { "administrador" })
+	@Before(only = { "administrador", "admalunodisciplina", "admalunos",
+			"admdisciplinas", "admnotas", "admprofessordisciplina",
+			"admprofessores", "admturmas", "gerenciaraluno",
+			"gerenciardisciplina", "gerenciarprofessor", "gerenciarturma" })
 	static void checkAdmin() {
 		if (!session.contains("admin")) {
 			if (session.contains("user")) {
@@ -34,7 +37,7 @@ public class Application extends Controller {
 		}
 	}
 
-	@Before(only = { "user" })
+	@Before(only = { "user", "aluno", "alterarfoto", "mensagens", "recadosaluno", "recadosusuario" })
 	static void checkUser() {
 		if (!session.contains("user")) {
 			if (session.contains("admin")) {
@@ -239,16 +242,17 @@ public class Application extends Controller {
 		render(aluno, colegas);
 	}
 
-	public static void addRecado(long idDestinatario, @Required String texto, boolean privado) {
+	public static void addRecado(long idDestinatario, @Required String texto,
+			boolean privado) {
 
 		validation.minSize(texto, 1);
 		validation.maxSize(texto, 100);
 		if (validation.hasErrors()) {
 			flash.error("Erro!");
-		}
-		else {
+		} else {
 			long idRemetente = Long.valueOf(session.get("user"));
-			Recado recado = new Recado(idRemetente, texto, idDestinatario, privado);
+			Recado recado = new Recado(idRemetente, texto, idDestinatario,
+					privado);
 			recado.save();
 		}
 		recadosaluno(idDestinatario);
@@ -259,7 +263,7 @@ public class Application extends Controller {
 		recado.delete();
 		recadosusuario();
 	}
-	
+
 	public static void removerMensagem(long idRecado) {
 		Recado recado = Recado.findById(idRecado);
 		recado.delete();
@@ -273,11 +277,11 @@ public class Application extends Controller {
 		List<Recado> recados = aluno.getRecados(false);
 
 		List<Aluno> colegas = aluno.getColegas();
-		render(aluno,colegas,recados);
+		render(aluno, colegas, recados);
 	}
-	
+
 	public static void recadosaluno(long idAluno) {
-		
+
 		Aluno aluno = Aluno.findById(idAluno);
 		List<Aluno> colegas = null;
 		if (aluno != null) {
@@ -286,15 +290,15 @@ public class Application extends Controller {
 		List<Recado> recados = aluno.getRecados(false);
 		render(aluno, colegas, recados);
 	}
-	
-	public static void enviarMensagem(long idDestinatario, @Required String texto) {
-		
+
+	public static void enviarMensagem(long idDestinatario,
+			@Required String texto) {
+
 		validation.minSize(texto, 1);
 		validation.maxSize(texto, 100);
 		if (validation.hasErrors()) {
 			flash.error("Mensagem não pode ser enviada!");
-		}
-		else {
+		} else {
 			long idRemetente = Long.valueOf(session.get("user"));
 			Recado recado = new Recado(idRemetente, texto, idDestinatario, true);
 			recado.save();
@@ -302,15 +306,15 @@ public class Application extends Controller {
 		}
 		mensagens();
 	}
-	
+
 	public static void mensagens() {
-		
+
 		long id = Long.valueOf(session.get("user"));
 		Aluno aluno = Aluno.findById(id);
 		List<Recado> mensagens = aluno.getRecados(true);
 		List<Aluno> colegas = aluno.getColegas();
-		
-		render(aluno,colegas,mensagens);
+
+		render(aluno, colegas, mensagens);
 	}
 
 }
