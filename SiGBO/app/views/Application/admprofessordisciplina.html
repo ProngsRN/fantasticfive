@@ -12,23 +12,24 @@
 	<br>
 #{/if}
 #{if (!professores.isEmpty()) && (!disciplinas.isEmpty())}
-<h2>:: Cadastrar Professor em Disciplina ::</h2>
+<h2>:: Cadastrar Professor em Disciplina ::</center></h2>
 <form action="@{Cadastro.addDisciplinaToProfessor()}"  method="GET">
-	<label  for="idProfessor">Professor: </label>
+	<label  for="idProfessor" style="margin:0 0 0 120">Professor: </label>
 	<select name="idProfessor">
 		#{list items:professores, as:'professor'}
 			<option value=${professor.getId()}>${professor.nome}</option>
 		#{/list}
 	</select>
 	<br>
-	<label  for="idDisciplina">Disciplina: </label>
+	<label  for="idDisciplina" style="margin:0 0 0 120">Disciplina: </label>
 	<select name="idDisciplina">
 		#{list items:disciplinas, as:'disciplina'}
-			<option value=${disciplina.getId()}>[ID ${disciplina.getId()}]${disciplina.nome} - Turma: ${disciplina.getTurmaDisciplina()}</option>
+			<option value=${disciplina.getId()}>${disciplina.nome} - Turma: ${disciplina.getTurmaDisciplina()}</option>
 		#{/list}
 	</select>
-	
-	<input type="submit" value="Adicionar"/>
+	<div class="buttons">
+	<br><input type="submit" value="Adicionar" class="button" style="margin:0 0 0 230">
+	</div>
 	#{if flash.error}
 		<p style="color:#c00">
 			${flash.error}
@@ -38,7 +39,7 @@
 #{/if}
 <br/>
 #{if !professores.isEmpty()}
-<font size=4>:: Professores Cadastrados ::</font>
+<font size=4><center>Professores Cadastrados</font><br><br>
 <table border=1>
 	<tr>
 		<td bgcolor='#aaddbb' width=180><center><b>Nome</td>
@@ -50,12 +51,12 @@
 	#{list items:professores, as:'professor'}
 		<tr>
 			<td width=180>
-				<center>[ID ${professor.getId()}] ${professor.nome}
+				<center>${professor.nome}
 			</td> 
 			<td width=550>
 				#{list items:professordisciplina, as:'disciplina'}
 					#{if disciplina.idProfessor == professor.id} 
-						<center>[ID: ${disciplina.idDisciplina}]${disciplina.getNomeDisciplina()} (<b>Turma:</b> ${disciplina.getTurmaDisciplina()})</center><br>
+						<center>${disciplina.getNomeDisciplina()} (${disciplina.getTurmaDisciplina()})</center>
 					#{/if} 
 				#{/list}
 			</td>
