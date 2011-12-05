@@ -59,17 +59,19 @@
 #{if !alunos.isEmpty()}
 <font size=4>:: Alunos Cadastrados (Disciplinas e Notas)::</font>
 	<br>
-		<table border=1 align=left>
+		<div style="width:700px;">
+		<table border=1>
 		<tr>
-			<td bgcolor='#aaddbb' width=210><b><center>Aluno</td> 
-			<td bgcolor='#aaddbb' width=340><center><b>Disciplina</td>
+			<td bgcolor='#aaddbb' width=200><b><center>Aluno</td> 
+			<td bgcolor='#aaddbb' width=330><center><b>Disciplina</td>
 			<td bgcolor='#aaddbc' width=40><center><b>Nota 1</td>
 			<td bgcolor='#aaddbc' width=40><center><b>Nota 2</td>
 			<td bgcolor='#aaddbc' width=40><center><b>Nota 3</td>
 			<td bgcolor='#aaddbc' width=40><center><b>Nota 4</td>
 		</tr>
 		</table>
-		<div style="height:270px;width:750px;overflow:scroll;">
+		</div>
+		<div style="height:270px;width:700px;overflow:scroll;">
 		<table border=1>
 		#{list items:alunodisciplina, as:'aluno'}
 			<tr>
