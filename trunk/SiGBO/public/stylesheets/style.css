@@ -25,6 +25,7 @@ h5 a:hover { color:#4062b7; text-decoration:underline; }
 */
 
 #header { background:url(../images/header.jpg) left top repeat-x; height:75px; }
+#header2 { background:url(../images/header2.jpg) left top repeat-x; height:75px; }
 
 #logo { float:left; width:201px; height:75px; text-align:left; }
 #logo a { float:left; width:201px; height:75px; font-size:0; line-height:0; text-indent:-4000px; background:url(../images/logo.png); }
