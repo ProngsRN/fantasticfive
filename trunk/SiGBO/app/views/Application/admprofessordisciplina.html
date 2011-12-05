@@ -12,7 +12,7 @@
 	<br>
 #{/if}
 #{if (!professores.isEmpty()) && (!disciplinas.isEmpty())}
-<h2>:: Cadastrar Professor em Disciplina ::</center></h2>
+<h2>« Cadastrar Professor em Disciplina »</center></h2>
 <form action="@{Cadastro.addDisciplinaToProfessor()}"  method="GET">
 	<label  for="idProfessor" style="margin:0 0 0 120">Professor: </label>
 	<select name="idProfessor">
@@ -24,7 +24,7 @@
 	<label  for="idDisciplina" style="margin:0 0 0 120">Disciplina: </label>
 	<select name="idDisciplina">
 		#{list items:disciplinas, as:'disciplina'}
-			<option value=${disciplina.getId()}>${disciplina.nome} - Turma: ${disciplina.getTurmaDisciplina()}</option>
+			<option value=${disciplina.getId()}>${disciplina.nome} (${disciplina.getTurmaDisciplina()})</option>
 		#{/list}
 	</select>
 	<div class="buttons">
@@ -39,29 +39,30 @@
 #{/if}
 <br/>
 #{if !professores.isEmpty()}
-<font size=4><center>Professores Cadastrados</font><br><br>
-<table border=1>
-	<tr>
-		<td bgcolor='#aaddbb' width=180><center><b>Nome</td>
-		<td bgcolor='#aaddbb' width=550><center><b>Disciplinas (ID)</td>
-	</tr>
-</table>
-<div style="height:270px;width:750px;overflow:scroll;">
-<table border=1 height=90>
-	#{list items:professores, as:'professor'}
-		<tr>
-			<td width=180>
-				<center>${professor.nome}
-			</td> 
-			<td width=550>
-				#{list items:professordisciplina, as:'disciplina'}
-					#{if disciplina.idProfessor == professor.id} 
-						<center>${disciplina.getNomeDisciplina()} (${disciplina.getTurmaDisciplina()})</center>
-					#{/if} 
-				#{/list}
-			</td>
-		</tr>
-	#{/list}
-</table>
-</div>
+	<font size=4><center>Professores Cadastrados</center></font>
+	<br/>
+	<div style="margin:0 0 0 0">
+		<table border=1>
+			<tr>
+				<td bgcolor='#aaddbb' width=210><center><b>Nome</td>
+				<td bgcolor='#aaddbb' width=479><center><b>Disciplinas</td>
+			</tr>
+		</table>
+	</div>
+		<div style="height:300px;overflow:scroll;">
+		<table border=1>
+			#{list items:professores, as:'professor'}
+					<tr>
+						<td width=215><center>${professor.nome}<center></td> 
+						<td width=490>
+						#{list items:professordisciplina, as:'disciplina'}
+							#{if disciplina.idProfessor == professor.id} 
+								<center>${disciplina.getNomeDisciplina()} (${disciplina.getTurmaDisciplina()})</center>
+							#{/if} 
+						#{/list}
+						</td>
+					</tr>
+			#{/list}
+		</table>
+	</div>	
 #{/if}
