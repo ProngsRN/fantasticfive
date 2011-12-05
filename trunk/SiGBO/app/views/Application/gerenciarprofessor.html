@@ -2,20 +2,22 @@
 #{set title:'SiGBO :: Administrar Professores - Gerenciar Professor' /}
 
 <center>
-<h2>:: Remover Professor ::</h2>
+<h2>« Remover Professor »</h2>
 #{if professores.isEmpty()}
 	Você ainda não cadastrou nenhum professor. <a href="@{Application.admprofessores}">Clique aqui</a> para cadastrar.
 	<br>
 #{/if}
 #{if !professores.isEmpty()}
 <form action="@{Remove.removeProfessor()}"  method="GET">
-	<label  for="idProfessor">Aluno: </label>
+	<label  for="idProfessor">Professor: </label>
 	<select name="idProfessor">
 		#{list items:professores, as:'professor'}
 			<option value=${professor.getId()}>${professor.nome}</option>
 		#{/list}
 	</select>
-	<input type="submit" value="Remover"/>
+	<div class="buttons">
+	<br><input type="submit" value="Remover" class="button"/>
+	</div>
 	
 	#{if flash.error}
 		<p style="color:#c00">
@@ -26,20 +28,3 @@
 #{/if}
 	
 <br/>
-#{if !professores.isEmpty()}
-<font size=4>:: Professores Cadastrados ::</font>
-<table border=1>
-	<tr>
-		<td bgcolor='#aaddbb' width=230><center><b>Nome</td>
-	</tr>
-</table>
-<div style="height:250px;width:250px;overflow:scroll;">
-	<table border=1 height=70>
-		#{list items:professores, as:'professor'}
-			<tr>
-				<td width=200>[ID: ${professor.getId()}] ${professor.nome}</td> 
-			</tr>
-		#{/list}
-	</table>
-</div>	
-#{/if}

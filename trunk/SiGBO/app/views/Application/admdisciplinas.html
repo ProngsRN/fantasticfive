@@ -37,8 +37,9 @@
 #{/if}
 <br/>
 #{if !disciplinas.isEmpty()}
-<font size=4>Disciplinas Cadastradas</font><br><br>
-		<div style="margin:0 0 0 0">
+<font size=4>Disciplinas Cadastradas</font>
+		<br><br>
+		<div style="margin:0 0 0 -15">
 		<table border=1 width=500>
 			<tr>
 				<td bgcolor='#aaddbb' width=150><b><center>Disciplina</td> 
@@ -46,7 +47,7 @@
 			</tr>
 		</table>
 		</div>
-		<div style="height:270px;width:500px;overflow:scroll;">
+		<div style="height:270px;width:520px;overflow:scroll;">
 		<table border=1>
 		#{list items:disciplinas, as:'disciplina'}
 			<tr>
@@ -54,7 +55,7 @@
 					<center>${disciplina.nome}
 				</td> 
 				<td width=350>
-					<center><b>Turma:</b> ${disciplina.getTurmaDisciplina()}</center><br>
+					<center>${disciplina.getTurmaDisciplina()}</center><br>
 				</td>
 			</tr>
 		#{/list}
