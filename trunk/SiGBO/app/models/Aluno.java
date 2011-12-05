@@ -18,7 +18,7 @@ public class Aluno extends Model {
 
 	@Required
 	private String nome;
-
+	private long turmaAtual;
 	private long avatar;
 
 	public Aluno(String nome) {
@@ -113,6 +113,14 @@ public class Aluno extends Model {
 			}
 		}
 		return recados;
+	}
+
+	public long getTurmaAtual() {
+		return turmaAtual;
+	}
+
+	public void setTurmaAtual(long turmaAtual) {
+		this.turmaAtual = turmaAtual;
 	}
 
 }

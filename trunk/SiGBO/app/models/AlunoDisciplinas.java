@@ -45,12 +45,17 @@ public class AlunoDisciplinas extends Model {
 
 		Banco banco = new Banco();
 		banco.conectar();
-		String sql = ("SELECT nome FROM disciplina WHERE id = " + idDisciplina);
+		String sql = ("SELECT * FROM disciplina WHERE id = " + idDisciplina);
 		ResultSet rs = banco.consultar(sql);
 		String nome = "";
+		Turma turma = null;
+		long idTurma;
 		if (rs.next()) {
 			nome = rs.getString("nome");
+			idTurma = rs.getLong("turma");
+			turma = Turma.findById(idTurma);
 		}
+		nome = nome + " - " + turma.getAno() + "º " + "\""+ turma.getSala() +"\"";
 		banco.desconectar();
 		return nome;
 	}
@@ -82,20 +87,36 @@ public class AlunoDisciplinas extends Model {
 		}
 		sql = ("SELECT ano,nivel,sala FROM turma WHERE id = " + id);
 		rs = banco.consultar(sql);
-		String ano, nivel, sala;
+		String ano, sala;
 		if (rs.next()) {
 			ano = rs.getString("ano");
-			nivel = rs.getString("nivel");
+			int nivel = rs.getInt("nivel");
 			sala = rs.getString("sala");
 			String nivelString;
-			if (nivel == "2")
-				nivelString = "Ensino MÃ©dio";
+			if (nivel == 2)
+				nivelString = "Ensino Médio";
 			else
 				nivelString = "Ensino Fundamental";
 			turma = (ano + "º Ano \"" + sala + "\" " + nivelString);
 		}
 		banco.desconectar();
 		return turma;
+	}
+	
+	public boolean isTurmaAtual() throws SQLException {
+		
+		Banco banco = new Banco();
+		banco.conectar();
+		String sql = ("SELECT turma FROM disciplina WHERE id = " + idDisciplina);
+		ResultSet rs = banco.consultar(sql);
+		
+		long id = 0;
+		if (rs.next()) {
+			id = rs.getLong("turma");
+		}
+		Aluno aluno = Aluno.findById(idAluno);
+		banco.desconectar();
+		return (id == aluno.getTurmaAtual());
 	}
 
 	public float getNota1() {

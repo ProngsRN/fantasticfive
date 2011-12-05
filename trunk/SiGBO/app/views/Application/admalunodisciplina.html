@@ -12,9 +12,9 @@
 	<br>
 #{/if}
 #{if (!alunos.isEmpty()) && (!disciplinas.isEmpty())}
-<h2>:: Cadastrar Aluno em Disciplina ::</h2>
+<h2>« Cadastrar Aluno em Disciplina »</h2></center>
 <form action="@{Cadastro.addDisciplinaToAluno()}"  method="GET">
-	<label  for="idAluno">Aluno: </label>
+	<label  for="idAluno">&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;Aluno: </label>
 	<select name="idAluno">
 		#{if !alunos.isEmpty()}
 			#{list items:alunos, as:'aluno'}
@@ -22,15 +22,17 @@
 			#{/list}
 		#{/if}
 	</select>
-	<br>
+	<br><br>
 	<label  for="idDisciplina">Disciplina: </label>
 	<select name="idDisciplina">
 		#{list items:disciplinas, as:'disciplina'}
-			<option value=${disciplina.getId()}>[ID ${disciplina.getId()}]${disciplina.nome} - Turma: ${disciplina.getTurmaDisciplina()}</option>
+			<option value=${disciplina.getId()}>${disciplina.nome} - Turma: ${disciplina.getTurmaDisciplina()}</option>
 		#{/list}
 	</select>
 	
-	<input type="submit" value="Adicionar"/>
+	<div class="buttons" style="margin:0 0 0 60">
+	<br><input type="submit" value="Adicionar" class="button"/>
+	</div>
 	
 	#{if flash.error}
 		<p style="color:#c00">
@@ -42,24 +44,26 @@
 	
 <br/>
 #{if !alunos.isEmpty()}
-	<font size=4>:: Alunos Cadastrados ::</font>
+	<font size=4><center>Alunos Cadastrados</center></font>
 	<br/>
+	<div style="margin:0 0 0 0">
 		<table border=1>
 			<tr>
 				<td bgcolor='#aaddbb' width=210><center><b>Nome</td>
-				<td bgcolor='#aaddbb' width=490><center><b>Disciplinas (ID)</td>
+				<td bgcolor='#aaddbb' width=479><center><b>Disciplinas</td>
 			</tr>
 		</table>
+	</div>
 		<div style="height:300px;overflow:scroll;">
 		<table border=1>
 			#{list items:alunos, as:'aluno'}
 					<tr>
-						<td width=210>[ID: ${aluno.getId()}] ${aluno.nome}</td> 
+						<td width=215><center>${aluno.nome}<center></td> 
 						<td width=490>
 							#{list items:alunodisciplina, as:'disciplina'}
 								#{if disciplina.idAluno == aluno.id} 
 									<center>
-									[ID: ${disciplina.idDisciplina}] ${disciplina.getNomeDisciplina()} 
+									${disciplina.getNomeDisciplina()} 
 									(<b>Turma:</b> ${disciplina.getTurmaDisciplina()})</center>
 									<br>
 								#{/if} 

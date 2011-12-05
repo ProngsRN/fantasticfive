@@ -63,13 +63,18 @@ public class Application extends Controller {
 			administrador();
 		}
 	}
-
+	
 	public static void index() {
 		render();
 	}
 
-	public static void login(String usuario, String senha) throws SQLException {
+	public static void login(@Required String usuario, @Required String senha) throws SQLException {
 
+		validation.required(usuario);
+		validation.required(senha);
+		if (validation.hasErrors()) {
+			index();
+		}
 		Banco banco = new Banco();
 		banco.conectar();
 		if (usuario.equals("admin") && senha.equals("123")) {
@@ -86,9 +91,9 @@ public class Application extends Controller {
 				session.put("user-nome", rs.getString("usuario"));
 				user();
 			} else
-				flash.error("Pagina do Professor em construçao.");
+				flash.error("Página do Professor em construçao.");
 		} else
-			flash.error("Usuario e Senha nao conferem");
+			flash.error("Usuário ou Senha inválidos.");
 		index();
 	}
 
@@ -146,8 +151,9 @@ public class Application extends Controller {
 	}
 
 	public static void admalunos() {
+		List<Turma> turmas = Turma.findAll();
 		List<Aluno> alunos = Aluno.findAll();
-		render(alunos);
+		render(alunos, turmas);
 	}
 
 	public static void gerenciaraluno() {
