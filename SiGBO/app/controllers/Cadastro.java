@@ -136,7 +136,7 @@ public class Cadastro extends Application {
 	}
 
 	public static void addAluno(String nome, String usuario, String senha,
-			String senha2) throws SQLException {
+			String senha2, long turmaAtual) throws SQLException {
 
 		Banco banco = new Banco();
 		banco.conectar();
@@ -158,6 +158,7 @@ public class Cadastro extends Application {
 
 			if (!rs.next() && !rs2.next()) {
 				Aluno aluno = new Aluno(nome);
+				aluno.setTurmaAtual(turmaAtual);
 				aluno.save();
 				long id = aluno.getId();
 				Usuario novoUsuario = new Usuario(id, senha, usuario, 1);
@@ -228,6 +229,10 @@ public class Cadastro extends Application {
 		Long idAluno = Long.valueOf(session.get("user"));
 		ColegaAluno amizade = new ColegaAluno(idAluno, idColega);
 		amizade.save();
+	}
+	
+	public static int teste (int x) {
+		return x+2;
 	}
 
 }

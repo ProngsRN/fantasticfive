@@ -7,7 +7,7 @@
 	<br>
 #{/if}
 #{if !turmas.isEmpty()}
-<h2>:: Cadastrar nova Disciplina ::</h2>
+<h2>« Cadastrar nova Disciplina »</h2>
 <form action="@{Cadastro.addDisciplina()}"  method="GET">
 	<label  for="ano">Nome: </label>
 	<input type="text" name="nome"/>
@@ -15,18 +15,19 @@
 	<select name="turma">
 		#{list items:turmas, as:'turma'}
 			<option value=${turma.getId()}>
-				Ano: ${turma.ano} 
-				Nivel: 	#{if turma.nivel == 1} 
-							Ensino Fundamental 
-						#{/if}
-						#{if turma.nivel == 2}
-							Ensino Médio
-						#{/if}
-				Sala: ${turma.sala}
+				${turma.ano}º Ano "${turma.sala}"
+				#{if turma.nivel == 1} 
+						Ensino Fundamental 
+				#{/if}
+				#{if turma.nivel == 2}
+						Ensino Médio
+				#{/if}
 			</option>
 		#{/list}
 	</select>
-	<input type="submit" value="Adicionar"/>
+	<div class="buttons">
+	<br><input type="submit" value="Adicionar" class="button"/>
+	</div>
 	#{if flash.error}
 		<p style="color:#c00">
 			${flash.error}
@@ -36,22 +37,24 @@
 #{/if}
 <br/>
 #{if !disciplinas.isEmpty()}
-<font size=4>:: Disciplinas Cadastradas::</font>
-		<table border=1 width=600>
+<font size=4>Disciplinas Cadastradas</font><br><br>
+		<div style="margin:0 0 0 0">
+		<table border=1 width=500>
 			<tr>
 				<td bgcolor='#aaddbb' width=150><b><center>Disciplina</td> 
-				<td bgcolor='#aaddbb' width=480><center><b>Turma</td>
+				<td bgcolor='#aaddbb' width=350><center><b>Turma</td>
 			</tr>
 		</table>
-		<div style="height:270px;width:700px;overflow:scroll;">
+		</div>
+		<div style="height:270px;width:500px;overflow:scroll;">
 		<table border=1>
 		#{list items:disciplinas, as:'disciplina'}
 			<tr>
-				<td width=180>
-					<center>[ID ${disciplina.getId()}] ${disciplina.nome}
+				<td width=150>
+					<center>${disciplina.nome}
 				</td> 
-				<td width=460>
-					<center>[ID: ${disciplina.turma}] <b>Turma:</b> ${disciplina.getTurmaDisciplina()}</center><br>
+				<td width=350>
+					<center><b>Turma:</b> ${disciplina.getTurmaDisciplina()}</center><br>
 				</td>
 			</tr>
 		#{/list}

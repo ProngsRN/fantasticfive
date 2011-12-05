@@ -14,14 +14,13 @@
 	<select name="idTurma">
 		#{list items:turmas, as:'turma'}
 			<option value=${turma.getId()}>
-				Ano: ${turma.ano} 
-				Nivel: 	#{if turma.nivel == 1} 
-							Ensino Fundamental 
-						#{/if}
-						#{if turma.nivel == 2}
-							Ensino Médio
-						#{/if}
-				Sala: ${turma.sala}
+				${turma.ano}º Ano "${turma.sala}"
+				#{if turma.nivel == 1} 
+						Ensino Fundamental 
+				#{/if}
+				#{if turma.nivel == 2}
+						Ensino Médio
+				#{/if}
 			</option>
 		#{/list}
 	</select>
@@ -54,7 +53,7 @@
 		</td>
 	</tr>
 </table>
-<div style="height:250px;width:300px;overflow:scroll;">
+<div style="height:250px;width:270px;overflow:scroll;">
 <table border=1>
 	#{list items:turmas, as:'turma'}
 		<tr>

@@ -2,21 +2,38 @@
 #{set title:'SiGBO :: Administrar Alunos' /}
 
 <center>
-<h2>:: Cadastrar novo Aluno ::</h2>
+<h2>« Cadastrar novo Aluno »</h2></center>
 <form action="@{Cadastro.addAluno()}"  method="GET">
-	<label  for="nome">Nome: </label>
-	<input type="text" name="nome" value="${params.nome}"/>
+	<label  for="nome" style="margin:0 0 0 65">Nome: </label>
+	<input type="text" name="nome" size=30 value="${params.nome}"/>
 	<br>
-	<label  for="usuario">Nome de Usuario: </label>
-	<input type="text" name="usuario" value="${params.usuario}"/>
-	<br><br>
-	<label  for="senha">Senha: </label>
-	<input type="password" name="senha" value="${params.senha}"/>
+	<label  for="usuario" style="margin:0 0 0 1">Nome de Usuario: </label>
+	<input type="text" name="usuario" size=30  value="${params.usuario}"/>
 	<br>
-	<label  for="senha2">Informe a senha novamente: </label>
-	<input type="password" name="senha2" value="${params.senha2}"/>
+	<label for="turmaAtual" style="margin:0 0 0 12">Turma Principal: </label>
+	<select name="turmaAtual">
+		#{list items:turmas, as:'turma'}
+			<option value=${turma.getId()}>
+				${turma.ano}º Ano "${turma.sala}"
+				#{if turma.nivel == 1} 
+						Ensino Fundamental 
+				#{/if}
+				#{if turma.nivel == 2}
+						Ensino Médio
+				#{/if}
+			</option>
+		#{/list}
+	</select>
 	<br>
-	<input type="submit" value="Adicionar"/>
+	<label  for="senha" style="margin:0 0 0 63">Senha: </label>
+	<input type="password" name="senha" size=30 value="${params.senha}"/>
+	<br>
+	<label  for="senha2">Confirme a senha: </label>
+	<input type="password" name="senha2" size=30 value="${params.senha2}"/>
+	<br>
+	<div class="buttons" style="margin:0 0 0 135">
+	<br><input type="submit" value="Adicionar" class="button"/>
+	</div>
 	
 	#{if flash.error}
 		<p style="color:#c00">
@@ -27,22 +44,24 @@
 	
 <br/>
 #{if !alunos.isEmpty()}
-	<font size=4>:: Alunos Cadastrados ::</font>
-	<br>
+	<font size=4><center>Alunos Cadastrados</font>
+	<br><br>
+	<div style="margin:0 0 0 -20">
 	<table border=1>
 		<tr>
-			<td bgcolor='#aaddbb' width=250><b><center>Nome</td>
-			<td bgcolor='#aaddbb' width=90><b><center>Usuario</td>
-			<td bgcolor='#aaddbb' width=70><b><center>Senha</td>
+			<td bgcolor='#aaddbb' width=279><b><center>Nome</td>
+			<td bgcolor='#aaddbb' width=100><b><center>Usuario</td>
+			<td bgcolor='#aaddbb' width=80><b><center>Senha</td>
 		</tr>
 	</table>
-	<div style="height:250px;width:480px;overflow:scroll;">
-	<table border=1 height=140 width=450>
+	</div>
+	<div style="height:250px;width:510px;overflow:scroll;">
+	<table border=1 height=140 width=480>
 		#{list items:alunos, as:'aluno'}
 				<tr>
-					<td>[ID: ${aluno.getId()}] ${aluno.getNome()}</td> 
-					<td><b>${aluno.getNomeUsuario()}</b></td> 
-					<td><i>${aluno.getSenhaUsuario()}</i></td>
+					<td width=270>${aluno.getNome()}</td> 
+					<td width=100><b>${aluno.getNomeUsuario()}</b></td> 
+					<td width=80><i>${aluno.getSenhaUsuario()}</i></td>
 				</tr>
 		#{/list}
 	</table>

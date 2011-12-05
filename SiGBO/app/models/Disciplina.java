@@ -48,15 +48,15 @@ public class Disciplina extends Model {
 		String sql = ("SELECT ano,nivel,sala FROM turma WHERE id = " + turma);
 		ResultSet rs = banco.consultar(sql);
 		String turma = "";
-		String ano, nivel, sala;
+		String ano, sala;
 		if (rs.next()) {
 			ano = rs.getString("ano");
-			nivel = rs.getString("nivel");
+			int nivel = rs.getInt("nivel");
 			sala = rs.getString("sala");
 			String nivelString;
-			if (nivel == "2") nivelString = "Ensino Médio";
+			if (nivel == 2) nivelString = "Ensino Médio";
 			else nivelString = "Ensino Fundamental";
-			turma = ("Ano: " + ano + " Nivel: " + nivelString + " Sala: " + sala);
+			turma = (ano + "º Ano \"" + sala + "\" " + nivelString);
 		}
 		banco.desconectar();
 		return turma;

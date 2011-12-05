@@ -7,7 +7,7 @@
 	<br>
 #{/if}
 #{if !alunos.isEmpty()}
-<h2>:: Cadastrar Nota ::</h2>
+<h2>« Cadastrar Nota »</h2>
 <form action="@{Cadastro.addNotaToAluno()}"  method="GET">
 	<label  for="idAluno">Aluno: </label>
 	<select name="idAluno">
@@ -17,6 +17,7 @@
 			</option>
 		#{/list}
 	</select>
+	<br>
 	<label  for="idDisciplina">Disciplina: </label>
 	<select name="idDisciplina">
 		#{list items:disciplinas, as:'disciplina'}
@@ -43,7 +44,7 @@
 	</select>
 	
 	<label  for="nota">Nota: </label>
-	<input type="text" name="nota">
+	<input type="text" name="nota" size=1>
 	
 	<div class="buttons">
 	<br><input type="submit" value="Adicionar" class="button"/>
@@ -57,8 +58,8 @@
 #{/if}
 <br/>
 #{if !alunos.isEmpty()}
-<font size=4>:: Alunos Cadastrados (Disciplinas e Notas)::</font>
-	<br>
+<font size=4>Alunos Cadastrados (Disciplinas e Notas)</font>
+	<br><br>
 		<div style="width:700px;">
 		<table border=1>
 		<tr>
@@ -76,10 +77,10 @@
 		#{list items:alunodisciplina, as:'aluno'}
 			<tr>
 				<td width=200>
-					<center>[ID ${aluno.getIdAluno()}] ${aluno.getNomeAluno()}
+					<center>${aluno.getNomeAluno()}
 				</td> 
 				<td width=330>
-					<center>[ID: ${aluno.getIdDisciplina()}] ${aluno.getNomeDisciplina()} <br>(${aluno.getTurmaDisciplina()})</center>
+					<center>${aluno.getNomeDisciplina()} <br>(${aluno.getTurmaDisciplina()})</center>
 				</td>
 				<td width=40>
 					<center> ${aluno.getNota1()}

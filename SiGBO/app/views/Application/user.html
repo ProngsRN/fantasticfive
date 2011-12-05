@@ -1,7 +1,6 @@
 #{extends '/templates/templateuser.html' /}
 #{set title: 'SiGBO :: Usuário / Página Inicial' /}
 
-<center>
 <p align="left">
 #{if (aluno.getAvatar() == 0)}
 	<b>Complete o seu registro, ${aluno.getNome()}!
@@ -18,9 +17,14 @@ Quantidade de disciplinas: ${disciplinas.size()}
 <br><br>
 #{if disciplinas != null}
 	#{list items:disciplinas, as:'disc'}
+		#{if disc.isTurmaAtual()}
+			<font color="green">
+		#{/if}
+		#{if !disc.isTurmaAtual()}
+			<font color="red">
+		#{/if}
 		<b>${disc.getNomeDisciplina()}</b>
-		<br>
-		Notas:
+		</font>
 		<br>
 		${disc.getNota1()} ||  
 		${disc.getNota2()} || 
@@ -30,6 +34,4 @@ Quantidade de disciplinas: ${disciplinas.size()}
 	#{/list}
 #{/if}
 </p>
-</div>
-</center>
 <br><br><br><br><br><br><br><br>
