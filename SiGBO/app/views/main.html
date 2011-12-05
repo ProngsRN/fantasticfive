@@ -128,7 +128,7 @@
 			<h2>Login</h2>
 			<div class="entry">	
 				<form action="@{Application.login()}" method="GET">
-					<input type="text" name="usuario" onblur="if(this.value == '') { this.value='Nome de Usuario'}" onfocus="if (this.value == 'Nome de Usuario') {this.value=''}">
+					<input type="text" name="usuario" value="Nome de Usuario" onblur="if(this.value == '') { this.value='Nome de Usuario'}" onfocus="if (this.value == 'Nome de Usuario') {this.value=''}">
 					<input type="password" name="senha" onblur="if(this.value == '') { this.value='Senha'}" onfocus="if (this.value == 'Senha') {this.value=''}">
 					<div class="buttons">
 						<input type="submit" value="Acessar o Sistema" class="button">
