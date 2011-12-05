@@ -23,6 +23,10 @@ public class AlunoDisciplinas extends Model {
 	public AlunoDisciplinas(long idDisciplina, long idAluno) {
 		this.idDisciplina = idDisciplina;
 		this.idAluno = idAluno;
+		nota1 = -1;
+		nota2 = -1;
+		nota3 = -1;
+		nota4 = -1;
 	}
 
 	public void setIdDisciplina(long idDisciplina) {
@@ -48,14 +52,9 @@ public class AlunoDisciplinas extends Model {
 		String sql = ("SELECT * FROM disciplina WHERE id = " + idDisciplina);
 		ResultSet rs = banco.consultar(sql);
 		String nome = "";
-		Turma turma = null;
-		long idTurma;
 		if (rs.next()) {
 			nome = rs.getString("nome");
-			idTurma = rs.getLong("turma");
-			turma = Turma.findById(idTurma);
 		}
-		nome = nome + " - " + turma.getAno() + "º " + "\""+ turma.getSala() +"\"";
 		banco.desconectar();
 		return nome;
 	}
@@ -149,5 +148,9 @@ public class AlunoDisciplinas extends Model {
 
 	public void setNota4(float nota4) {
 		this.nota4 = nota4;
+	}
+	
+	public float getMedia() {
+		return ( (nota1 + nota2 + nota3 + nota4)/4 );
 	}
 }
