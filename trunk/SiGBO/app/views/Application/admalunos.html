@@ -1,7 +1,8 @@
 #{extends '/templates/templateadmin.html' /}
 #{set title:'SiGBO :: Administrar Alunos' /}
 
-<h3>:: Cadastrar novo Aluno ::</h3>
+<center>
+<h2>:: Cadastrar novo Aluno ::</h2>
 <form action="@{Cadastro.addAluno()}"  method="GET">
 	<label  for="nome">Nome: </label>
 	<input type="text" name="nome" value="${params.nome}"/>
@@ -26,7 +27,8 @@
 	
 <br/>
 #{if !alunos.isEmpty()}
-	<h3>:: Alunos Cadastrados ::</h3>
+	<font size=4>:: Alunos Cadastrados ::</font>
+	<br>
 	<table border=1>
 		<tr>
 			<td bgcolor='#aaddbb' width=250><b><center>Nome</td>
@@ -44,5 +46,5 @@
 				</tr>
 		#{/list}
 	</table>
-</div>
+	</div>
 #{/if}

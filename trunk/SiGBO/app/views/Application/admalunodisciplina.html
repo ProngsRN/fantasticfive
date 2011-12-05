@@ -1,9 +1,8 @@
 #{extends '/templates/templateadmin.html' /}
-
 #{set title: 'SiGBO :: Administrar Alunos - Cadastrar em Disciplina' /}
 
+<center>
 #{if alunos.isEmpty()}
-	<center>
 	Você ainda não cadastrou nenhum aluno. <a href="@{Application.admalunos}">Clique aqui</a> para cadastrar.
 	<br>
 #{/if}
@@ -13,7 +12,7 @@
 	<br>
 #{/if}
 #{if (!alunos.isEmpty()) && (!disciplinas.isEmpty())}
-<h3>:: Cadastrar Aluno em Disciplina ::</h3>
+<h2>:: Cadastrar Aluno em Disciplina ::</h2>
 <form action="@{Cadastro.addDisciplinaToAluno()}"  method="GET">
 	<label  for="idAluno">Aluno: </label>
 	<select name="idAluno">
@@ -43,7 +42,8 @@
 	
 <br/>
 #{if !alunos.isEmpty()}
-	<h3>:: Alunos Cadastrados ::</h3>
+	<font size=4>:: Alunos Cadastrados ::</font>
+	<br/>
 		<table border=1>
 			<tr>
 				<td bgcolor='#aaddbb' width=210><center><b>Nome</td>

@@ -259,6 +259,12 @@ public class Application extends Controller {
 		recado.delete();
 		recadosusuario();
 	}
+	
+	public static void removerMensagem(long idRecado) {
+		Recado recado = Recado.findById(idRecado);
+		recado.delete();
+		mensagens();
+	}
 
 	public static void recadosusuario() {
 

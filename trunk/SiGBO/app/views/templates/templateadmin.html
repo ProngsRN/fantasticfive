@@ -1,95 +1,119 @@
-<html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="@{'public/stylesheets/style.css'}" type="text/css" media="all" />
-		<link rel="stylesheet" href="@{'public/stylesheets/jquery.jcarousel.css'}" type="text/css" media="all" />
-		<link rel="shortcut icon" href="@{'public/images/favicon.ico'}" />
-		<script type="text/javascript" src="@{'/public/javascripts/jquery-1.4.2.min.js'}"></script>
-		<script type="text/javascript" src="@{'/public/javascripts/jquery.jcarousel.pack.js'}"></script>
-		<script type="text/javascript" src="@{'/public/javascripts/func.js'}"></script>
-    </head>
-    <body>
-		<div class="shell">
-	<div class="border">
-		<div id="header">
-			<h1 id="logo"><a href="#" class="notext">beSmart</a></h1>
-			<div class="socials right">
-				<ul>
-				    <li><a href="@{Application.administrador()}" class="rss">Início</a></li>
-				    <li><a href="@{Application.logout()}" class="fb">Sair</a></li>
-				</ul>
-			</div>
-			<div class="cl">&nbsp;</div>
-		</div>
-		
-		<div id="sidebar" class="left">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="ISO-8859-1" />
+	<title>#{get 'title' /}</title>
+	<link rel="stylesheet" href="@{'public/stylesheets/style.css'}" type="text/css" media="all" />
 	
-				<h3>Turmas</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admturmas}">Cadastrar Turma</a></li>
-					    <li><a href="@{Application.gerenciarturma}">Gerenciar Turmas</a></li>
-					</ul>
-				</div>
-				
-				<h3>Disciplinas</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admdisciplinas}">Cadastrar Disciplina</a></li>
-					    <li><a href="@{Application.gerenciardisciplina}">Gerenciar Disciplinas</a></li>
-					</ul>
-				</div>
-				
-				<h3>Professores</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admprofessores}">Cadastrar Professor</a></li>
-					    <li><a href="@{Application.gerenciarprofessor}">Gerenciar Professores</a></li>
-					    <li><a href="@{Application.admprofessordisciplina}">Cadastrar em Disciplina</a></li>
-					</ul>
-				</div>
-				
-				<h3>Alunos</h3>
-				<div class="sidebar-nav">
-					<ul>
-					    <li><a href="@{Application.admalunos}">Cadastrar Aluno</a></li>
-					    <li><a href="@{Application.gerenciaraluno}">Gerenciar Alunos</a></li>
-					    <li><a href="@{Application.admalunodisciplina}">Cadastrar em Disciplina</a></li>
-					    <li><a href="@{Application.admnotas}">Cadastrar Notas</a></li>
-					</ul>
-				</div>
 	
-		</div>
-		
-		<div id="main">
-			<center>
-			<div style="height:380px;">
-			#{doLayout /}
-			<br/>
-			</center>
-		</div>
-		
-		
-		<div class="shadow-l"></div>
-		<div class="shadow-r"></div>
-		<div class="shadow-b"></div>
-	</div>
+	<!-- Cufon -->
+	<script type="text/javascript" src="@{'/public/javascripts/cufon-yui.js'}"></script>
 	
-	<div id="footer">
-		<div class="footer-nav left">
+	<script type="text/javascript" src="@{'/public/javascripts/MyriadPro.font.js'}"></script>
+	<script type="text/javascript" src="@{'/public/javascripts/ArialBold.font.js'}"></script>
+	
+	
+	<script type="text/javascript" src="@{'/public/javascripts/jquery-func.js'}"></script>
+	<link rel="shortcut icon" type="image/x-icon" href="@{'public/images/favicon.ico'}" />
+</head>
+<body>
+<!-- Header -->
+<div id="header">
+	<div class="shell">
+		<!-- Logo -->
+		<h1 id="logo"><a>CEMNA - centro educacional professora maria norma alves</a></h1>
+		<!-- /Logo -->
+		
+		<!-- Navigation -->
+		<div id="navigation">
 			<ul>
-			    <li><a href="#" class="active">Inicio</a></li>
-			    <li><a href="#">Historia</a></li>
-			    <li><a href="#">Equipe</a></li>
-			    <li><a href="#">Calendario</a></li>
-			    <li class="last"><a href="#">Contato</a></li>
+				<li><a href="@{Application.administrador}" >In&iacute;cio</a></li>
+				<li><a href="@{Application.logout}">Sair</a></li>
 			</ul>
 		</div>
-	
-		<p class="copy right">Copyright &copy; | SiGBO 2011 - Fantastic Five Team |  ! beSmart 2010 | Valid CSS &amp; HTML. <a href="http://chocotemplates.com" target="_blank" title="Chocotemplates">Design</a></p>
+		<!-- /Navigation -->
+	</div>
+</div>
+<!-- /Header -->
+
+<!-- Main -->
+<div id="main">
+	<div class="shell">
+		<!-- Box -->
+		<div class="box">
+			<img src="@{'public/images/turmas.png'}" />
+			<div class="entry bullet-list">
+				<ul>
+					<li><a href="@{Application.admturmas}">Cadastrar Turma</a></li>
+					<li><a href="@{Application.gerenciarturma}">Gerenciar Turmas</a></li>
+				</ul>
+			</div>
+
+			<img src="@{'public/images/disc.png'}" />
+			<div class="entry bullet-list">
+				<ul>
+					<li><a href="@{Application.admdisciplinas}">Cadastrar Disciplina</a></li>
+					<li><a href="@{Application.gerenciardisciplina}">Gerenciar Disciplinas</a></li>
+				</ul>
+			</div>
+
+			<img src="@{'public/images/prof.png'}" />
+			<div class="entry bullet-list">
+				<ul>
+					<li><a href="@{Application.admprofessores}">Adicionar Professor</a></li>
+					<li><a href="@{Application.gerenciarprofessor}">Gerenciar Professores</a></li>
+					<li><a href="@{Application.admprofessordisciplina}">Cadastrar em Disciplina</a></li>
+				</ul>
+			</div>
+
+			<img src="@{'public/images/alunos.png'}" />
+			<div class="entry bullet-list">
+				<ul>
+					<li><a href="@{Application.admalunos}">Adicionar Aluno</a></li>
+					<li><a href="@{Application.gerenciaraluno}">Gerenciar Alunos</a></li>
+					<li><a href="@{Application.admalunodisciplina}">Cadastrar em Disciplina</a></li>
+					<li><a href="@{Application.admnotas}">Cadastrar Notas</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- /Box -->
+
+		<!-- Box -->
+		<div class="box principal">			
+			<div class="entry">
+				#{doLayout /}
+			</div>
+		</div>
+		<!-- /Box -->
+
 		<div class="cl">&nbsp;</div>
 	</div>
+</div>
+<!-- /Main -->
+
+<!-- Footer -->
+<div id="footer">
+	<div class="shell">
+		<!-- Mini Nav --> 
+		<div class="footer-navigation"> 
+			<ul> 
+				<li><a href="#">In&iacute;cio</a></li>
+				<li><a href="#">Sobre</a></li>
+				<li><a href="#">Fotos</a></li>
+				<li><a href="#">Blog</a></li>
+				<li class="last"><a href="#">Contato</a></li> 
+			</ul> 
+		</div> 
+		<!-- /Mini Nav --> 
+		
+		<!-- Copyrights --> 
+		<p class="right"> 
+			Copyright &copy; 2011 | CEMNA | Fantastic Five Team | <a href="http://css-free-templates.com/">Design</a>
+		</p> 
+		<!-- /Copyrights --> 
+		
+		<div class="cl">&nbsp;</div>
 	</div>
-	</body>
+</div>
+<!-- /Footer -->
+</body>
 </html>

@@ -1,13 +1,13 @@
 #{extends '/templates/templateadmin.html' /}
 #{set title:'SiGBO :: Administrar Disciplinas' /}
 		
-
+<center>
 #{if turmas.isEmpty()}
 	Você ainda não cadastrou nenhuma turma. <a href="@{Application.admturmas}">Clique aqui</a> para cadastrar.
 	<br>
 #{/if}
 #{if !turmas.isEmpty()}
-<h3>:: Cadastrar nova Disciplina ::</h3>
+<h2>:: Cadastrar nova Disciplina ::</h2>
 <form action="@{Cadastro.addDisciplina()}"  method="GET">
 	<label  for="ano">Nome: </label>
 	<input type="text" name="nome"/>
@@ -36,7 +36,7 @@
 #{/if}
 <br/>
 #{if !disciplinas.isEmpty()}
-<h3>:: Disciplinas Cadastradas::</h3>
+<font size=4>:: Disciplinas Cadastradas::</font>
 		<table border=1 width=600>
 			<tr>
 				<td bgcolor='#aaddbb' width=150><b><center>Disciplina</td> 

@@ -1,7 +1,8 @@
 #{extends '/templates/templateadmin.html' /}
 #{set title:'SiGBO :: Administrar Professores' /}
 
-<h3>:: Cadastrar novo Professor ::</h3>
+<center>
+<h2>:: Cadastrar novo Professor ::</h2>
 <form action="@{Cadastro.addProfessor()}"  method="GET">
 	<label  for="nome">Nome: </label>
 	<input type="text" name="nome"/>
@@ -26,7 +27,7 @@
 <br/>
 
 #{if !professores.isEmpty()}
-<h3>:: Professores Cadastrados ::</h3>
+<font size=4>:: Professores Cadastrados ::</font>
 <table border=1>
 	<tr>
 		<td bgcolor='#aaddbb' width=230><center><b>Nome</td>
