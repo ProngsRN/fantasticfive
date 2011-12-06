@@ -118,6 +118,18 @@ public class Aluno extends Model {
 	public long getTurmaAtual() {
 		return turmaAtual;
 	}
+	
+	public String escreverTurmaAtual() {
+		Turma turma = Turma.findById(turmaAtual);
+		String nivel = "";
+		if (turma.getNivel() == 1) {
+			nivel = "Ensino Fundamental";
+		}
+		else {
+			nivel = "Ensino Médio";
+		}
+		return (turma.getAno() + "º " + nivel);
+	}
 
 	public void setTurmaAtual(long turmaAtual) {
 		this.turmaAtual = turmaAtual;
