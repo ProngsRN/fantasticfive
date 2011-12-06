@@ -39,14 +39,14 @@ SÉRIE: <b>${aluno.escreverTurmaAtual()}</b>      ANO: <b>2011</b>
 <br><br>
 <table id="customers">
 <tr>
-	<th>Disciplinas</th>
-	<th><b>1o BIMESTRE</b></th>
-	<th><b>2o BIMESTRE</b></th>
-	<th><b>3o BIMESTRE</b></th>
-	<th><b>4o BIMESTRE</b></th>
-	<th><b>Média</b></th>
-	<th><b>Rec</b></th>
-	<th><b>Média Final</b></th>
+	<th><center>Disciplinas</center></th>
+	<th><center><b>1o BIMESTRE</b></center></th>
+	<th><center><b>2o BIMESTRE</b></center></th>
+	<th><center><b>3o BIMESTRE</b></center></th>
+	<th><center><b>4o BIMESTRE</b></center></th>
+	<th><center><b>Média</b></center></th>
+	<th><center><b>Rec</b></center></th>
+	<th><center><b>Média Final</b></center></th>
 </tr>
 	#{list items:disciplinas, as:'disc'}
 		</tr>
@@ -57,36 +57,36 @@ SÉRIE: <b>${aluno.escreverTurmaAtual()}</b>      ANO: <b>2011</b>
 			#{if !disc.isTurmaAtual()}
 				<font color="red">
 			#{/if}
-			${disc.getNomeDisciplina()}
+			<center>${disc.getNomeDisciplina()}</center>
 			</font>
 		</td>
 		<td>
-			#{if disc.getNota1() != -1}${disc.getNota1()}#{/if}
-			#{if disc.getNota1() == -1}-#{/if}
+			#{if disc.getNota1() != -1}<center>${disc.getNota1()}</center>#{/if}
+			#{if disc.getNota1() == -1}<center>-</center>#{/if}
 		</td>
 		<td>
-			#{if disc.getNota2() != -1}${disc.getNota2()}#{/if}
-			#{if disc.getNota2() == -1}-#{/if}
+			#{if disc.getNota2() != -1}<center>${disc.getNota2()}</center>#{/if}
+			#{if disc.getNota2() == -1}<center>-</center>#{/if}
 		</td>
 		<td>
-			#{if disc.getNota3() != -1}${disc.getNota3()}#{/if}
-			#{if disc.getNota3() == -1}-#{/if}
+			#{if disc.getNota3() != -1}<center>${disc.getNota3()}</center>#{/if}
+			#{if disc.getNota3() == -1}<center>-</center>#{/if}
 		</td>
 		<td>
-			#{if disc.getNota4() != -1}${disc.getNota4()}#{/if}
-			#{if disc.getNota4() == -1}-#{/if}
+			#{if disc.getNota4() != -1}<center>${disc.getNota4()}</center>#{/if}
+			#{if disc.getNota4() == -1}<center>-</center>#{/if}
 		</td>
 		<td>
-			#{if disc.getMedia() != -1}${disc.getMedia()}#{/if}
-			#{if disc.getMedia() == -1}-#{/if}
+			#{if (disc.getNota4() != -1) && (disc.getMedia() != -1)}<center>${disc.getMedia()}</center>#{/if}
+			#{if disc.getNota4() == -1}<center>#</center>#{/if}
 		</td>
 		<td>
-			#{if disc.getRec() != -2}${disc.getRec()}#{/if}
-			#{if disc.getRec() == -2}##{/if}
+			#{if disc.getRec() != -2}<center>${disc.getRec()}</center>#{/if}
+			#{if disc.getRec() == -2}<center>#</center>#{/if}
 		</td>
 		<td>
-			#{if disc.getMediaFinal() != -1}${disc.getMediaFinal()}#{/if}
-			#{if disc.getMediaFinal() == -1}##{/if}
+			#{if disc.getMediaFinal() != -1}<center>${disc.getMediaFinal()}</center>#{/if}
+			#{if disc.getMediaFinal() == -1}<center>#</center>#{/if}
 		</td>
 		</tr>
 	#{/list}
