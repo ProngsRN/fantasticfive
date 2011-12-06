@@ -22,6 +22,8 @@ public class Remove extends Application {
 			banco.executar(sql);
 			sql = ("DELETE FROM alunodisciplinas WHERE idaluno = " + idAluno);
 			banco.executar(sql);
+			sql = ("DELETE FROM usuario WHERE idusuarioref = " + idAluno + " AND tipo = 1");
+			banco.executar(sql);
 			banco.desconectar();
 		}
 		gerenciaraluno();
@@ -84,6 +86,8 @@ public class Remove extends Application {
 			sql = ("DELETE FROM professordisciplinas WHERE iddisciplina = " + idDisciplina);
 			banco.executar(sql);
 			sql = ("DELETE FROM alunodisciplinas WHERE iddisciplina = " + idDisciplina);
+			banco.executar(sql);
+			sql = ("UPDATE aluno SET turmaatual = 0  WHERE turmaatual = " + idTurma);
 			banco.executar(sql);
 			banco.desconectar();
 		}
