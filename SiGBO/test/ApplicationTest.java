@@ -9,15 +9,5 @@ public class ApplicationTest extends FunctionalTest {
 	 public void testTheHomePage() {
 	 	Response response = GET("/");
 	    assertStatus(200, response);
-	 }
-	 
-	 @Test
-	 public void testAdminPage() {
-		 Response response = GET("/admin");
-		 assertStatus(301, response);
-	 }
-
-   
-    
-    
+	 }	 
 }
