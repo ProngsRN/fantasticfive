@@ -29,14 +29,15 @@
 <br/>
 
 #{if !professores.isEmpty()}
-<center><font size=4>Professores Cadastrados</font><br><br>
-<div style="height:250px;width:400px;overflow:scroll;">
-	<table border=1 height=70>
-		#{list items:professores, as:'professor'}
-			<tr>
-				<td width=380><center>${professor.nome}</center></td> 
-			</tr>
-		#{/list}
-	</table>
+<center><font size=4>Professores Cadastrados</font>
+<br><br>
+<div style="height:250px;overflow:scroll;">
+<table id="customers">
+#{list items:professores, as:'professor'}
+<tr>
+<td><center>${professor.nome}</center></td>
+</tr>
+#{/list}
+</table>
 </div>
 #{/if}	

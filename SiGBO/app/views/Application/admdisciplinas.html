@@ -38,27 +38,17 @@
 <br/>
 #{if !disciplinas.isEmpty()}
 <font size=4>Disciplinas Cadastradas</font>
-		<br><br>
-		<div style="margin:0 0 0 -15">
-		<table border=1 width=500>
-			<tr>
-				<td bgcolor='#aaddbb' width=150><b><center>Disciplina</td> 
-				<td bgcolor='#aaddbb' width=350><center><b>Turma</td>
-			</tr>
-		</table>
-		</div>
-		<div style="height:270px;width:520px;overflow:scroll;">
-		<table border=1>
-		#{list items:disciplinas, as:'disciplina'}
-			<tr>
-				<td width=150>
-					<center>${disciplina.nome}
-				</td> 
-				<td width=350>
-					<center>${disciplina.getTurmaDisciplina()}</center><br>
-				</td>
-			</tr>
-		#{/list}
-		</table>
-		</div>
+<br><br>
+<table id="customers">
+<tr>
+  <th><center>Disciplina</center></th>
+  <th><center>Turma</center></th>
+</tr>
+#{list items:disciplinas, as:'disciplina'}
+<tr>
+<td><center>${disciplina.nome}</center></td>
+<td><center>${disciplina.getTurmaDisciplina()}</center></td>
+</tr>
+#{/list}
+</table>
 #{/if}

@@ -44,26 +44,24 @@
 	
 <br/>
 #{if !alunos.isEmpty()}
-	<font size=4><center>Alunos Cadastrados</font>
-	<br><br>
-	<div style="margin:0 0 0 -20">
-	<table border=1>
-		<tr>
-			<td bgcolor='#aaddbb' width=279><b><center>Nome</td>
-			<td bgcolor='#aaddbb' width=100><b><center>Usuário</td>
-			<td bgcolor='#aaddbb' width=80><b><center>Senha</td>
-		</tr>
-	</table>
-	</div>
-	<div style="height:250px;width:510px;overflow:scroll;">
-	<table border=1 height=140 width=480>
-		#{list items:alunos, as:'aluno'}
-				<tr>
-					<td width=270><center>${aluno.getNome()}</center></td> 
-					<td width=100><center><b>${aluno.getNomeUsuario()}</center></b></td> 
-					<td width=80><center><i>${aluno.getSenhaUsuario()}</center></i></td>
-				</tr>
-		#{/list}
-	</table>
-	</div>
+<font size=4><center>Alunos Cadastrados</font>
+<br><br>
+<table id="customers">
+<tr>
+  <th><center>Ano</center></th>
+  <th><center>Turma</center></th>
+  <th><center>Nome</center></th>
+  <th><center>Usuário</center></th>
+  <th><center>Senha</center></th>
+</tr>
+#{list items:alunos, as:'aluno'}
+<tr>
+<td><center>${turma.ano}º</center></td>
+<td><center>${turma.sala}</center></td>
+<td><center>${aluno.getNome()}</center></td> 
+<td><center><b>${aluno.getNomeUsuario()}</center></b></td> 
+<td><center><i>${aluno.getSenhaUsuario()}</center></i></td>
+</tr>
+#{/list}
+</table>
 #{/if}
