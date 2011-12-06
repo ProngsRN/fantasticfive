@@ -1,4 +1,56 @@
-#{extends 'main.html' /}
-#{set title:'boletim.html' /}
-
-Here goes your content.
+<html>
+<center>
+<b>CEMNA - CENTRO DE EDUCAÇÃO PROFª MARIA NORMA ALVES</b>
+<br>
+<body>
+Aluno(a): <b>${aluno.getNome()}</b>
+<br>
+SÉRIE: <b>${aluno.escreverTurmaAtual()}</b>      ANO: <b>2011</b>  
+<br>
+<br>
+<table border="1" width=640>
+<tr>
+<th>Disciplinas</th>
+<td><b>1o BIMESTRE</b></td>
+	<td><b>2o BIMESTRE</b></td>
+	<td><b>3o BIMESTRE</b></td>
+	<td><b>4o BIMESTRE</b></td>
+	<td><b>Média</b></td>
+</tr>
+	#{list items:disciplinas, as:'disc'}
+		</tr>
+		<td>
+			#{if disc.isTurmaAtual()}
+				<font color="green">
+			#{/if}
+			#{if !disc.isTurmaAtual()}
+				<font color="red">
+			#{/if}
+			${disc.getNomeDisciplina()}
+			</font>
+		</td>
+		<td>
+			#{if disc.getNota1() != -1}${disc.getNota1()}#{/if}
+			#{if disc.getNota1() == -1}-#{/if}
+		</td>
+		<td>
+			#{if disc.getNota2() != -1}${disc.getNota2()}#{/if}
+			#{if disc.getNota2() == -1}-#{/if}
+		</td>
+		<td>
+			#{if disc.getNota3() != -1}${disc.getNota3()}#{/if}
+			#{if disc.getNota3() == -1}-#{/if}
+		</td>
+		<td>
+			#{if disc.getNota4() != -1}${disc.getNota4()}#{/if}
+			#{if disc.getNota4() == -1}-#{/if}
+		</td>
+		<td>
+			#{if disc.getMedia() != -1}${disc.getMedia()}#{/if}
+			#{if disc.getMedia() == -1}-#{/if}
+		</td>
+		</tr>
+	#{/list}
+</table>
+<input type="button" value="Imprimir boletim" onclick="window.print();">
+</html>
