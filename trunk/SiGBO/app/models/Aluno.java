@@ -121,6 +121,7 @@ public class Aluno extends Model {
 	
 	public String escreverTurmaAtual() {
 		Turma turma = Turma.findById(turmaAtual);
+		String texto ="";
 		String nivel = "";
 		if (turma.getNivel() == 1) {
 			nivel = "Ensino Fundamental";
@@ -128,7 +129,10 @@ public class Aluno extends Model {
 		else {
 			nivel = "Ensino Médio";
 		}
-		return (turma.getAno() + "º Ano " + turma.getSala() + " do " + nivel);
+		if (turma != null) {
+			texto = (turma.getAno() + "º Ano " + turma.getSala() + " do " + nivel);
+		}
+		return texto;
 	}
 
 	public void setTurmaAtual(long turmaAtual) {

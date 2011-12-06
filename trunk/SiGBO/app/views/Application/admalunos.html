@@ -48,20 +48,18 @@
 <br><br>
 <table id="customers">
 <tr>
-  <th><center>Ano</center></th>
   <th><center>Turma</center></th>
   <th><center>Nome</center></th>
   <th><center>Usuário</center></th>
   <th><center>Senha</center></th>
 </tr>
 #{list items:alunos, as:'aluno'}
-<tr>
-<td><center>${turma.ano}º</center></td>
-<td><center>${turma.sala}</center></td>
-<td><center>${aluno.getNome()}</center></td> 
-<td><center><b>${aluno.getNomeUsuario()}</center></b></td> 
-<td><center><i>${aluno.getSenhaUsuario()}</center></i></td>
-</tr>
+	<tr>
+	<td><center>${aluno.escreverTurmaAtual()}º</center></td>
+	<td><center>${aluno.getNome()}</center></td> 
+	<td><center><b>${aluno.getNomeUsuario()}</center></b></td> 
+	<td><center><i>${aluno.getSenhaUsuario()}</center></i></td>
+	</tr>
 #{/list}
 </table>
 #{/if}
