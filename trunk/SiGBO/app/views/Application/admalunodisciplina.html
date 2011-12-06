@@ -54,13 +54,15 @@
 #{list items:alunos, as:'aluno'}
 <tr>
 <td><center>${aluno.nome}</center></td>
-<td>#{list items:alunodisciplina, as:'disciplina'}
-								#{if disciplina.idAluno == aluno.id} 
-									<center>
-									${disciplina.getNomeDisciplina()}
-									(${disciplina.getTurmaDisciplina()})</center>
-								#{/if} 
-							#{/list}</td>
+<td>
+	#{list items:alunodisciplina, as:'disciplina'}
+		#{if disciplina.idAluno == aluno.id} 
+			<center>
+				${disciplina.getNomeDisciplina()} (${disciplina.getTurmaDisciplina()})
+			</center>
+		#{/if} 
+    #{/list}
+</td>
 </tr>
 #{/list}
 </table>

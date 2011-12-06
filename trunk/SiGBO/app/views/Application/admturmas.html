@@ -37,46 +37,27 @@
 #{if !turmas.isEmpty()}
 <font size=4><b>Turmas Cadastradas</b></font>
 <br><br>
-<div style="margin:0 0 0 -17">
-<table border=1>
-	<tr>
-		<td bgcolor='#aaddbb' width=40>
-			<center>
-			<b>Ano
-		</td>
-		<td bgcolor='#aaddbb' width=40>
-			<center>
-			<b>Sala
-		</td>
-		<td bgcolor='#aaddbb' width=150>
-			<center>
-			<b>Nível
-		</td>
-	</tr>
-</table>
-</div>
-<div style="height:250px;width:270px;overflow:scroll;">
-<table border=1>
-	#{list items:turmas, as:'turma'}
-		<tr>
-			<td width=40>
-				<center>
-				${turma.ano}º
-			</td>
-			<td width=40>
-				<center>${turma.sala}
-			</td>
-			<td width=150>
-				<center>
+<table id="customers">
+<tr>
+  <th><center>Ano</center></th>
+  <th><center>Sala</center></th>
+  <th><center>Nível</center></th>
+</tr>
+#{list items:turmas, as:'turma'}
+<tr>
+<td><center>${turma.ano}º</center></td>
+<td><center>${turma.sala}</center></td>
+<td>
+	<center>
 				#{if turma.nivel == 2} 
 					Ensino Médio
 				#{/if}
 				#{if turma.nivel == 1}
 					Ensino Fundamental
 				#{/if}
-			</td>
-		</tr>
-	#{/list}
+	</center>
+</td>
+</tr>
+#{/list}
 </table>
-</div>
 #{/if}
