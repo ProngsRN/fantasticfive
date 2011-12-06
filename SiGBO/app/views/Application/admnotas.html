@@ -22,7 +22,7 @@
 	<select name="idDisciplina">
 		#{list items:disciplinas, as:'disciplina'}
 			<option value=${disciplina.getIdDisciplina()}>
-				${disciplina.getNomeDisciplina()}
+				${disciplina.getNomeDisciplina()} - ${disciplina.getTurmaDisciplina()}
 			</option>
 		#{/list}
 	</select>
@@ -40,6 +40,9 @@
 		</option>
 		<option value="nota4">
 			4º Bimestre
+		</option>
+		<option value="rec">
+			Recuperação
 		</option>
 	</select>
 	<label  for="nota">Nota: </label>
@@ -67,15 +70,32 @@
 	<th><center><b>Nota 2</th>
 	<th><center><b>Nota 3</th>
 	<th><center><b>Nota 4</th>
+	<th><center><b>Rec.</th>
 </tr>
 #{list items:alunodisciplina, as:'aluno'}
 <tr>
 	<td width=200><center>${aluno.getNomeAluno()}</td> 
 	<td width=330><center>${aluno.getNomeDisciplina()} <br>(${aluno.getTurmaDisciplina()})</center></td>
-	<td><center> ${aluno.getNota1()}</td>
-	<td><center> ${aluno.getNota2()}</td>
-	<td><center> ${aluno.getNota3()}</td>
-	<td><center> ${aluno.getNota4()}</td>
+	<td><center> 
+		#{if aluno.getNota1() != -1}${aluno.getNota1()}#{/if}
+		#{if aluno.getNota1() == -1}-#{/if}
+	</td>
+	<td><center> 
+		#{if aluno.getNota2() != -1}${aluno.getNota2()}#{/if}
+		#{if aluno.getNota2() == -1}-#{/if}
+	</td>
+	<td><center>
+		#{if aluno.getNota3() != -1}${aluno.getNota3()}#{/if}
+		#{if aluno.getNota3() == -1}-#{/if}	
+	</td>
+	<td><center>
+		#{if aluno.getNota4() != -1}${aluno.getNota4()}#{/if}
+		#{if aluno.getNota4() == -1}-#{/if}
+	</td>
+	<td><center>
+		#{if aluno.getRec() != -2}${aluno.getRec()}#{/if}
+		#{if aluno.getNota4() == -2}##{/if}
+	</td>
 </tr>
 #{/list}
 </table>

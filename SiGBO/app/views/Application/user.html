@@ -1,9 +1,11 @@
 #{extends '/templates/templateuser.html' /}
 #{set title: 'SiGBO :: Usuário / Página Inicial' /}
 
+<h2>${aluno.getNome()}</h2>
+<big><big>${aluno.escreverTurmaAtual()}</big></big>
 <p align="left">
 #{if (aluno.getAvatar() == 0)}
-	<b>Complete o seu registro, ${aluno.getNome()}!
+	<b>Coloque uma foto :)
 	<br>
 						
 	#{form @Application.uploadPicture(), enctype:'multipart/form-data'}
@@ -13,38 +15,5 @@
 	</b>
 #{/if}
 <br>
-Quantidade de disciplinas: ${disciplinas.size()}
-<br><br>
-#{if disciplinas != null}
-	#{list items:disciplinas, as:'disc'}
-		#{if disc.isTurmaAtual()}
-			<font color="green">
-		#{/if}
-		#{if !disc.isTurmaAtual()}
-			<font color="red">
-		#{/if}
-		<b>${disc.getNomeDisciplina()}</b>
-		</font>
-		<br>
-		 Nota 1: #{if disc.getNota1() != -1}${disc.getNota1()}#{/if}
-			#{if disc.getNota1() == -1}-#{/if}
-		||
-		Nota 2:	#{if disc.getNota2() != -1}${disc.getNota2()}#{/if}
-			#{if disc.getNota2() == -1}-#{/if}
-		||
-		Nota 3:	#{if disc.getNota3() != -1}${disc.getNota3()}#{/if}
-			#{if disc.getNota3() == -1}-#{/if}
-		||
-		Nota 4:	#{if disc.getNota4() != -1}${disc.getNota4()}#{/if}
-			#{if disc.getNota4() == -1}-#{/if}
-		||
-		Média:	#{if disc.getMedia() != -1}${disc.getMedia()}#{/if}
-			#{if disc.getMedia() == -1}-#{/if}
-		<br><br>
-	#{/list}
-#{/if}
-<a href="#" onclick="window.open('@{Application.boletim}', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=640, HEIGHT=480');">
-	Ver Boletim
-</a>  
 </p>
 <br><br><br><br><br><br><br><br>

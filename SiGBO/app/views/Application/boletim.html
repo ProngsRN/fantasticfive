@@ -1,4 +1,34 @@
 <html>
+<head>
+<style type="text/css">
+#customers
+{
+font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+width:100%;
+border-collapse:collapse;
+}
+#customers td, #customers th 
+{
+font-size:1em;
+border:1px solid #ba0002;
+padding:3px 7px 2px 7px;
+}
+#customers th 
+{
+font-size:1.1em;
+text-align:left;
+padding-top:5px;
+padding-bottom:4px;
+background-color:#780307;
+color:#ffffff;
+}
+#customers tr.alt td 
+{
+color:#000000;
+background-color:#EAF2D3;
+}
+</style>
+</head>
 <center>
 <b>CEMNA - CENTRO DE EDUCAÇÃO PROFª MARIA NORMA ALVES</b>
 <br>
@@ -6,16 +36,17 @@
 Aluno(a): <b>${aluno.getNome()}</b>
 <br>
 SÉRIE: <b>${aluno.escreverTurmaAtual()}</b>      ANO: <b>2011</b>  
-<br>
-<br>
-<table border="1" width=640>
+<br><br>
+<table id="customers">
 <tr>
-<th>Disciplinas</th>
-<td><b>1o BIMESTRE</b></td>
-	<td><b>2o BIMESTRE</b></td>
-	<td><b>3o BIMESTRE</b></td>
-	<td><b>4o BIMESTRE</b></td>
-	<td><b>Média</b></td>
+	<th>Disciplinas</th>
+	<th><b>1o BIMESTRE</b></th>
+	<th><b>2o BIMESTRE</b></th>
+	<th><b>3o BIMESTRE</b></th>
+	<th><b>4o BIMESTRE</b></th>
+	<th><b>Média</b></th>
+	<th><b>Rec</b></th>
+	<th><b>Média Final</b></th>
 </tr>
 	#{list items:disciplinas, as:'disc'}
 		</tr>
@@ -49,8 +80,18 @@ SÉRIE: <b>${aluno.escreverTurmaAtual()}</b>      ANO: <b>2011</b>
 			#{if disc.getMedia() != -1}${disc.getMedia()}#{/if}
 			#{if disc.getMedia() == -1}-#{/if}
 		</td>
+		<td>
+			#{if disc.getRec() != -2}${disc.getRec()}#{/if}
+			#{if disc.getRec() == -2}##{/if}
+		</td>
+		<td>
+			#{if disc.getMediaFinal() != -1}${disc.getMediaFinal()}#{/if}
+			#{if disc.getMediaFinal() == -1}##{/if}
+		</td>
 		</tr>
 	#{/list}
 </table>
+<br><br><br>
+
 <input type="button" value="Imprimir boletim" onclick="window.print();">
 </html>

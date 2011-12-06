@@ -128,7 +128,7 @@ public class Aluno extends Model {
 		else {
 			nivel = "Ensino Médio";
 		}
-		return (turma.getAno() + "º " + nivel);
+		return (turma.getAno() + "º Ano " + turma.getSala() + " do " + nivel);
 	}
 
 	public void setTurmaAtual(long turmaAtual) {

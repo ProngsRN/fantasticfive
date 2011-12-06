@@ -18,7 +18,7 @@ public class AlunoDisciplinas extends Model {
 
 	private long idAluno;
 
-	private float nota1, nota2, nota3, nota4;
+	private float nota1, nota2, nota3, nota4, rec;
 
 	public AlunoDisciplinas(long idDisciplina, long idAluno) {
 		this.idDisciplina = idDisciplina;
@@ -27,6 +27,7 @@ public class AlunoDisciplinas extends Model {
 		nota2 = -1;
 		nota3 = -1;
 		nota4 = -1;
+		setRec(-2);
 	}
 
 	public void setIdDisciplina(long idDisciplina) {
@@ -152,5 +153,20 @@ public class AlunoDisciplinas extends Model {
 	
 	public float getMedia() {
 		return ( (nota1 + nota2 + nota3 + nota4)/4 );
+	}
+	
+	public float getMediaFinal() {
+		if (rec != -2) {
+			return getMedia() + rec / 2;
+		}
+		else return -1;
+	}
+
+	public float getRec() {
+		return rec;
+	}
+
+	public void setRec(float rec) {
+		this.rec = rec;
 	}
 }
