@@ -48,7 +48,12 @@
 		<!-- Box -->
 		<div class="aluno0">
 			<center>
-			<img src="@{Application.getPicture(aluno.getAvatar())}" alt="#" width="180px"/>
+			#{if aluno.getAvatar() == 0}
+				<img src="@{'/public/images/avatar2.jpg'}" alt="#" width="180px"/>
+			#{/if}
+			#{if aluno.getAvatar() != 0}
+				<img src="@{Application.getPicture(aluno.getAvatar())}" alt="#" width="180px"/>
+			#{/if}
 			<font size=4>${aluno.getNome()}</font>
 			</center><br>
 			<div class="entry bullet-list">
@@ -78,7 +83,12 @@
 				#{if !colegas.isEmpty()}
 					#{list items:colegas, as:'colega'}
 						<a href="@{Application.aluno(colega.getId())}">
-							<img src="@{Application.getPicture(colega.getAvatar())}" width="120px"/>
+							#{if colega.getAvatar() == 0}
+								<img src="@{'/public/images/avatar2.jpg'}" alt="#" width="120px"/>
+							#{/if}
+							#{if colega.getAvatar() != 0}
+								<img src="@{Application.getPicture(colega.getAvatar())}" width="120px"/>
+							#{/if}
 							<br>
 							<small>${colega.getNome()}</small>
 							</b>
