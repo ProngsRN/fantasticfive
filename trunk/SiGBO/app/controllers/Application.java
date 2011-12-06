@@ -161,44 +161,44 @@ public class Application extends Controller {
 	}
 
 	public static void admalunos() {
-		List<Turma> turmas = Turma.find("order by nivel desc").fetch();
-		List<Aluno> alunos = Aluno.find("order by nome desc").fetch();
+		List<Turma> turmas = Turma.find("order by nivel").fetch();
+		List<Aluno> alunos = Aluno.find("order by nome").fetch();
 		render(alunos, turmas);
 	}
 
 	public static void gerenciaraluno() {
-		List<Aluno> alunos = Aluno.find("order by nome desc").fetch();
+		List<Aluno> alunos = Aluno.find("order by nome").fetch();
 		render(alunos);
 	}
 
 	public static void gerenciarprofessor() {
-		List<Professor> professores = Professor.findAll();
+		List<Professor> professores = Professor.find("order by nome").fetch();
 		render(professores);
 	}
 
 	public static void gerenciarturma() {
-		List<Turma> turmas = Turma.find("order by nivel desc").fetch();
+		List<Turma> turmas = Turma.find("order by nivel").fetch();
 		render(turmas);
 	}
 
 	public static void gerenciardisciplina() {
-		List<Disciplina> disciplinas = Disciplina.find("order by nome desc").fetch();
+		List<Disciplina> disciplinas = Disciplina.find("order by nome").fetch();
 		render(disciplinas);
 	}
 
 	public static void admalunodisciplina() {
-		List<AlunoDisciplinas> alunodisciplina = AlunoDisciplinas.findAll();
-		List<Disciplina> disciplinas = Disciplina.find("order by nome desc").fetch();
-		List<Aluno> alunos = Aluno.find("order by nome desc").fetch();
+		List<AlunoDisciplinas> alunodisciplina = AlunoDisciplinas.find("order by idDisciplina").fetch();
+		List<Disciplina> disciplinas = Disciplina.find("order by nome").fetch();
+		List<Aluno> alunos = Aluno.find("order by nome").fetch();
 
 		render(alunodisciplina, alunos, disciplinas);
 	}
 
 	public static void admprofessordisciplina() {
 		List<ProfessorDisciplinas> professordisciplina = ProfessorDisciplinas
-				.findAll();
-		List<Professor> professores = Professor.find("order by nome desc").fetch();;
-		List<Disciplina> disciplinas = Disciplina.find("order by nome desc").fetch();;
+				.find("order by idDisciplina").fetch();
+		List<Professor> professores = Professor.find("order by nome").fetch();;
+		List<Disciplina> disciplinas = Disciplina.find("order by nome").fetch();;
 
 		render(professores, disciplinas, professordisciplina);
 	}
@@ -208,7 +208,7 @@ public class Application extends Controller {
 	}
 
 	public static void admnotas() {
-		List<AlunoDisciplinas> alunodisciplina = AlunoDisciplinas.findAll();
+		List<AlunoDisciplinas> alunodisciplina = AlunoDisciplinas.find("order by idDisciplina").fetch();
 		List<AlunoDisciplinas> alunos = new ArrayList<AlunoDisciplinas>();
 		List<AlunoDisciplinas> disciplinas = new ArrayList<AlunoDisciplinas>();
 		List<Long> listaid = new ArrayList<Long>();
@@ -233,18 +233,18 @@ public class Application extends Controller {
 	}
 
 	public static void admprofessores() {
-		List<Professor> professores = Professor.find("order by nome desc").fetch();
+		List<Professor> professores = Professor.find("order by nome").fetch();
 		render(professores);
 	}
 
 	public static void admdisciplinas() {
 		List<Disciplina> disciplinas = Disciplina.find("order by nome desc").fetch();
-		List<Turma> turmas = Turma.find("order by nivel desc").fetch();
+		List<Turma> turmas = Turma.find("order by nivel").fetch();
 		render(turmas, disciplinas);
 	}
 
 	public static void admturmas() {
-		List<Turma> turmas = Turma.find("order by nivel desc").fetch();
+		List<Turma> turmas = Turma.find("order by nivel").fetch();
 		render(turmas);
 	}
 
