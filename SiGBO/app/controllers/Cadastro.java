@@ -225,11 +225,6 @@ public class Cadastro extends Application {
 		admalunodisciplina();
 	}
 	
-	public static void criarAmizade (long idColega) {
-		Long idAluno = Long.valueOf(session.get("user"));
-		ColegaAluno amizade = new ColegaAluno(idAluno, idColega);
-		amizade.save();
-	}
 	
 	public static int teste (int x) {
 		return x+2;
