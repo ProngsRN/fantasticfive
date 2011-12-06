@@ -94,7 +94,7 @@ public class Aluno extends Model {
 	public List<AlunoDisciplinas> getAlunoDisciplinas() {
 
 		List<AlunoDisciplinas> alunodisciplinas = new ArrayList<AlunoDisciplinas>();
-		List<AlunoDisciplinas> lista = AlunoDisciplinas.findAll();
+		List<AlunoDisciplinas> lista = AlunoDisciplinas.find("order by idaluno").fetch();
 		for (AlunoDisciplinas ad : lista) {
 			if (ad.getIdAluno() == id) {
 				alunodisciplinas.add(ad);
