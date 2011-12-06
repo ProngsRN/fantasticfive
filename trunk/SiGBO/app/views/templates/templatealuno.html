@@ -75,7 +75,7 @@
 			<img src="@{'public/images/colegas.png'}" alt="#" align="center">
 			<div style="height:520px;width:170px;overflow:scroll;">
 				<center>
-				#{if colegas != null}
+				#{if !colegas.isEmpty()}
 					#{list items:colegas, as:'colega'}
 						<a href="@{Application.aluno(colega.getId())}">
 							<img src="@{Application.getPicture(colega.getAvatar())}" width="120px"/>
@@ -86,7 +86,7 @@
 						<h2></h2>
 					#{/list}
 				#{/if}
-				#{if colegas == null}
+				#{if colegas.isEmpty()}
 					Você não tem colegas.
 				#{/if}
 				</center>

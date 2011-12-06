@@ -50,7 +50,12 @@
 		<div class="aluno0">
 			<center>
 			<a href="@{Application.alterarfoto()}" alt="Alterar a foto">
-			<img src="@{Application.getPicture(aluno.getAvatar())}" alt="#" width="180px"/>
+			#{if aluno.getAvatar() == 0}
+				<img src="@{'/public/images/avatar2.jpg'}" alt="#" width="180px"/>
+			#{/if}
+			#{if aluno.getAvatar() != 0}
+				<img src="@{Application.getPicture(aluno.getAvatar())}" alt="#" width="180px"/>
+			#{/if}
 			</a>
 			<font size=4>${aluno.getNome()}</font>
 			</center><br>
@@ -86,7 +91,7 @@
 			</center>
 			<div style="height:520px;width:170px;overflow:scroll;">
 				<center>
-				#{if colegas != null}
+				#{if !colegas.isEmpty()}
 					#{list items:colegas, as:'colega'}
 						<a href="@{Application.aluno(colega.getId())}">
 							<img src="@{Application.getPicture(colega.getAvatar())}" width="120px"/>
@@ -97,7 +102,7 @@
 						<h2></h2>
 					#{/list}
 				#{/if}
-				#{if colegas == null}
+				#{if colegas.isEmpty()}
 					Voce nao tem colegas.
 				#{/if}
 				</center>
