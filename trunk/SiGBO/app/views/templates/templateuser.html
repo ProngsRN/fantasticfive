@@ -45,6 +45,7 @@
 <!-- Main -->
 <div id="main">
 	<div class="shell">
+	
 		<!-- Box -->
 		<div class="aluno0">
 			<center>
@@ -58,6 +59,11 @@
 					<li><a href="@{Application.aluno(aluno.getId())}">Perfil</a></li>
 					<li><a href="@{Application.recadosusuario()}">Mural de Recados</a></li>
 					<li><a href="@{Application.mensagens()}">Mensagens</a></li>
+					<li>
+					<a href="#" onclick="window.open('@{Application.boletim}', 'Pagina', 'STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=10, LEFT=10, WIDTH=640, HEIGHT=480');">
+						Ver Boletim
+					</a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -80,7 +86,7 @@
 			</center>
 			<div style="height:520px;width:170px;overflow:scroll;">
 				<center>
-				#{if !colegas.isEmpty()}
+				#{if colegas != null}
 					#{list items:colegas, as:'colega'}
 						<a href="@{Application.aluno(colega.getId())}">
 							<img src="@{Application.getPicture(colega.getAvatar())}" width="120px"/>
@@ -91,7 +97,7 @@
 						<h2></h2>
 					#{/list}
 				#{/if}
-				#{if colegas.isEmpty()}
+				#{if colegas == null}
 					Voce nao tem colegas.
 				#{/if}
 				</center>
